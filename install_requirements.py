@@ -12,7 +12,7 @@ oscmd("brew install k9s")
 oscmd("echo alias k9s=\'$HOME/.linuxbrew/bin/k9s\' >> ~/.bashrc")
 
 pipsetup="pip install requests;pip install -r pip_requirements.txt"
-setupclient="python ./setupAutomation.py"
+setupclient="python lib/setupAutomation.py"
 
 cmdstr = "bash -c ' {} && {}' ".format(pipsetup,setupclient)
 oscmd(cmdstr)
