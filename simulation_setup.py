@@ -46,9 +46,9 @@ def job_execute(kwargs):
     ''' Set up runtime environment (CPU Only) '''
     entry = input("Do you want to setup runtime environment? [y/N] ") or "n"
     if entry in ['Y','y']:
-        if setupDockerDaemon(cnf) == -1:
-            mconsole("You need to reboot",level = "ERROR")
-            return -99
+        # if setupDockerDaemon(cnf) == -1:
+        #     mconsole("You need to reboot",level = "ERROR")
+        #     return -99
         if setupKubernetes(cnf) != 0: return -1
         if setupHelm(cnf) != 0: return -2
         if installAdvantEDGE(cnf) != 0: return -3
