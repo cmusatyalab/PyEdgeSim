@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 import sys
-sys.path.append("./lib")
 import os
+sys.path.append(os.getcwd())
 import pprint
 import json
 import shutil
