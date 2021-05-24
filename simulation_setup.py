@@ -48,7 +48,6 @@ def job_execute(kwargs):
     if entry in ['Y','y']:
         if setupDockerDaemon(cnf) == -1:
             mconsole("You need to reboot",level = "ERROR")
-            entry = input()
             return -99
         if setupKubernetes(cnf) != 0: return -1
         if setupHelm(cnf) != 0: return -2
