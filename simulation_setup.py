@@ -23,7 +23,7 @@ def main():
     logger = configureLogging(LOGNAME=LOGNAME,LOGFILE=LOGFILE,coloron=False)
     try:
         mconsole("Starting {}".format(__file__))
-        batch_console(batchfile="welcome.txt")
+        batch_console(batchfile="doc/welcome.txt")
         (options,_) = cmdOptions(cnf)
         kwargs = options.__dict__.copy()
         retcode = job_execute(kwargs)
