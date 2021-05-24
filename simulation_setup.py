@@ -1,15 +1,11 @@
 #!/usr/bin/env python
-import os
-import sys
+import sys, os
 sys.path.append("./lib")
-# import platform
 from optparse import OptionParser
-import shutil
-from simlogging import *
-
-from config import *
 from pyutils import *
 
+from simlogging import *
+from config import *
 from setupRunTime import *
 from setupBuildEnv import *
 from setupAutomation import *
@@ -28,7 +24,7 @@ def main():
     try:
         mconsole("Starting {}".format(__file__))
         batch_console(batchfile="welcome.txt")
-        (options,args) = cmdOptions(cnf)
+        (options,_) = cmdOptions(cnf)
         kwargs = options.__dict__.copy()
         retcode = job_execute(kwargs)
         if retcode == 0:

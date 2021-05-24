@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
-import os
-import sys
-import re
-import datetime
+import os, sys, re, datetime
 from datetime import timedelta
 import pandas as pd
 import requests
@@ -14,7 +11,7 @@ from influxdb import DataFrameClient
 
 from pyutils import *
 from pdutils import *
-from pdpltutils import *
+from pdpltutils import ts_lineplot,histplot
 from gputils import *
 from mathutils import *
 from iputils import *

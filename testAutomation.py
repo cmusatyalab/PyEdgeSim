@@ -11,7 +11,7 @@ from simlogging import mconsole
 
 from pyutils import *
 from advantedgeapilib import *
-from testscripts import *
+from testScenarios import *
 
 api = AdvantEDGEApi()
 
@@ -47,7 +47,7 @@ def runAutomationTest(cnf, restart=False):
     mconsole("End Test")
     return 0
  
-def shutdown():
+def shutdown(terminateatshutdown=False):
     if terminateatshutdown:
         api.terminateActiveScenario()
          
