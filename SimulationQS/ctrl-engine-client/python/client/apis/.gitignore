@@ -1,5 +1,0 @@
-/__init__.py
-/event_replay_api.py
-/pod_states_api.py
-/scenario_configuration_api.py
-/scenario_execution_api.py
