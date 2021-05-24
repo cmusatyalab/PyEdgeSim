@@ -10,3 +10,10 @@
 2021-05-24 15:21:38,032 [INFO] Exposing InfluxDB on port 30086; This may take a while
 2021-05-24 15:21:38,033 [INFO] Shutting down deployment and waiting 60 seconds
 2021-05-24 15:23:15,047 [INFO] Starting deployment and waiting 60 seconds
+2021-05-24 15:24:48,197 [INFO] You will need to recreate sandbox adv-ortist-sim and deploy scenario adv-ortist-sim in it
+2021-05-24 15:24:48,216 [INFO] Database openrtistdb exists in influxdb
+2021-05-24 15:24:48,216 [INFO] Database adv_ortist_sim_adv_ortist_sim exists in influxdb
+2021-05-24 15:25:46,776 [INFO] Install grafana extensions
+2021-05-24 15:25:56,955 [INFO] Navigate to http://127.0.0.1/grafana, login and import '/home/jblakley/git/PyEdgeSim/grafana/Client Framerate and Round Trip Time.json' (login: admin, pw: admin)
+2021-05-24 15:26:08,480 [INFO] (Re)starting OpenRTiST scenario adv-ortist-sim in sandbox adv-ortist-sim
+2021-05-24 15:26:08,610 [INFO] No Active Scenario

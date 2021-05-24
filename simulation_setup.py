@@ -102,7 +102,7 @@ def batch_console(batchfile=None,batchlist=None,level="INFO"):
         for line in batchlist:
             mconsole(line.strip('\n'),level=level)
     else:
-        mconsole("No file or list specified",level=ERROR)
+        mconsole("No file or list specified",level="ERROR")
 
 
 if __name__ == '__main__': main()
