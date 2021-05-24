@@ -1,0 +1,12 @@
+2021-05-24 15:14:09,114 [INFO] Starting /home/jblakley/git/PyEdgeSimFramework/simulation_setup.py
+2021-05-24 15:14:09,248 [INFO] This script will walk you through installation of the "Walk Down Walnut" Demo
+2021-05-24 15:14:09,248 [INFO] 	It assumes that you have installed the prerequisites at:
+2021-05-24 15:14:09,248 [INFO] 		https://github.com/InterDigitalInc/AdvantEDGE/wiki/runtime-environment
+2021-05-24 15:14:09,251 [INFO] 		
+2021-05-24 15:14:24,192 [INFO] /etc/docker/daemon.json already current
+2021-05-24 15:15:27,443 [INFO] Installing AdvantEDGE
+2021-05-24 15:15:27,444 [ERROR] ADVANTEDGEDIR already exists: /home/jblakley/AdvantEDGE
+2021-05-24 15:16:32,789 [INFO] NodeJS Version: v10.16.3 NPM Version: 7.14.0
+2021-05-24 15:21:38,032 [INFO] Exposing InfluxDB on port 30086; This may take a while
+2021-05-24 15:21:38,033 [INFO] Shutting down deployment and waiting 60 seconds
+2021-05-24 15:23:15,047 [INFO] Starting deployment and waiting 60 seconds

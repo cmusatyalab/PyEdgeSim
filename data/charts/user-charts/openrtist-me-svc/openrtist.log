@@ -1,0 +1,33 @@
+[setupvars.sh] OpenVINO environment initialized
+INFO:__main__:Detected GPU / CUDA support
+Process Process-1:
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/gabriel_server/local_engine/runner.py", line 13, in _run_engine
+    engine = engine_setup()
+  File "./main.py", line 118, in engine_setup
+    adapter = create_adapter(args.openvino, args.cpu_only, args.torch, args.myriad)
+  File "./main.py", line 44, in create_adapter
+    return TorchAdapter(False, DEFAULT_STYLE)
+  File "/openrtist/server/torch_adapter.py", line 67, in __init__
+    self.add_supported_style(name[:-6])
+  File "/openrtist/server/openrtist_adapter.py", line 37, in add_supported_style
+    self.set_style(new_style)
+  File "/openrtist/server/torch_adapter.py", line 77, in set_style
+    self._update_model_style(new_style)
+  File "/openrtist/server/torch_adapter.py", line 97, in _update_model_style
+    self.style_model.cuda()
+  File "/usr/local/lib/python3.6/dist-packages/torch/nn/modules/module.py", line 305, in cuda
+    return self._apply(lambda t: t.cuda(device))
+  File "/usr/local/lib/python3.6/dist-packages/torch/nn/modules/module.py", line 202, in _apply
+    module._apply(fn)
+  File "/usr/local/lib/python3.6/dist-packages/torch/nn/modules/module.py", line 202, in _apply
+    module._apply(fn)
+  File "/usr/local/lib/python3.6/dist-packages/torch/nn/modules/module.py", line 224, in _apply
+    param_applied = fn(param)
+  File "/usr/local/lib/python3.6/dist-packages/torch/nn/modules/module.py", line 305, in <lambda>
+    return self._apply(lambda t: t.cuda(device))
+RuntimeError: CUDA error: out of memory

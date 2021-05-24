@@ -1,0 +1,576 @@
+version: 1.6.0
+name: vlel-2-ortst-3b
+deployment:
+    netChar:
+        latency: 50
+        latencyVariation: 5
+        latencyDistribution: Normal
+        throughputDl: 1000
+        throughputUl: 1000
+        throughput: null
+        packetLoss: null
+    domains:
+        -
+            id: PUBLIC
+            name: PUBLIC
+            type: PUBLIC
+            netChar:
+                latency: 6
+                latencyVariation: 2
+                throughputDl: 1000000
+                throughputUl: 1000000
+                latencyDistribution: null
+                throughput: null
+                packetLoss: null
+            zones:
+                -
+                    id: PUBLIC-COMMON
+                    name: PUBLIC-COMMON
+                    type: COMMON
+                    netChar:
+                        latency: 5
+                        latencyVariation: 1
+                        throughputDl: 1000000
+                        throughputUl: 1000000
+                        latencyDistribution: null
+                        throughput: null
+                        packetLoss: null
+                    networkLocations:
+                        -
+                            id: PUBLIC-COMMON-DEFAULT
+                            name: PUBLIC-COMMON-DEFAULT
+                            type: DEFAULT
+                            netChar:
+                                latency: 1
+                                latencyVariation: 1
+                                throughputDl: 50000
+                                throughputUl: 50000
+                                packetLoss: 1
+                                latencyDistribution: null
+                                throughput: null
+                            physicalLocations:
+                                -
+                                    id: cloud1
+                                    name: cloud1
+                                    type: DC
+                                    netChar: {latency: null, latencyVariation: null, latencyDistribution: null, throughput: null, throughputDl: null, throughputUl: null, packetLoss: null}
+                                    isExternal: null
+                                    geoData: null
+                                    networkLocationsInRange: null
+                                    meta: null
+                                    userMeta: null
+                                    processes: null
+                                    linkLatency: null
+                                    linkLatencyVariation: null
+                                    linkThroughput: null
+                                    linkPacketLoss: null
+                            terminalLinkLatency: null
+                            terminalLinkLatencyVariation: null
+                            terminalLinkThroughput: null
+                            terminalLinkPacketLoss: null
+                            meta: null
+                            userMeta: null
+                            cellularPoaConfig: null
+                            geoData: null
+                    interFogLatency: null
+                    interFogLatencyVariation: null
+                    interFogThroughput: null
+                    interFogPacketLoss: null
+                    interEdgeLatency: null
+                    interEdgeLatencyVariation: null
+                    interEdgeThroughput: null
+                    interEdgePacketLoss: null
+                    edgeFogLatency: null
+                    edgeFogLatencyVariation: null
+                    edgeFogThroughput: null
+                    edgeFogPacketLoss: null
+                    meta: null
+                    userMeta: null
+            interZoneLatency: null
+            interZoneLatencyVariation: null
+            interZoneThroughput: null
+            interZonePacketLoss: null
+            meta: null
+            userMeta: null
+            cellularDomainConfig: null
+        -
+            id: operator1
+            name: operator1
+            type: OPERATOR
+            netChar:
+                latency: 15
+                latencyVariation: 3
+                throughputDl: 1000
+                throughputUl: 1000
+                latencyDistribution: null
+                throughput: null
+                packetLoss: null
+            zones:
+                -
+                    id: operator1-COMMON
+                    name: operator1-COMMON
+                    type: COMMON
+                    netChar:
+                        latency: 5
+                        latencyVariation: 1
+                        throughputDl: 1000000
+                        throughputUl: 1000000
+                        latencyDistribution: null
+                        throughput: null
+                        packetLoss: null
+                    networkLocations:
+                        -
+                            id: operator1-COMMON-DEFAULT
+                            name: operator1-COMMON-DEFAULT
+                            type: DEFAULT
+                            netChar:
+                                latency: 1
+                                latencyVariation: 1
+                                throughputDl: 50000
+                                throughputUl: 50000
+                                packetLoss: 1
+                                latencyDistribution: null
+                                throughput: null
+                            terminalLinkLatency: null
+                            terminalLinkLatencyVariation: null
+                            terminalLinkThroughput: null
+                            terminalLinkPacketLoss: null
+                            meta: null
+                            userMeta: null
+                            cellularPoaConfig: null
+                            geoData: null
+                            physicalLocations: null
+                    interFogLatency: null
+                    interFogLatencyVariation: null
+                    interFogThroughput: null
+                    interFogPacketLoss: null
+                    interEdgeLatency: null
+                    interEdgeLatencyVariation: null
+                    interEdgeThroughput: null
+                    interEdgePacketLoss: null
+                    edgeFogLatency: null
+                    edgeFogLatencyVariation: null
+                    edgeFogThroughput: null
+                    edgeFogPacketLoss: null
+                    meta: null
+                    userMeta: null
+                -
+                    id: zone1
+                    name: zone1-o1
+                    type: ZONE
+                    netChar:
+                        throughputDl: 1000
+                        throughputUl: 1000
+                        latency: null
+                        latencyVariation: null
+                        latencyDistribution: null
+                        throughput: null
+                        packetLoss: null
+                    networkLocations:
+                        -
+                            id: zone1-o1-DEFAULT
+                            name: zone1-o1-DEFAULT
+                            type: DEFAULT
+                            netChar:
+                                latency: 1
+                                latencyVariation: 1
+                                throughputDl: 50000
+                                throughputUl: 50000
+                                packetLoss: 1
+                                latencyDistribution: null
+                                throughput: null
+                            physicalLocations:
+                                -
+                                    id: zone1-edge1
+                                    name: m2b-3-cloudlet
+                                    type: EDGE
+                                    geoData: {location: null, radius: null, path: null, eopMode: null, velocity: null}
+                                    processes:
+                                        -
+                                            id: zone1-edge1-iperf
+                                            name: openrtist-svc1
+                                            type: EDGE-APP
+                                            userChartLocation: openrtist2/charts/openrtist
+                                            userChartAlternateValues: openrtist2/values/openrtist-svc1.yaml
+                                            userChartGroup: 'openrtist-svc1:openrtist-svc:9099:TCP'
+                                            netChar:
+                                                throughputDl: 1000
+                                                throughputUl: 1000
+                                                latency: null
+                                                latencyVariation: null
+                                                latencyDistribution: null
+                                                throughput: null
+                                                packetLoss: null
+                                            isExternal: null
+                                            image: null
+                                            environment: null
+                                            commandArguments: null
+                                            commandExe: null
+                                            serviceConfig: null
+                                            gpuConfig: null
+                                            externalConfig: null
+                                            status: null
+                                            meta: null
+                                            userMeta: null
+                                            appLatency: null
+                                            appLatencyVariation: null
+                                            appThroughput: null
+                                            appPacketLoss: null
+                                            placementId: null
+                                    netChar:
+                                        throughputDl: 1000
+                                        throughputUl: 1000
+                                        latency: null
+                                        latencyVariation: null
+                                        latencyDistribution: null
+                                        throughput: null
+                                        packetLoss: null
+                                    isExternal: null
+                                    networkLocationsInRange: null
+                                    meta: null
+                                    userMeta: null
+                                    linkLatency: null
+                                    linkLatencyVariation: null
+                                    linkThroughput: null
+                                    linkPacketLoss: null
+                            terminalLinkLatency: null
+                            terminalLinkLatencyVariation: null
+                            terminalLinkThroughput: null
+                            terminalLinkPacketLoss: null
+                            meta: null
+                            userMeta: null
+                            cellularPoaConfig: null
+                            geoData: null
+                        -
+                            id: zone1-poa1
+                            name: zone1-poa1
+                            type: POA
+                            netChar:
+                                throughputDl: 1000
+                                throughputUl: 1000
+                                latency: null
+                                latencyVariation: null
+                                latencyDistribution: null
+                                throughput: null
+                                packetLoss: null
+                            geoData: {location: null, radius: null, path: null, eopMode: null, velocity: null}
+                            physicalLocations:
+                                -
+                                    id: ue1
+                                    name: ue1
+                                    type: UE
+                                    processes:
+                                        -
+                                            id: ue1-iperf
+                                            name: openrtist-client1
+                                            type: UE-APP
+                                            isExternal: true
+                                            externalConfig:
+                                                ingressServiceMap:
+                                                    -
+                                                        name: openrtist-svc
+                                                        port: 9099
+                                                        externalPort: 31001
+                                                        protocol: TCP
+                                                egressServiceMap: null
+                                            netChar:
+                                                throughputDl: 1000
+                                                throughputUl: 1000
+                                                latency: null
+                                                latencyVariation: null
+                                                latencyDistribution: null
+                                                throughput: null
+                                                packetLoss: null
+                                            image: null
+                                            environment: null
+                                            commandArguments: null
+                                            commandExe: null
+                                            serviceConfig: null
+                                            gpuConfig: null
+                                            status: null
+                                            userChartLocation: null
+                                            userChartAlternateValues: null
+                                            userChartGroup: null
+                                            meta: null
+                                            userMeta: null
+                                            appLatency: null
+                                            appLatencyVariation: null
+                                            appThroughput: null
+                                            appPacketLoss: null
+                                            placementId: null
+                                    netChar: {latency: null, latencyVariation: null, latencyDistribution: null, throughput: null, throughputDl: null, throughputUl: null, packetLoss: null}
+                                    isExternal: null
+                                    geoData: null
+                                    networkLocationsInRange: null
+                                    meta: null
+                                    userMeta: null
+                                    linkLatency: null
+                                    linkLatencyVariation: null
+                                    linkThroughput: null
+                                    linkPacketLoss: null
+                            terminalLinkLatency: null
+                            terminalLinkLatencyVariation: null
+                            terminalLinkThroughput: null
+                            terminalLinkPacketLoss: null
+                            meta: null
+                            userMeta: null
+                            cellularPoaConfig: null
+                        -
+                            id: zone1-poa2
+                            name: zone1-poa2
+                            type: POA
+                            netChar:
+                                latency: 10
+                                latencyVariation: 2
+                                throughputDl: 50
+                                throughputUl: 50
+                                latencyDistribution: null
+                                throughput: null
+                                packetLoss: null
+                            terminalLinkLatency: null
+                            terminalLinkLatencyVariation: null
+                            terminalLinkThroughput: null
+                            terminalLinkPacketLoss: null
+                            meta: null
+                            userMeta: null
+                            cellularPoaConfig: null
+                            geoData: null
+                            physicalLocations: null
+                    interFogLatency: null
+                    interFogLatencyVariation: null
+                    interFogThroughput: null
+                    interFogPacketLoss: null
+                    interEdgeLatency: null
+                    interEdgeLatencyVariation: null
+                    interEdgeThroughput: null
+                    interEdgePacketLoss: null
+                    edgeFogLatency: null
+                    edgeFogLatencyVariation: null
+                    edgeFogThroughput: null
+                    edgeFogPacketLoss: null
+                    meta: null
+                    userMeta: null
+                -
+                    id: zone2
+                    name: zone2-o1
+                    type: ZONE
+                    netChar:
+                        throughputDl: 1000
+                        throughputUl: 1000
+                        latency: null
+                        latencyVariation: null
+                        latencyDistribution: null
+                        throughput: null
+                        packetLoss: null
+                    networkLocations:
+                        -
+                            id: zone2-o1-DEFAULT
+                            name: zone2-o1-DEFAULT
+                            type: DEFAULT
+                            netChar:
+                                latency: 1
+                                latencyVariation: 1
+                                throughputDl: 50000
+                                throughputUl: 50000
+                                packetLoss: 1
+                                latencyDistribution: null
+                                throughput: null
+                            physicalLocations:
+                                -
+                                    id: zone2-edge1
+                                    name: m2a-cloudlet
+                                    type: EDGE
+                                    geoData: {location: null, radius: null, path: null, eopMode: null, velocity: null}
+                                    netChar:
+                                        throughputDl: 1000
+                                        throughputUl: 1000
+                                        latency: null
+                                        latencyVariation: null
+                                        latencyDistribution: null
+                                        throughput: null
+                                        packetLoss: null
+                                    isExternal: null
+                                    networkLocationsInRange: null
+                                    meta: null
+                                    userMeta: null
+                                    processes: null
+                                    linkLatency: null
+                                    linkLatencyVariation: null
+                                    linkThroughput: null
+                                    linkPacketLoss: null
+                            terminalLinkLatency: null
+                            terminalLinkLatencyVariation: null
+                            terminalLinkThroughput: null
+                            terminalLinkPacketLoss: null
+                            meta: null
+                            userMeta: null
+                            cellularPoaConfig: null
+                            geoData: null
+                    interFogLatency: null
+                    interFogLatencyVariation: null
+                    interFogThroughput: null
+                    interFogPacketLoss: null
+                    interEdgeLatency: null
+                    interEdgeLatencyVariation: null
+                    interEdgeThroughput: null
+                    interEdgePacketLoss: null
+                    edgeFogLatency: null
+                    edgeFogLatencyVariation: null
+                    edgeFogThroughput: null
+                    edgeFogPacketLoss: null
+                    meta: null
+                    userMeta: null
+            interZoneLatency: null
+            interZoneLatencyVariation: null
+            interZoneThroughput: null
+            interZonePacketLoss: null
+            meta: null
+            userMeta: null
+            cellularDomainConfig: null
+        -
+            id: 67ea7efc-d0f3-4dd4-a289-c8b32571b3c1
+            name: operator2
+            type: OPERATOR
+            netChar:
+                latency: 15
+                latencyVariation: 3
+                throughputDl: 1000
+                throughputUl: 1000
+                latencyDistribution: null
+                throughput: null
+                packetLoss: null
+            zones:
+                -
+                    id: operator2-COMMON
+                    name: operator2-COMMON
+                    type: COMMON
+                    netChar:
+                        latency: 5
+                        latencyVariation: 1
+                        throughputDl: 1000
+                        throughputUl: 1000
+                        latencyDistribution: null
+                        throughput: null
+                        packetLoss: null
+                    networkLocations:
+                        -
+                            id: operator2-COMMON-DEFAULT
+                            name: operator2-COMMON-DEFAULT
+                            type: DEFAULT
+                            netChar:
+                                latency: 1
+                                latencyVariation: 1
+                                throughputDl: 1000
+                                throughputUl: 1000
+                                latencyDistribution: null
+                                throughput: null
+                                packetLoss: null
+                            terminalLinkLatency: null
+                            terminalLinkLatencyVariation: null
+                            terminalLinkThroughput: null
+                            terminalLinkPacketLoss: null
+                            meta: null
+                            userMeta: null
+                            cellularPoaConfig: null
+                            geoData: null
+                            physicalLocations: null
+                    interFogLatency: null
+                    interFogLatencyVariation: null
+                    interFogThroughput: null
+                    interFogPacketLoss: null
+                    interEdgeLatency: null
+                    interEdgeLatencyVariation: null
+                    interEdgeThroughput: null
+                    interEdgePacketLoss: null
+                    edgeFogLatency: null
+                    edgeFogLatencyVariation: null
+                    edgeFogThroughput: null
+                    edgeFogPacketLoss: null
+                    meta: null
+                    userMeta: null
+                -
+                    id: 8ae03265-db05-4647-962f-389bf1cd3e6f
+                    name: zone1-o2
+                    type: ZONE
+                    netChar:
+                        throughputDl: 1000
+                        throughputUl: 1000
+                        latency: null
+                        latencyVariation: null
+                        latencyDistribution: null
+                        throughput: null
+                        packetLoss: null
+                    networkLocations:
+                        -
+                            id: zone1-o2-DEFAULT
+                            name: zone1-o2-DEFAULT
+                            type: DEFAULT
+                            netChar:
+                                latency: 1
+                                latencyVariation: 1
+                                throughputDl: 1000
+                                throughputUl: 1000
+                                latencyDistribution: null
+                                throughput: null
+                                packetLoss: null
+                            physicalLocations:
+                                -
+                                    id: 864aefcd-89aa-4d1f-a045-2d05bd37937f
+                                    name: m1-cloudlet
+                                    type: EDGE
+                                    geoData: {location: null, radius: null, path: null, eopMode: null, velocity: null}
+                                    netChar:
+                                        throughputDl: 1000
+                                        throughputUl: 1000
+                                        latency: null
+                                        latencyVariation: null
+                                        latencyDistribution: null
+                                        throughput: null
+                                        packetLoss: null
+                                    isExternal: null
+                                    networkLocationsInRange: null
+                                    meta: null
+                                    userMeta: null
+                                    processes: null
+                                    linkLatency: null
+                                    linkLatencyVariation: null
+                                    linkThroughput: null
+                                    linkPacketLoss: null
+                            terminalLinkLatency: null
+                            terminalLinkLatencyVariation: null
+                            terminalLinkThroughput: null
+                            terminalLinkPacketLoss: null
+                            meta: null
+                            userMeta: null
+                            cellularPoaConfig: null
+                            geoData: null
+                    interFogLatency: null
+                    interFogLatencyVariation: null
+                    interFogThroughput: null
+                    interFogPacketLoss: null
+                    interEdgeLatency: null
+                    interEdgeLatencyVariation: null
+                    interEdgeThroughput: null
+                    interEdgePacketLoss: null
+                    edgeFogLatency: null
+                    edgeFogLatencyVariation: null
+                    edgeFogThroughput: null
+                    edgeFogPacketLoss: null
+                    meta: null
+                    userMeta: null
+            interZoneLatency: null
+            interZoneLatencyVariation: null
+            interZoneThroughput: null
+            interZonePacketLoss: null
+            meta: null
+            userMeta: null
+            cellularDomainConfig: null
+    interDomainLatency: null
+    interDomainLatencyVariation: null
+    interDomainThroughput: null
+    interDomainPacketLoss: null
+    meta: null
+    userMeta: null
+id: null
+description: null
+config: null

@@ -1,0 +1,4 @@
+This script will walk you through installation of the "Walk Down Walnut" Demo
+	It assumes that you have installed the prerequisites at:
+		https://github.com/InterDigitalInc/AdvantEDGE/wiki/runtime-environment
+		

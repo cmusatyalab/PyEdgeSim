@@ -1,0 +1,447 @@
+version: 1.4.0
+name: openrtist-me-svc
+deployment:
+    interDomainLatency: 50
+    interDomainLatencyVariation: 10
+    interDomainThroughput: 1000
+    domains:
+        -
+            id: PUBLIC
+            name: PUBLIC
+            type: PUBLIC
+            interZoneLatency: 6
+            interZoneLatencyVariation: 2
+            interZoneThroughput: 1000
+            zones:
+                -
+                    id: PUBLIC-COMMON
+                    name: PUBLIC-COMMON
+                    type: COMMON
+                    netChar:
+                        latency: 5
+                        latencyVariation: 1
+                        throughput: 1000
+                        packetLoss: null
+                    networkLocations:
+                        -
+                            id: PUBLIC-COMMON-DEFAULT
+                            name: PUBLIC-COMMON-DEFAULT
+                            type: DEFAULT
+                            terminalLinkLatency: 1
+                            terminalLinkLatencyVariation: 1
+                            terminalLinkThroughput: 1000
+                            terminalLinkPacketLoss: 1
+                            meta: null
+                            userMeta: null
+                            physicalLocations: null
+                    interFogLatency: null
+                    interFogLatencyVariation: null
+                    interFogThroughput: null
+                    interFogPacketLoss: null
+                    interEdgeLatency: null
+                    interEdgeLatencyVariation: null
+                    interEdgeThroughput: null
+                    interEdgePacketLoss: null
+                    edgeFogLatency: null
+                    edgeFogLatencyVariation: null
+                    edgeFogThroughput: null
+                    edgeFogPacketLoss: null
+                    meta: null
+                    userMeta: null
+            interZonePacketLoss: null
+            meta: null
+            userMeta: null
+        -
+            id: operator
+            name: operator
+            type: OPERATOR
+            interZoneLatency: 6
+            interZoneLatencyVariation: 2
+            interZoneThroughput: 1000
+            zones:
+                -
+                    id: operator-COMMON
+                    name: operator-COMMON
+                    type: COMMON
+                    netChar:
+                        latency: 5
+                        latencyVariation: 1
+                        throughput: 1000
+                        packetLoss: null
+                    networkLocations:
+                        -
+                            id: operator-COMMON-DEFAULT
+                            name: operator-COMMON-DEFAULT
+                            type: DEFAULT
+                            terminalLinkLatency: 1
+                            terminalLinkLatencyVariation: 1
+                            terminalLinkThroughput: 1000
+                            terminalLinkPacketLoss: 1
+                            meta: null
+                            userMeta: null
+                            physicalLocations: null
+                    interFogLatency: null
+                    interFogLatencyVariation: null
+                    interFogThroughput: null
+                    interFogPacketLoss: null
+                    interEdgeLatency: null
+                    interEdgeLatencyVariation: null
+                    interEdgeThroughput: null
+                    interEdgePacketLoss: null
+                    edgeFogLatency: null
+                    edgeFogLatencyVariation: null
+                    edgeFogThroughput: null
+                    edgeFogPacketLoss: null
+                    meta: null
+                    userMeta: null
+                -
+                    id: zone1
+                    name: zone1
+                    type: ZONE
+                    netChar:
+                        latency: 5
+                        latencyVariation: 1
+                        throughput: 1000
+                        packetLoss: null
+                    networkLocations:
+                        -
+                            id: zone1-DEFAULT
+                            name: zone1-DEFAULT
+                            type: DEFAULT
+                            terminalLinkLatency: 1
+                            terminalLinkLatencyVariation: 1
+                            terminalLinkThroughput: 1000
+                            terminalLinkPacketLoss: 1
+                            physicalLocations:
+                                -
+                                    id: edge-node
+                                    name: edge-node1
+                                    type: EDGE
+                                    processes:
+                                        -
+                                            id: openrtist-svc1
+                                            name: openrtist-svc1
+                                            type: EDGE-APP
+                                            userChartLocation: ~/openrtist-me-svc/chart
+                                            userChartAlternateValues: ~/openrtist-me-svc/values/openrtist-svc1.yaml
+                                            userChartGroup: 'openrtist-svc1:openrtist-svc:9099:TCP'
+                                            appThroughput: 1000
+                                            isExternal: null
+                                            image: null
+                                            environment: null
+                                            commandArguments: null
+                                            commandExe: null
+                                            serviceConfig: null
+                                            gpuConfig: null
+                                            externalConfig: null
+                                            status: null
+                                            meta: null
+                                            userMeta: null
+                                            appLatency: null
+                                            appLatencyVariation: null
+                                            appPacketLoss: null
+                                            placementId: null
+                                    linkThroughput: 1000
+                                    isExternal: null
+                                    networkLocationsInRange: null
+                                    meta: null
+                                    userMeta: null
+                                    linkLatency: null
+                                    linkLatencyVariation: null
+                                    linkPacketLoss: null
+                            meta: null
+                            userMeta: null
+                        -
+                            id: poa1
+                            name: poa1
+                            type: POA
+                            terminalLinkLatency: 1
+                            terminalLinkLatencyVariation: 1
+                            terminalLinkThroughput: 1000
+                            physicalLocations:
+                                -
+                                    id: ue1
+                                    name: ue1
+                                    type: UE
+                                    processes:
+                                        -
+                                            id: openrtist-client1
+                                            name: openrtist-client1
+                                            type: UE-APP
+                                            isExternal: true
+                                            externalConfig:
+                                                ingressServiceMap:
+                                                    -
+                                                        name: openrtist-svc
+                                                        port: 9099
+                                                        externalPort: 31001
+                                                        protocol: TCP
+                                                egressServiceMap: null
+                                            appThroughput: 1000
+                                            image: null
+                                            environment: null
+                                            commandArguments: null
+                                            commandExe: null
+                                            serviceConfig: null
+                                            gpuConfig: null
+                                            status: null
+                                            userChartLocation: null
+                                            userChartAlternateValues: null
+                                            userChartGroup: null
+                                            meta: null
+                                            userMeta: null
+                                            appLatency: null
+                                            appLatencyVariation: null
+                                            appPacketLoss: null
+                                            placementId: null
+                                    isExternal: null
+                                    networkLocationsInRange: null
+                                    meta: null
+                                    userMeta: null
+                                    linkLatency: null
+                                    linkLatencyVariation: null
+                                    linkThroughput: null
+                                    linkPacketLoss: null
+                            terminalLinkPacketLoss: null
+                            meta: null
+                            userMeta: null
+                    interFogLatency: null
+                    interFogLatencyVariation: null
+                    interFogThroughput: null
+                    interFogPacketLoss: null
+                    interEdgeLatency: null
+                    interEdgeLatencyVariation: null
+                    interEdgeThroughput: null
+                    interEdgePacketLoss: null
+                    edgeFogLatency: null
+                    edgeFogLatencyVariation: null
+                    edgeFogThroughput: null
+                    edgeFogPacketLoss: null
+                    meta: null
+                    userMeta: null
+                -
+                    id: zone2
+                    name: zone2
+                    type: ZONE
+                    netChar:
+                        latency: 10
+                        latencyVariation: 1
+                        throughput: 1000
+                        packetLoss: null
+                    networkLocations:
+                        -
+                            id: zone2-DEFAULT
+                            name: zone2-DEFAULT
+                            type: DEFAULT
+                            terminalLinkLatency: 1
+                            terminalLinkLatencyVariation: 1
+                            terminalLinkThroughput: 1000
+                            terminalLinkPacketLoss: 1
+                            physicalLocations:
+                                -
+                                    id: 1fbe9bdc-858f-4c79-a56e-ce3f5d4da95b
+                                    name: edge-node2
+                                    type: EDGE
+                                    processes:
+                                        -
+                                            id: 4a499f88-c9f9-4f53-8a2a-a198eefdd4bf
+                                            name: openrtist-svc2
+                                            type: EDGE-APP
+                                            userChartLocation: ~/openrtist-me-svc/chart
+                                            userChartAlternateValues: ~/openrtist-me-svc/values/openrtist-svc2.yaml
+                                            userChartGroup: 'openrtist-svc2:openrtist-svc:9099:TCP'
+                                            appThroughput: 1000
+                                            isExternal: null
+                                            image: null
+                                            environment: null
+                                            commandArguments: null
+                                            commandExe: null
+                                            serviceConfig: null
+                                            gpuConfig: null
+                                            externalConfig: null
+                                            status: null
+                                            meta: null
+                                            userMeta: null
+                                            appLatency: null
+                                            appLatencyVariation: null
+                                            appPacketLoss: null
+                                            placementId: null
+                                    linkThroughput: 1000
+                                    isExternal: null
+                                    networkLocationsInRange: null
+                                    meta: null
+                                    userMeta: null
+                                    linkLatency: null
+                                    linkLatencyVariation: null
+                                    linkPacketLoss: null
+                            meta: null
+                            userMeta: null
+                        -
+                            id: poa2
+                            name: poa2
+                            type: POA
+                            terminalLinkLatency: 1
+                            terminalLinkLatencyVariation: 1
+                            terminalLinkThroughput: 1000
+                            physicalLocations:
+                                -
+                                    id: 1c8c7d8e-37e7-4cb0-8288-3b6a44805296
+                                    name: ue2
+                                    type: UE
+                                    processes:
+                                        -
+                                            id: 866a0ba3-4d55-4a25-a01f-62eca060f48e
+                                            name: openrtist-client2
+                                            type: UE-APP
+                                            isExternal: true
+                                            externalConfig:
+                                                ingressServiceMap:
+                                                    -
+                                                        name: openrtist-svc
+                                                        port: 9099
+                                                        externalPort: 31002
+                                                        protocol: TCP
+                                                egressServiceMap: null
+                                            appThroughput: 1000
+                                            image: null
+                                            environment: null
+                                            commandArguments: null
+                                            commandExe: null
+                                            serviceConfig: null
+                                            gpuConfig: null
+                                            status: null
+                                            userChartLocation: null
+                                            userChartAlternateValues: null
+                                            userChartGroup: null
+                                            meta: null
+                                            userMeta: null
+                                            appLatency: null
+                                            appLatencyVariation: null
+                                            appPacketLoss: null
+                                            placementId: null
+                                    linkThroughput: 1000
+                                    isExternal: null
+                                    networkLocationsInRange: null
+                                    meta: null
+                                    userMeta: null
+                                    linkLatency: null
+                                    linkLatencyVariation: null
+                                    linkPacketLoss: null
+                            terminalLinkPacketLoss: null
+                            meta: null
+                            userMeta: null
+                    interFogLatency: null
+                    interFogLatencyVariation: null
+                    interFogThroughput: null
+                    interFogPacketLoss: null
+                    interEdgeLatency: null
+                    interEdgeLatencyVariation: null
+                    interEdgeThroughput: null
+                    interEdgePacketLoss: null
+                    edgeFogLatency: null
+                    edgeFogLatencyVariation: null
+                    edgeFogThroughput: null
+                    edgeFogPacketLoss: null
+                    meta: null
+                    userMeta: null
+                -
+                    id: zone3
+                    name: zone3
+                    type: ZONE
+                    netChar:
+                        latency: 20
+                        latencyVariation: 1
+                        throughput: 1000
+                        packetLoss: null
+                    networkLocations:
+                        -
+                            id: zone3-DEFAULT
+                            name: zone3-DEFAULT
+                            type: DEFAULT
+                            terminalLinkLatency: 1
+                            terminalLinkLatencyVariation: 1
+                            terminalLinkThroughput: 1000
+                            terminalLinkPacketLoss: 1
+                            meta: null
+                            userMeta: null
+                            physicalLocations: null
+                        -
+                            id: poa3
+                            name: poa3
+                            type: POA
+                            terminalLinkLatency: 1
+                            terminalLinkLatencyVariation: 1
+                            terminalLinkThroughput: 1000
+                            terminalLinkPacketLoss: null
+                            meta: null
+                            userMeta: null
+                            physicalLocations: null
+                    interFogLatency: null
+                    interFogLatencyVariation: null
+                    interFogThroughput: null
+                    interFogPacketLoss: null
+                    interEdgeLatency: null
+                    interEdgeLatencyVariation: null
+                    interEdgeThroughput: null
+                    interEdgePacketLoss: null
+                    edgeFogLatency: null
+                    edgeFogLatencyVariation: null
+                    edgeFogThroughput: null
+                    edgeFogPacketLoss: null
+                    meta: null
+                    userMeta: null
+                -
+                    id: zone4
+                    name: zone4
+                    type: ZONE
+                    netChar:
+                        latency: 30
+                        latencyVariation: 1
+                        throughput: 1000
+                        packetLoss: null
+                    networkLocations:
+                        -
+                            id: zone4-DEFAULT
+                            name: zone4-DEFAULT
+                            type: DEFAULT
+                            terminalLinkLatency: 1
+                            terminalLinkLatencyVariation: 1
+                            terminalLinkThroughput: 1000
+                            terminalLinkPacketLoss: 1
+                            meta: null
+                            userMeta: null
+                            physicalLocations: null
+                        -
+                            id: poa4
+                            name: poa4
+                            type: POA
+                            terminalLinkLatency: 1
+                            terminalLinkLatencyVariation: 1
+                            terminalLinkThroughput: 1000
+                            terminalLinkPacketLoss: null
+                            meta: null
+                            userMeta: null
+                            physicalLocations: null
+                    interFogLatency: null
+                    interFogLatencyVariation: null
+                    interFogThroughput: null
+                    interFogPacketLoss: null
+                    interEdgeLatency: null
+                    interEdgeLatencyVariation: null
+                    interEdgeThroughput: null
+                    interEdgePacketLoss: null
+                    edgeFogLatency: null
+                    edgeFogLatencyVariation: null
+                    edgeFogThroughput: null
+                    edgeFogPacketLoss: null
+                    meta: null
+                    userMeta: null
+            interZonePacketLoss: null
+            meta: null
+            userMeta: null
+    interDomainPacketLoss: null
+    meta: null
+    userMeta: null
+id: null
+description: null
+config: null

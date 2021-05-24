@@ -1,0 +1,330 @@
+version: 1.7.1
+name: adv-ortist-sim
+deployment:
+    netChar:
+        latency: 50
+        latencyVariation: 5
+        latencyDistribution: Normal
+        throughputDl: 1000
+        throughputUl: 1000
+    connectivity:
+        model: OPEN
+    domains:
+        -
+            id: PUBLIC
+            name: PUBLIC
+            type: PUBLIC
+            netChar:
+                latency: 6
+                latencyVariation: 2
+                throughputDl: 1000000
+                throughputUl: 1000000
+            zones:
+                -
+                    id: PUBLIC-COMMON
+                    name: PUBLIC-COMMON
+                    type: COMMON
+                    netChar:
+                        latency: 5
+                        latencyVariation: 1
+                        throughputDl: 1000000
+                        throughputUl: 1000000
+                    networkLocations:
+                        -
+                            id: PUBLIC-COMMON-DEFAULT
+                            name: PUBLIC-COMMON-DEFAULT
+                            type: DEFAULT
+                            netChar:
+                                latency: 1
+                                latencyVariation: 1
+                                throughputDl: 50000
+                                throughputUl: 50000
+                                packetLoss: 1
+                            physicalLocations:
+                                -
+                                    id: cloud1
+                                    name: cloud1
+                                    type: DC
+                                    netChar:
+                                        latencyDistribution: Normal
+                                        throughputDl: 1000
+                                        throughputUl: 1000
+                                        latency: 0
+                                        latencyVariation: 0
+                                        packetLoss: 0
+                                    connected: true
+                                    wireless: false
+                                    wirelessType: ""
+                                    dataNetwork:
+                                        dnn: ""
+                                        ladn: false
+                                        ecsp: ""
+                                    geoData:
+                                        location: null
+                                        path: null
+                                        eopMode: ""
+                                        velocity: null
+                                    macId: ""
+                                    label: cloud1
+        -
+            id: operator1
+            name: operator1
+            type: OPERATOR
+            netChar:
+                latency: 15
+                latencyVariation: 3
+                throughputDl: 1000
+                throughputUl: 1000
+            zones:
+                -
+                    id: operator1-COMMON
+                    name: operator1-COMMON
+                    type: COMMON
+                    netChar:
+                        latency: 5
+                        latencyVariation: 1
+                        throughputDl: 1000000
+                        throughputUl: 1000000
+                    networkLocations:
+                        -
+                            id: operator1-COMMON-DEFAULT
+                            name: operator1-COMMON-DEFAULT
+                            type: DEFAULT
+                            netChar:
+                                latency: 1
+                                latencyVariation: 1
+                                throughputDl: 50000
+                                throughputUl: 50000
+                                packetLoss: 1
+                -
+                    id: zone1
+                    name: zone1-o1
+                    type: ZONE
+                    netChar:
+                        throughputDl: 1000
+                        throughputUl: 1000
+                    networkLocations:
+                        -
+                            id: zone1-o1-DEFAULT
+                            name: zone1-o1-DEFAULT
+                            type: DEFAULT
+                            netChar:
+                                latency: 1
+                                latencyVariation: 1
+                                throughputDl: 50000
+                                throughputUl: 50000
+                                packetLoss: 1
+                            physicalLocations:
+                                -
+                                    id: zone1-edge1
+                                    name: m2b-3-cloudlet
+                                    type: EDGE
+                                    geoData:
+                                        location: null
+                                        path: null
+                                        eopMode: ""
+                                        velocity: null
+                                    processes:
+                                        -
+                                            id: zone1-edge1-iperf
+                                            name: openrtist-svc1
+                                            type: EDGE-APP
+                                            userChartLocation: openrtist2/charts/openrtist
+                                            userChartAlternateValues: openrtist2/values/openrtist-svc1.yaml
+                                            userChartGroup: 'openrtist-svc1:openrtist-svc:9099:TCP'
+                                            netChar:
+                                                latencyDistribution: Normal
+                                                throughputDl: 1000
+                                                throughputUl: 1000
+                                    netChar:
+                                        latencyDistribution: Normal
+                                        throughputDl: 1000
+                                        throughputUl: 1000
+                                        latency: 0
+                                        latencyVariation: 0
+                                        packetLoss: 0
+                                    connected: true
+                                    wireless: false
+                                    wirelessType: ""
+                                    dataNetwork:
+                                        dnn: ""
+                                        ladn: false
+                                        ecsp: ""
+                                    macId: ""
+                                    label: m2b-3-cloudlet
+                        -
+                            id: zone1-poa1
+                            name: zone1-poa1
+                            type: POA
+                            netChar:
+                                throughputDl: 1000
+                                throughputUl: 1000
+                            geoData: {}
+                            physicalLocations:
+                                -
+                                    id: ue1
+                                    name: ue1
+                                    type: UE
+                                    processes:
+                                        -
+                                            id: ue1-iperf
+                                            name: openrtist-client1
+                                            type: UE-APP
+                                            isExternal: true
+                                            externalConfig:
+                                                ingressServiceMap:
+                                                    -
+                                                        name: openrtist-svc
+                                                        port: 9099
+                                                        externalPort: 31001
+                                                        protocol: TCP
+                                            netChar:
+                                                latencyDistribution: Normal
+                                                throughputDl: 1000
+                                                throughputUl: 1000
+                                    netChar:
+                                        latencyDistribution: Normal
+                                        throughputDl: 1000
+                                        throughputUl: 1000
+                                        latency: 0
+                                        latencyVariation: 0
+                                        packetLoss: 0
+                                    connected: true
+                                    wireless: false
+                                    wirelessType: ""
+                                    dataNetwork:
+                                        dnn: ""
+                                        ladn: false
+                                        ecsp: ""
+                                    geoData:
+                                        location: null
+                                        path: null
+                                        eopMode: ""
+                                        velocity: null
+                                    macId: ""
+                                    label: ue1
+                        -
+                            id: zone1-poa2
+                            name: zone1-poa2
+                            type: POA
+                            netChar:
+                                latency: 10
+                                latencyVariation: 2
+                                throughputDl: 50
+                                throughputUl: 50
+                -
+                    id: zone2
+                    name: zone2-o1
+                    type: ZONE
+                    netChar:
+                        throughputDl: 1000
+                        throughputUl: 1000
+                    networkLocations:
+                        -
+                            id: zone2-o1-DEFAULT
+                            name: zone2-o1-DEFAULT
+                            type: DEFAULT
+                            netChar:
+                                latency: 1
+                                latencyVariation: 1
+                                throughputDl: 50000
+                                throughputUl: 50000
+                                packetLoss: 1
+                            physicalLocations:
+                                -
+                                    id: zone2-edge1
+                                    name: m2a-cloudlet
+                                    type: EDGE
+                                    geoData:
+                                        location: null
+                                        path: null
+                                        eopMode: ""
+                                        velocity: null
+                                    netChar:
+                                        latencyDistribution: Normal
+                                        throughputDl: 1000
+                                        throughputUl: 1000
+                                        latency: 0
+                                        latencyVariation: 0
+                                        packetLoss: 0
+                                    connected: true
+                                    wireless: false
+                                    wirelessType: ""
+                                    dataNetwork:
+                                        dnn: ""
+                                        ladn: false
+                                        ecsp: ""
+                                    macId: ""
+                                    label: m2a-cloudlet
+        -
+            id: 67ea7efc-d0f3-4dd4-a289-c8b32571b3c1
+            name: operator2
+            type: OPERATOR
+            netChar:
+                latency: 15
+                latencyVariation: 3
+                throughputDl: 1000
+                throughputUl: 1000
+            zones:
+                -
+                    id: operator2-COMMON
+                    name: operator2-COMMON
+                    type: COMMON
+                    netChar:
+                        latency: 5
+                        latencyVariation: 1
+                        throughputDl: 1000
+                        throughputUl: 1000
+                    networkLocations:
+                        -
+                            id: operator2-COMMON-DEFAULT
+                            name: operator2-COMMON-DEFAULT
+                            type: DEFAULT
+                            netChar:
+                                latency: 1
+                                latencyVariation: 1
+                                throughputDl: 1000
+                                throughputUl: 1000
+                -
+                    id: 8ae03265-db05-4647-962f-389bf1cd3e6f
+                    name: zone1-o2
+                    type: ZONE
+                    netChar:
+                        throughputDl: 1000
+                        throughputUl: 1000
+                    networkLocations:
+                        -
+                            id: zone1-o2-DEFAULT
+                            name: zone1-o2-DEFAULT
+                            type: DEFAULT
+                            netChar:
+                                latency: 1
+                                latencyVariation: 1
+                                throughputDl: 1000
+                                throughputUl: 1000
+                            physicalLocations:
+                                -
+                                    id: 864aefcd-89aa-4d1f-a045-2d05bd37937f
+                                    name: m1-cloudlet
+                                    type: EDGE
+                                    geoData:
+                                        location: null
+                                        path: null
+                                        eopMode: ""
+                                        velocity: null
+                                    netChar:
+                                        latencyDistribution: Normal
+                                        throughputDl: 1000
+                                        throughputUl: 1000
+                                        latency: 0
+                                        latencyVariation: 0
+                                        packetLoss: 0
+                                    connected: true
+                                    wireless: false
+                                    wirelessType: ""
+                                    dataNetwork:
+                                        dnn: ""
+                                        ladn: false
+                                        ecsp: ""
+                                    macId: ""
+                                    label: m1-cloudlet

@@ -1,0 +1,212 @@
+version: 1.3.0
+name: openrtist-jim
+deployment:
+    interDomainLatency: 50
+    interDomainLatencyVariation: 10
+    interDomainThroughput: 1000
+    domains:
+        -
+            id: PUBLIC
+            name: PUBLIC
+            type: PUBLIC
+            interZoneLatency: 6
+            interZoneLatencyVariation: 2
+            interZoneThroughput: 1000
+            zones:
+                -
+                    id: PUBLIC-COMMON
+                    name: PUBLIC-COMMON
+                    type: COMMON
+                    netChar:
+                        latency: 5
+                        latencyVariation: 1
+                        throughput: 1000
+                    networkLocations:
+                        -
+                            id: PUBLIC-COMMON-DEFAULT
+                            name: PUBLIC-COMMON-DEFAULT
+                            type: DEFAULT
+                            terminalLinkLatency: 1
+                            terminalLinkLatencyVariation: 1
+                            terminalLinkThroughput: 1000
+                            terminalLinkPacketLoss: 1
+        -
+            id: operator
+            name: operator
+            type: OPERATOR
+            interZoneLatency: 6
+            interZoneLatencyVariation: 2
+            interZoneThroughput: 1000
+            zones:
+                -
+                    id: operator-COMMON
+                    name: operator-COMMON
+                    type: COMMON
+                    netChar:
+                        latency: 5
+                        latencyVariation: 1
+                        throughput: 1000
+                    networkLocations:
+                        -
+                            id: operator-COMMON-DEFAULT
+                            name: operator-COMMON-DEFAULT
+                            type: DEFAULT
+                            terminalLinkLatency: 1
+                            terminalLinkLatencyVariation: 1
+                            terminalLinkThroughput: 1000
+                            terminalLinkPacketLoss: 1
+                -
+                    id: zone1
+                    name: zone1
+                    type: ZONE
+                    netChar:
+                        latency: 5
+                        latencyVariation: 1
+                        throughput: 1000
+                    networkLocations:
+                        -
+                            id: zone1-DEFAULT
+                            name: zone1-DEFAULT
+                            type: DEFAULT
+                            terminalLinkLatency: 1
+                            terminalLinkLatencyVariation: 1
+                            terminalLinkThroughput: 1000
+                            terminalLinkPacketLoss: 1
+                            physicalLocations:
+                                -
+                                    id: edge-node
+                                    name: edge-node
+                                    type: EDGE
+                                    processes:
+                                        -
+                                            id: openrtist-svc1
+                                            name: openrtist-svc1
+                                            type: EDGE-APP
+                                            isExternal: false
+                                            userChartLocation: ~/openrtist-jim/chart
+                                            userChartAlternateValues: ""
+                                            userChartGroup: 'openrtist-svc::9099:TCP'
+                                            image: null
+                                            environment: null
+                                            commandArguments: null
+                                            commandExe: null
+                                            serviceConfig: null
+                                            gpuConfig: null
+                                            externalConfig: null
+                                            appLatency: 0
+                                            appLatencyVariation: 0
+                                            appThroughput: 1000
+                                            appPacketLoss: 0
+                                            placementId: null
+                        -
+                            id: poa1
+                            name: poa1
+                            type: POA
+                            terminalLinkLatency: 1
+                            terminalLinkLatencyVariation: 1
+                            terminalLinkThroughput: 1000
+                            physicalLocations:
+                                -
+                                    id: ue1
+                                    name: ue1
+                                    type: UE
+                                    processes:
+                                        -
+                                            id: openrtist-client1
+                                            name: openrtist-client1
+                                            type: UE-APP
+                                            isExternal: true
+                                            userChartLocation: null
+                                            userChartAlternateValues: null
+                                            userChartGroup: null
+                                            image: null
+                                            environment: null
+                                            commandArguments: null
+                                            commandExe: null
+                                            serviceConfig: null
+                                            gpuConfig: null
+                                            externalConfig:
+                                                ingressServiceMap:
+                                                    -
+                                                        externalPort: 31000
+                                                        name: openrtist-svc
+                                                        port: 9099
+                                                        protocol: TCP
+                                                egressServiceMap: []
+                                            appLatency: 0
+                                            appLatencyVariation: 0
+                                            appThroughput: 1000
+                                            appPacketLoss: 0
+                                            placementId: ""
+                -
+                    id: zone2
+                    name: zone2
+                    type: ZONE
+                    netChar:
+                        latency: 10
+                        latencyVariation: 1
+                        throughput: 1000
+                    networkLocations:
+                        -
+                            id: zone2-DEFAULT
+                            name: zone2-DEFAULT
+                            type: DEFAULT
+                            terminalLinkLatency: 1
+                            terminalLinkLatencyVariation: 1
+                            terminalLinkThroughput: 1000
+                            terminalLinkPacketLoss: 1
+                        -
+                            id: poa2
+                            name: poa2
+                            type: POA
+                            terminalLinkLatency: 1
+                            terminalLinkLatencyVariation: 1
+                            terminalLinkThroughput: 1000
+                -
+                    id: zone3
+                    name: zone3
+                    type: ZONE
+                    netChar:
+                        latency: 20
+                        latencyVariation: 1
+                        throughput: 1000
+                    networkLocations:
+                        -
+                            id: zone3-DEFAULT
+                            name: zone3-DEFAULT
+                            type: DEFAULT
+                            terminalLinkLatency: 1
+                            terminalLinkLatencyVariation: 1
+                            terminalLinkThroughput: 1000
+                            terminalLinkPacketLoss: 1
+                        -
+                            id: poa3
+                            name: poa3
+                            type: POA
+                            terminalLinkLatency: 1
+                            terminalLinkLatencyVariation: 1
+                            terminalLinkThroughput: 1000
+                -
+                    id: zone4
+                    name: zone4
+                    type: ZONE
+                    netChar:
+                        latency: 30
+                        latencyVariation: 1
+                        throughput: 1000
+                    networkLocations:
+                        -
+                            id: zone4-DEFAULT
+                            name: zone4-DEFAULT
+                            type: DEFAULT
+                            terminalLinkLatency: 1
+                            terminalLinkLatencyVariation: 1
+                            terminalLinkThroughput: 1000
+                            terminalLinkPacketLoss: 1
+                        -
+                            id: poa4
+                            name: poa4
+                            type: POA
+                            terminalLinkLatency: 1
+                            terminalLinkLatencyVariation: 1
+                            terminalLinkThroughput: 1000
