@@ -15,7 +15,7 @@ cnf = initConfig()
 nvmenvstr = 'export NVM_DIR=\"$HOME/.nvm\";[ -s \"$NVM_DIR/nvm.sh\" ] && \. \"$NVM_DIR/nvm.sh\";[ -s \"$NVM_DIR/bash_completion\" ] && \. \"$NVM_DIR/bash_completion\"'
 
 def main():
-    installNodeJS(cnf)
+    installMeepCTL(cnf)
 
 def installGO(cnf):
     GOVER = cnf['GOVERSION']
@@ -36,7 +36,8 @@ def installGO(cnf):
     return 0
 
 def setGOPATH():
-    gobin = "{}/gocode/bin".format(os.environ['HOME'])
+    hm = os.environ['HOME']
+    gobin = "{}/gocode/bin:{}/go/bin:/usr/local/go/bin".format(hm,hm)
     os.environ['PATH'] = "{}:{}".format(os.environ['PATH'],gobin)
     
 def installNodeJS(cnf):
@@ -76,10 +77,11 @@ def installESLint(cnf):
 def installGolangCILint(cnf):
     entry = input("Install GolangCI-Lint? [y/N] ") or "n"
     if entry in ['Y','y']:
-        pthstr = "export PATH=$PATH:/usr/local/go/bin"
+        setGOPATH()
+        # pthstr = "export PATH=$PATH:/usr/local/go/bin"
         inststr = "cd ~;GO111MODULE=on go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.18.0"
         verstr = "go/bin/golangci-lint --version"
-        cmdstr = "{};{};{}".format(pthstr,inststr,verstr)
+        cmdstr = "{};{}".format(inststr,verstr)
         oscmd('bash -c "{}"'.format(cmdstr))
     return 0
 
@@ -87,9 +89,9 @@ def installMeepCTL(cnf):
     entry = input("Install MeepCTL? [y/N] ") or "n"
     if entry in ['Y','y']:
         setGOPATH()
+        setMEEPPATH()
         addn = cnf['ADVANTEDGEDIR']
         cmdstr = "cd {}/go-apps/meepctl;./install.sh".format(addn)
-        meepctlbin = setMEEPPATH()
         oscmd('bash -c "{}"'.format(cmdstr))
         nodeip = cmd0("kubectl get nodes -o json|jq -r '.items[].status.addresses[] | select( .type | test(\"InternalIP\")) | .address'")
         oscmd("meepctl config ip {};meepctl config gitdir {};meepctl config".format(nodeip,addn))
