@@ -23,8 +23,8 @@ def main():
     pass
 
 def deployAdvantEDGE(cnf):
-    meepctl = os.path.join(*[cnf['ADVANTEDGEDIR'],"bin","meepctl","meepctl"])
-    setMEEPPATH()
+    # meepctl = os.path.join(*[cnf['ADVANTEDGEDIR'],"bin","meepctl","meepctl"])
+    setMEEPPATH(cnf['ADVANTEDGEDIR'])
     meepctl = "meepctl"
     if oscmd("{} deploy dep".format(meepctl)) != 0: return -1
     if oscmd("{} dockerize all".format(meepctl)) != 0: return -1
