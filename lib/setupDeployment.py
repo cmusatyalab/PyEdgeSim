@@ -24,7 +24,7 @@ def main():
 
 def deployAdvantEDGE(cnf):
     # meepctl = os.path.join(*[cnf['ADVANTEDGEDIR'],"bin","meepctl","meepctl"])
-    entry = input("Do you want to deploy AdvantEDGE? [y/N] ") or "n"
+    entry = input("Deploy AdvantEDGE? [y/N] ") or "n"
     if entry in ['Y','y']:
         setMEEPPATH(cnf['ADVANTEDGEDIR'])
         meepctl = "meepctl"
@@ -34,7 +34,7 @@ def deployAdvantEDGE(cnf):
     return 0
 
 def getOpenRTiST(cnf):
-    entry = input("Do you want to get OpenRTiST? [y/N] ") or "n"
+    entry = input("Get OpenRTiST? [y/N] ") or "n"
     if entry in ['Y','y']:
         mconsole("While OpenRTiST is being pulled and pushed, recreate sandbox {} in AdvantEDGE".format(cnf['SANDBOX']))    
         srcimg = "cmusatyalab/openrtist"
@@ -45,7 +45,7 @@ def getOpenRTiST(cnf):
     return 0
 
 def startOpenRTiST(cnf):
-    entry = input("Do you want to deploy the scenario? [y/N] ") or "n"
+    entry = input("Deploy the scenario? [y/N] ") or "n"
     if entry in ['Y','y']:      
         scenname = cnf['SCENARIO']
         sandbox = cnf['SANDBOX']
@@ -74,7 +74,7 @@ def startDeployment(cnf,settletime=0):
 def installCharts(cnf):
     datadir = "./data"
     destdir = os.path.expanduser("~/.meep/virt-engine")
-    entry = input("Do you want install the scenario charts? [y/N] ") or "n"
+    entry = input("Install the scenario charts? [y/N] ") or "n"
     if entry in ['Y','y']:
         for root, _, files in os.walk(datadir):
             if len(files) > 0:

@@ -44,13 +44,13 @@ def cmdOptions(tmpcnf):
 def job_execute(kwargs):
     cnf.update(kwargs)
     ''' Set up runtime environment (CPU Only) '''
-    entry = input("Do you want to setup runtime environment? [y/N] ") or "n"
+    entry = input("Setup runtime environment? [y/N] ") or "n"
     if entry in ['Y','y']:
         if setupKubernetes(cnf) != 0: return -1
         if setupHelm(cnf) != 0: return -2
         if installAdvantEDGE(cnf) != 0: return -3
     ''' Set up build environment (CPU Only) '''
-    entry = input("Do you want to setup build environment? [y/N] ") or "n"
+    entry = input("Setup build environment? [y/N] ") or "n"
     if entry in ['Y','y']:
         if installGO(cnf) != 0: return -4
         if installNodeJS(cnf) != 0: return -5
@@ -67,7 +67,7 @@ def job_execute(kwargs):
     ''' Deploy the scenario in the sandbox '''         
     if startOpenRTiST(cnf) != 0: return -14
     ''' Data Management '''
-    entry = input("Do you want to setup data management? [y/N] ") or "n"
+    entry = input("Setup data management? [y/N] ") or "n"
     if entry in ['Y','y']:        
         if setupInfluxDB(cnf) != 0: return -11
         if setupGrafana(cnf) != 0: return -12

@@ -17,7 +17,7 @@ api = AdvantEDGEApi()
 
 
 def runAutomationTest(cnf, restart=False):
-    entry = input("Do you want to run the test automation? [y/N] ") or "n"
+    entry = input("Run the test automation? [y/N] ") or "n"
     if entry not in ['Y','y']: return 0
     testscenname = cnf['SCENARIO']
     testprofile = cnf['AUTOMATION']

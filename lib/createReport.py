@@ -19,7 +19,7 @@ from iputils import *
 IP2LITE="IP2LOCATION-LITE-DB5.CSV"
 
 def createReport(cnf,filename=None):
-    entry = input("Do you want to create the test report? [y/N] ") or "n"        
+    entry = input("Create the test report? [y/N] ") or "n"        
     if entry not in ['Y','y']:  return 0
     ORTISTIP = cnf['APIIP']
     ORPORT=30086
@@ -125,16 +125,15 @@ def parseTraceRoute(cnf,trtedf):
     value_vars = [col for col in fdfx.columns if col.startswith('IPVAL')]
     fdfx = drp_lst(pd.melt(fdfx,id_vars=id_vars,value_vars=value_vars,var_name='IPPOS',value_name='IPNO')         .sort_values(['TIMESTAMP','IPPOS']).reset_index(),['index'])
     fdfx['IPADD'] = fdfx['IPNO'].map(ipno2ipadd)
-    # dumpdf(fdfx)
-
     ''' Join with location database '''
     fdfx = fdfx.apply(addLoc, axis=1).set_index('TIMESTAMP')
-    # dumpdf(fdfx)
-    # dumpdf(fdfx[['IPADD','city_name','region_name']].dropna())
     return fdfx
 
 def getIP2LITE(cnf):
     IP2LITE="IP2LOCATION-LITE-DB5.CSV"
+    fdn = os.path.join(*[cnf['PROJECTHOME'],"Downloads"])
+    if not os.path.isdir(fdn):
+        os.mkdir(fdn)
     ffn = os.path.join(*[cnf['PROJECTHOME'],"Downloads",IP2LITE])
     if not os.path.isfile(ffn):
         fetchIP2LITE(ffn)

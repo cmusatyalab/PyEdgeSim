@@ -93,7 +93,7 @@ def installAdvantEDGE(cnf):
     if os.path.isdir(ad_dir):
         mconsole("ADVANTEDGEDIR already exists: {}".format(ad_dir),level="ERROR")
         retcode = -2
-        entry = input("Do you want to delete and reinstall AdvantEDGE? [y/N] ") or "n"
+        entry = input("Delete and reinstall AdvantEDGE? [y/N] ") or "n"
         if entry in ['Y','y']:
             entry = input("Are you sure? Type yes to confirm: ") or "n"
             if entry in ['Yes','yes']:

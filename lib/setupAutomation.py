@@ -17,7 +17,7 @@ def main():
     setupAutomation(cnf)
     
 def setupAutomation(cnf):
-    entry = input("Do you want to setup automation? [y/N] ") or "n"
+    entry = input("Setup automation? [y/N] ") or "n"
     if entry in ['Y','y']:     
         setupAPIs(cnf)
     return 0
