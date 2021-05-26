@@ -114,5 +114,5 @@ With both the client and server running, connected and displaying style transfer
 
 Once you get a complete run with both the lower and upper dashboard showing data, create the test report to see that everything is working. The report is written to a file called `report.png`. It should look something like this.
 
-![](C:\Users\jimbl\Downloads\report.png)
+![](files/report.png)
 
