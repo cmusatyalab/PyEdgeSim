@@ -59,10 +59,10 @@ def installNodeJS(cnf):
         jsfn = os.path.join(tmpdir,"install.sh")
         oscmd("curl -skL https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh -o {}".format(jsfn))
         if oscmd("bash {}".format(jsfn)) == 0:
-             os.remove(jsfn)
+            os.remove(jsfn)
         os.environ['NVM_DIR'] = os.path.join(os.environ['HOME'],".nvm")
-        setNVMPATH()        
         oscmd("bash -c '{};nvm install 10.16.3'".format(nvmenvstr))
+        setNVMPATH()  
         oscmd("npm install -g npm")
         retlst = cmd("node -v;npm -v")
         mconsole("NodeJS Version: {} NPM Version: {}".format(retlst[0],retlst[1]) )
