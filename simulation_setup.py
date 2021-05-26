@@ -46,9 +46,6 @@ def job_execute(kwargs):
     ''' Set up runtime environment (CPU Only) '''
     entry = input("Do you want to setup runtime environment? [y/N] ") or "n"
     if entry in ['Y','y']:
-        # if setupDockerDaemon(cnf) == -1:
-        #     mconsole("You need to reboot",level = "ERROR")
-        #     return -99
         if setupKubernetes(cnf) != 0: return -1
         if setupHelm(cnf) != 0: return -2
         if installAdvantEDGE(cnf) != 0: return -3
@@ -62,30 +59,24 @@ def job_execute(kwargs):
         if installMeepCTL(cnf) != 0: return -8
         if buildMeepAll(cnf) != 0: return -9
     ''' Deploy AdvantEDGE '''
-    entry = input("Do you want to deploy AdvantEDGE? [y/N] ") or "n"
-    if entry in ['Y','y']:
-        if deployAdvantEDGE(cnf) != 0: return -10
+    if deployAdvantEDGE(cnf) != 0: return -10
+    ''' Pull OpenRTiST '''
+    if getOpenRTiST(cnf) != 0: return -13
+    ''' Set up the scenario '''
+    if installCharts(cnf) != 0: return -13
+    ''' Deploy the scenario in the sandbox '''         
+    if startOpenRTiST(cnf) != 0: return -14
+    ''' Data Management '''
     entry = input("Do you want to setup data management? [y/N] ") or "n"
     if entry in ['Y','y']:        
         if setupInfluxDB(cnf) != 0: return -11
         if setupGrafana(cnf) != 0: return -12
-    entry = input("Do you want to get OpenRTiST? [y/N] ") or "n"
-    if entry in ['Y','y']:
-        if getOpenRTiST(cnf) != 0: return -13 
-    entry = input("Do you want to deploy the scenario? [y/N] ") or "n"
-    if entry in ['Y','y']:        
-        if startOpenRTiST(cnf) != 0: return -14
-    entry = input("Do you want to setup automation? [y/N] ") or "n"
-    if entry in ['Y','y']:        
-        if setupAutomation(cnf) != 0: return -15
-    entry = input("Do you want to run the test automation? [y/N] ") or "n"
-    if entry in ['Y','y']:
-        if runAutomationTest(cnf) != 0: return -16
-    entry = input("Do you want to create the test report? [y/N] ") or "n"        
-    if entry in ['Y','y']:
-        if createReport(cnf,filename="report.png") != 0: return -17
-    else:
-        mconsole("SUCCESS!")
+    ''' Automation '''
+    if setupAutomation(cnf) != 0: return -15
+    if runAutomationTest(cnf) != 0: return -16
+    ''' Create automation report '''
+    if createReport(cnf,filename="report.png") != 0: return -17
+    else: mconsole("SUCCESS!")
     return 0
 
 

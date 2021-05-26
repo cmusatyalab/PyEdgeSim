@@ -17,6 +17,8 @@ api = AdvantEDGEApi()
 
 
 def runAutomationTest(cnf, restart=False):
+    entry = input("Do you want to run the test automation? [y/N] ") or "n"
+    if entry not in ['Y','y']: return 0
     testscenname = cnf['SCENARIO']
     testprofile = cnf['AUTOMATION']
     stablizetime = 10
@@ -29,11 +31,9 @@ def runAutomationTest(cnf, restart=False):
     ''' Parse active scenario '''
     activescenario = api.getActiveScenario()
     mconsole("Active Scenario: %s" % activescenario.name)
- 
-    ''' Set Network Characteristics to equivalent of zero '''
-
     mconsole("Start Test %s" % testprofile)
     testprofiledata = testprofiledict[testprofile]
+    ''' Set Network Characteristics to equivalent of zero '''
     mconsole("Set test profile to %s" % 'zero')
     setupTestProfile(testprofiledict['zero'],verbose=True)
     time.sleep(stablizetime)

@@ -24,27 +24,34 @@ def main():
 
 def deployAdvantEDGE(cnf):
     # meepctl = os.path.join(*[cnf['ADVANTEDGEDIR'],"bin","meepctl","meepctl"])
-    setMEEPPATH(cnf['ADVANTEDGEDIR'])
-    meepctl = "meepctl"
-    if oscmd("{} deploy dep".format(meepctl)) != 0: return -1
-    if oscmd("{} dockerize all".format(meepctl)) != 0: return -1
-    if oscmd("{} deploy core".format(meepctl)) != 0: return -1
+    entry = input("Do you want to deploy AdvantEDGE? [y/N] ") or "n"
+    if entry in ['Y','y']:
+        setMEEPPATH(cnf['ADVANTEDGEDIR'])
+        meepctl = "meepctl"
+        if oscmd("{} deploy dep".format(meepctl)) != 0: return -1
+        if oscmd("{} dockerize all".format(meepctl)) != 0: return -1
+        if oscmd("{} deploy core".format(meepctl)) != 0: return -1
     return 0
 
 def getOpenRTiST(cnf):
-    srcimg = "cmusatyalab/openrtist"
-    dstimg = "meep-docker-registry:30001/openrtist:real"
-    oscmd("docker pull {}".format(srcimg))
-    oscmd("docker tag {} {}".format(srcimg,dstimg))
-    oscmd("docker push {}".format(dstimg))
+    entry = input("Do you want to get OpenRTiST? [y/N] ") or "n"
+    if entry in ['Y','y']:
+        mconsole("While OpenRTiST is being pulled and pushed, recreate sandbox {} in AdvantEDGE".format(cnf['SANDBOX']))    
+        srcimg = "cmusatyalab/openrtist"
+        dstimg = "meep-docker-registry:30001/openrtist:real"
+        oscmd("docker pull {}".format(srcimg))
+        oscmd("docker tag {} {}".format(srcimg,dstimg))
+        oscmd("docker push {}".format(dstimg))
     return 0
 
 def startOpenRTiST(cnf):
-    scenname = cnf['SCENARIO']
-    sandbox = cnf['SANDBOX']
-    api.setSandbox(sandbox)
-    mconsole("(Re)starting OpenRTiST scenario {} in sandbox {}".format(scenname,sandbox))    
-    api.startScenario(scenname,restart=True)
+    entry = input("Do you want to deploy the scenario? [y/N] ") or "n"
+    if entry in ['Y','y']:      
+        scenname = cnf['SCENARIO']
+        sandbox = cnf['SANDBOX']
+        api.setSandbox(sandbox)
+        mconsole("(Re)starting OpenRTiST scenario {} in sandbox {}".format(scenname,sandbox))    
+        api.startScenario(scenname,restart=True)
     return 0
 
 def stopDeployment(cnf,settletime=120):
@@ -67,9 +74,9 @@ def startDeployment(cnf,settletime=0):
 def installCharts(cnf):
     datadir = "./data"
     destdir = os.path.expanduser("~/.meep/virt-engine")
-    entry = input("Copy scenarios and charts into AdvantEDGE [y/N] ") or "y"
+    entry = input("Do you want install the scenario charts? [y/N] ") or "n"
     if entry in ['Y','y']:
-        for root, dirs, files in os.walk(datadir):
+        for root, _, files in os.walk(datadir):
             if len(files) > 0:
                 fdestdir = root.replace(datadir,destdir)
                 os.makedirs(fdestdir,exist_ok=True)

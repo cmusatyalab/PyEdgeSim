@@ -31,22 +31,12 @@ def installGO(cnf):
         oscmd("wget -P {} https://dl.google.com/go/go1.{}.linux-amd64.tar.gz".format(tmpdir,GOVER))
         if oscmd("sudo tar -C /usr/local -xzf {}".format(gofn)) == 0:
             os.remove(gofn)
-        # oscmd("mkdir -p ~/gocode/bin")
-        # gstr = "GOPATH"
-        # if oscmd('grep "{}" ~/.bashrc'.format(gstr)) != 0:
-        #     oscmd("echo export GOPATH=$HOME/gocode >>~/.bashrc")
-        #     oscmd("echo 'export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin' >>~/.bashrc")
-        #     ''' Must run . ~/.bashrc before go will work '''
         setGOPATH()
     return 0
 
 def setGOPATH():
-    # hm = os.environ['HOME']
-    # gobin = "{}/gocode/bin:{}/go/bin:/usr/local/go/bin".format(hm,hm)
     gobin = "{}/go/bin:/usr/local/go/bin".format(os.environ['HOME'])
     setPATH(gobin)
-
-
 
 def installNodeJS(cnf):
     entry = input("Install NodeJS? [y/N] ") or "n"

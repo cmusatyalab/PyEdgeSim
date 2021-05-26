@@ -19,19 +19,18 @@ from iputils import *
 IP2LITE="IP2LOCATION-LITE-DB5.CSV"
 
 def createReport(cnf,filename=None):
-  
+    entry = input("Do you want to create the test report? [y/N] ") or "n"        
+    if entry not in ['Y','y']:  return 0
     ORTISTIP = cnf['APIIP']
     ORPORT=30086
     ORDBNAME= "openrtistdb"
-    dclient = InfluxDBClient(host=ORTISTIP, port=ORPORT, database=ORDBNAME)
+    # dclient = InfluxDBClient(host=ORTISTIP, port=ORPORT, database=ORDBNAME)
     dpdclient = DataFrameClient(host=ORTISTIP, port=ORPORT, database=ORDBNAME)
 
-    # SCENIP = cmd0("kubectl get pods -o json|jq -r '.items[] | select( .metadata.name | test(\"influxdb\")) | .status.podIP'")
-    # SCPORT=8086
     SCENIP = ORTISTIP
     SCPORT = ORPORT
     SCDBNAME=cnf['INFLUXSCENDB']
-    sclient = InfluxDBClient(host=SCENIP, port=SCPORT, database=SCDBNAME)
+    # sclient = InfluxDBClient(host=SCENIP, port=SCPORT, database=SCDBNAME)
     spdclient = DataFrameClient(host=SCENIP, port=SCPORT, database=SCDBNAME)
 
     ''' Get the session data of most recent session '''
@@ -76,7 +75,7 @@ def createReport(cnf,filename=None):
     trtedf2 = parseTraceRoute(cnf,trtedf)
     ''' Prepare the report '''
     createPlots(sessmeasdf,trtedf2,netdf,evdf, cnf,filename=filename)
-
+    mconsole("Report created: {}".format(filename))
     return 0
 
 def createPlots(measdf,trdf, netdf, evdf, cnf,  filename = None):
