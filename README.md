@@ -110,7 +110,7 @@ The final step in the script is the generation of a test report. We'll come back
 
 ## Exercise 2: Running the Simulation
 
-With both the client and server running, connected and displaying style transfer, rerun the test automation by skipping through the prior steps in `simulation_setup.py`.  For some reason, it can take a while (10-15 minutes) for influxdb measurements from openrtist to appear in the openrtistdb that grafana draws from. If you don't see them in the upper part of the dashboard, try rerunning the simulation a few times until you see them.
+With both the client and server running, connected and displaying style transfer, rerun the test automation by skipping through the prior steps in `simulation_setup.py`.  For some reason, it can take a while (10-15 minutes) for influxdb measurements from openrtist to appear in the openrtistdb that grafana draws from. If you don't see them in the upper part of the dashboard, try rerunning the simulation a few times until you see them. You can also look in influxdb itself by running the command shown above to connect.
 
 Once you get a complete run with both the lower and upper dashboard showing data, create the test report to see that everything is working. The report is written to a file called `report.png`. It should look something like this.
 
