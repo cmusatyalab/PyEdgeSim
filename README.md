@@ -64,11 +64,11 @@ Now, its time to set up the simulation. Execute:
 
 `./simulation_setup.py`
 
-This script will walk you through several steps. If any step fails, you can usually restart from that point forward by skipping the steps you have already completed. The steps are:
+This script will walk you through several steps. Each step is as automated as possible so user interaction is minimized. If any step fails, you can usually restart from that point forward by skipping the steps you have already completed. The steps are:
 
-1. Set up the AdvantEDGE runtime environment per the directions [here](https://github.com/InterDigitalInc/AdvantEDGE/wiki/env-runtime). This step installs and configures Kubernetes, Helm and AdvantEDGE.
-2. Set up the AdvantEDGE build environment per the directions [here](https://github.com/InterDigitalInc/AdvantEDGE/wiki/env-dev) and [here](https://github.com/InterDigitalInc/AdvantEDGE/wiki/mgmt-workflow). This step installs and configures go, nodejs with nvm & npm,  ESLint, GolangCI-Lint, meepctl and the meep microservices.
-3. Deploy AdvantEDGE per the directions [here](https://github.com/InterDigitalInc/AdvantEDGE/wiki/mgmt-workflow). This step deploys the meep dependencies services then dockerizes and deploys the meep core services.
+1. Set up the AdvantEDGE runtime environment. This step installs and configures Kubernetes, Helm and AdvantEDGE. It is an automation of directions [here](https://github.com/InterDigitalInc/AdvantEDGE/wiki/env-runtime).
+2. Set up the AdvantEDGE build environment. This step installs and configures go, nodejs with nvm & npm,  ESLint, GolangCI-Lint, meepctl and the meep microservices. It is an automation of the directions [here](https://github.com/InterDigitalInc/AdvantEDGE/wiki/env-dev) and [here](https://github.com/InterDigitalInc/AdvantEDGE/wiki/mgmt-workflow).
+3. Deploy AdvantEDGE. This step deploys the meep dependencies services then dockerizes and deploys the meep core services.  It is an automation of the directions [here](https://github.com/InterDigitalInc/AdvantEDGE/wiki/mgmt-workflow).
 
 At this point, AdvantEDGE should be running. You can check this by running `k9s` or opening a browser window to `127.0.0.1`. If you start a new bash shell, your `.bashrc` should be configured for `kubectl`, `meepctl`, `go`, `npm` and `nvm`. To verify, run:
 
@@ -96,13 +96,21 @@ You can now continue the `simulation_setup.py` script.
     - From the script, setup grafana. 
     - Then, open a browser tab to `http://127.0.0.1/grafana`, login at lower left with username = admin and pw = admin. Use the `+` to import the `Client Framerate and Round Trip Time.json` dashboard from the PyEdgeSim `data/grafana` directory. When the dashboard opens, select `adv_ortist_sim_adv_ortist_sim` from the `ScenarioDB` dropdown menu at the top of the dashboard.
 11. The script will prompt you to setup automation. This was already done during the installation requirements but no harm in doing it again to be safe.
-12. Run the test automation. You can view the progress of this from the grafana dashboard. You'll see a network latency step graph in the lower left. Since you have not yet configured the client, you won't see anything meaningful in the upper half of the dashboard. 
+12. Run the test automation. You can view the progress from the grafana dashboard. You'll see a network latency step graph in the lower left. Since you have not yet configured the client, you won't see anything meaningful in the upper half of the dashboard. 
 
 The final step in the script is the generation of a test report. We'll come back to this after the client is configured. You've completed the server configuration. For now, you can exit from the `simulation_setup.py` script.
 
 ### Client Setup
 
+1. On your android client device, download and install the instrumented OpenRTiST client from [here](http://visualcloudsystems.org/cmudl/app-measurementDB-debug.apk).
+2. When the OpenRTiST client opens, approve permission requests as prompted. These enable the client to collect measurements from the device. 
+3. On the OpenRTiST client Server List, create a new server using an address of `<YOUR-SERVER-PUBLIC-IP>:31001`. Open that server and approve any other requested permissions. You should now be connected to the OpenRTiST server and can display the artistic style of your choice from the drop down. If you can't connect, check that port 31001 is open on your server.
+
 
 
 ## Exercise 2: Running the Simulation
+
+With both the client and server running, connected and displaying style transfer, rerun the test automation by skipping through the prior steps in `simulation_setup.py`.  For some reason, it can take a while (10-15 minutes) for influxdb measurements from openrtist to appear in the openrtistdb that grafana draws from. If you don't see them in the upper part of the dashboard, try rerunning the simulation a few times until you see them.
+
+Once you get a complete run with both the lower and upper dashboard showing data, create the test report to see that everything is working. The report is written to a file called `report.png`.
 
