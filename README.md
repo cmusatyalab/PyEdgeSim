@@ -41,7 +41,9 @@ Install docker and configure $USER as a docker user. Then, reboot.
 Install java:
 
 > `sudo apt update`
+>
 > `sudo apt install default-jdk -y`
+>
 > `sudo apt install openjdk-8-jre -y`
 
 
@@ -51,7 +53,9 @@ Open firewall ports 80 (HTTP), 443 (HTTPS), 22 (SSH), 30086 (InfluxDB) and 31001
 Clone the repository and install the required packages
 
 > `git clone https://github.com/jblakley/PyEdgeSim`
+>
 > `cd PyEdgeSim`
+>
 > `python install_requirements.py`
 
 When prompted to <u>select the Linuxbrew installation directory</u>, enter ^D then return.
