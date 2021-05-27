@@ -9,13 +9,15 @@ http://reports-archive.adm.cs.cmu.edu/anon/2020/CMU-CS-20-135.pdf
 
 ## Prerequisites
 
-Linux server VM or bare metal
+To execute this exercise, you will need:
 
-Android Client
+- A Linux Server -- either a virtual machine or a bare metal. This server will also need an IP address that the client can reach.
+- An Android Client with permission and capability to download and install apks.
 
-## Tested on
 
-### Server
+The exercise was tested and developed using the following system configurations. It is recommended to follow these configurations as closely as possible. It is highly recommended that you use Ubuntu 18.04 for the server and a modern Android device for the client.
+
+### Server Configuration
 
 - Ubuntu 18.04
 - Azure Stack Standard DS5 v2 (16 vcpus, 56 GB memory) instance with 64GB SSD
@@ -25,7 +27,7 @@ Android Client
 - Chrome Browser
 - AdvantEDGE 1.7.1
 
-### Client
+### Client Configuration
 
 - Samsung Galaxy S8 with Android 9
 - Essential PH-1 with Android 10
