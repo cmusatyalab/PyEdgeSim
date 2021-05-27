@@ -23,11 +23,14 @@ def runAutomationTest(cnf, restart=False):
     testprofile = cnf['AUTOMATION']
     stablizetime = 10
     api.setSandbox(cnf['SANDBOX'])
-    scenariorunning = api.startScenario(testscenname)
-    if not scenariorunning:
-        mconsole("Could not start scenario: %s" % testscenname,level="ERROR")
-        sys.exit(1)
-
+    try:
+        scenariorunning = api.startScenario(testscenname)
+        if not scenariorunning:
+            mconsole("Could not start scenario: %s" % testscenname,level="ERROR")
+            return -1
+    except:
+        mconsole("Could not start scenario: %s; Most likely, the sandbox %s does not exist" % (testscenname, cnf['SANDBOX']),level="ERROR")
+        return -1
     ''' Parse active scenario '''
     activescenario = api.getActiveScenario()
     mconsole("Active Scenario: %s" % activescenario.name)
