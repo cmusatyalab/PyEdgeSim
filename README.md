@@ -87,7 +87,7 @@ The script now continues to:
 
 At this point, before deploying the scenario, some manual effort is required outside of the script.
 
-6. Open a browser window to `127.0.0.1` to connect to the AdvantEDGE console.
+6. Open a browser window to `127.0.0.1`or the server's public IP to connect to the AdvantEDGE console.
 7. Select the *CONFIGURE* tab and  import `adv-ortist-sim.yaml` from the PyEdgeSim `data/scenarios` directory. Save the scenario with the name `adv-ortist-sim`.
 8. Select the *EXECUTE* tab and create a new sandbox named `adv-ortist-sim`. Wait for the sandbox to be created (*watch the red stoplight turn green*). Now,  deploy the `adv-ortist-sim` scenario. If this is successful, you will see two network elements, `openrtist-client1` and `openrtist-svc1` at the bottom of the *EXECUTE* page. You will also see these two pods when running a `kubectl get pods` command or by looking in `k9s`.
 
