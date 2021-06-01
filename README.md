@@ -29,9 +29,7 @@ Detailed instructions are below but the basic process is:
    
 
 ------
-
-<img src="C:\Users\jimbl\Git\PyEdgeSim\doc\PyEdgeSimFramework.png" alt="P" style="zoom:48%;" />
-
+![PyEdgeSim](https://github.com/jblakley/PyEdgeSim/blob/main/doc/PyEdgeSimFramework.png)
 ------
 
 
