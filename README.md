@@ -2,10 +2,39 @@
 
 ## Introduction
 
-https://github.com/InterDigitalInc/AdvantEDGE
-https://github.com/InterDigitalInc/AdvantEDGE/wiki
+PyEdgeSim is a *mostly* python-based simulation framework built around the [AdvantEDGE Mobile Edge Emulation Platform](https://github.com/InterDigitalInc/AdvantEDGE). It is the framework used to run the simulations covered in the Carnegie Mellon University Computer Science Department Technical Report, [*Simulating Edge Computing Environments to Optimize Application Experience*](http://reports-archive.adm.cs.cmu.edu/anon/2020/CMU-CS-20-135.pdf) and the Open Edge Computing Initiative whitepaper [How Close to the Edge?: Edge Computing and Carrier Interexchange](https://bit.ly/3ruDEYQ). These simulations evaluated the performance of an edge-native application, [OpenRTiST](https://ieeexplore.ieee.org/document/9229154), while emulating mobile edge networks in a variety of environments using the AdvantEDGE platform.
 
-http://reports-archive.adm.cs.cmu.edu/anon/2020/CMU-CS-20-135.pdf
+PyEdgeSim is structured as an exercise to set up the simulation environment, run a *Hello World* simulation, view the simulation with a Grafana dashboard and produce a simple report from the captured data. Once you complete the exercise, we expect that you will customize the application, the simulation script, the dashboard and the final report for your own purposes. You can view this exercise as a *quickstart* to accelerate the learning curve in using AdvantEDGE as an emulation tool.
+
+Detailed instructions are below but the basic process is:
+
+1. Procure a client and server to run the environment on.
+
+2. Install and configure the prerequisites.
+
+3. Install and deploy the PyEdgeSim building blocks.
+   a. Install kubernetes and helm and start a kubernetes cluster
+   b. Install the AdvantEDGE build tools; Build and deploy AdvantEDGE.
+   c. Get the OpenRTiST client and server.
+   d. Set up the simulation scenario.
+   e. Set up the data management engine and visualization tools (InfluxDB and Grafana).
+   f. Set up the automation engine
+   
+4. Connect your OpenRTiST client to the server.
+
+5. Run a test automation.
+
+6. Generate a test report.
+
+   
+
+------
+
+<img src="C:\Users\jimbl\Git\PyEdgeSim\doc\PyEdgeSimFramework.png" alt="P" style="zoom:48%;" />
+
+------
+
+
 
 ## Prerequisites
 
