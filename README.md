@@ -26,13 +26,12 @@ Detailed instructions are below but the basic process is:
 
 6. Generate a test report.
 
-   
-
 ------
+## PyEdgeSim Platform
+
 ![PyEdgeSim](https://github.com/jblakley/PyEdgeSim/blob/main/doc/PyEdgeSimFramework.png)
+
 ------
-
-
 
 ## Prerequisites
 
