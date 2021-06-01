@@ -8,7 +8,7 @@ PyEdgeSim is structured as an exercise to set up the simulation environment, run
 
 Detailed instructions are below but the basic process is:
 
-1. Procure a client and server to run the environment on.
+1. Procure a client and server to run the environment.
 
 2. Install and configure the prerequisites.
 
