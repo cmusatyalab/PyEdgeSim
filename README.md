@@ -13,7 +13,7 @@ Detailed instructions are below but the basic process is:
 2. Install and configure the prerequisites.
 
 3. Install and deploy the PyEdgeSim building blocks.
-   Install kubernetes and helm and start a kubernetes cluster
+   * Install kubernetes and helm and start a kubernetes cluster
    * Install the AdvantEDGE build tools; Build and deploy AdvantEDGE.
    * Get the OpenRTiST client and server.
    * Set up the simulation scenario.
