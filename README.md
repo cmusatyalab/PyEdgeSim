@@ -15,10 +15,10 @@ Detailed instructions are below but the basic process is:
 3. Install and deploy the PyEdgeSim building blocks.
    Install kubernetes and helm and start a kubernetes cluster
    * Install the AdvantEDGE build tools; Build and deploy AdvantEDGE.
-   c. Get the OpenRTiST client and server.
-   d. Set up the simulation scenario.
-   e. Set up the data management engine and visualization tools (InfluxDB and Grafana).
-   f. Set up the automation engine
+   * Get the OpenRTiST client and server.
+   * Set up the simulation scenario.
+   * Set up the data management engine and visualization tools (InfluxDB and Grafana).
+   * Set up the automation engine
    
 4. Connect your OpenRTiST client to the server.
 
