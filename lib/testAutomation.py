@@ -17,6 +17,8 @@ api = AdvantEDGEApi()
 
 
 def runAutomationTest(cnf, restart=False):
+    mconsole("If necessary, recreate sandbox {} and redeploy scenario {}".format(cnf['SANDBOX'],cnf['SCENARIO']))
+    mconsole("Connect OpenRTIST client to the server")
     entry = input("Run the test automation? [y/N] ") or "n"
     if entry not in ['Y','y']: return 0
     testscenname = cnf['SCENARIO']
