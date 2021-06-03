@@ -83,7 +83,7 @@ def installCharts(cnf):
                     srcfn = os.path.join(root,fn)
                     dstfn = os.path.join(fdestdir,fn)
                     shutil.copy2(srcfn,dstfn)
-    mconsole("In AdvantEDGE console, import and save scenario {} and create sandbox {}".format(cnf['SCENARIO'],cnf['SANDBOX']))
+        mconsole("In AdvantEDGE console, import and save scenario {} and create sandbox {}".format(cnf['SCENARIO'],cnf['SANDBOX']))
     return 0
 
 
