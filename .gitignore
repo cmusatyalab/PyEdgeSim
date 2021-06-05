@@ -1,2 +1,7 @@
 /npm-debug.log
 /simulation_setup.log
+/meep-ctrl-engine-swagger.yaml
+/meep-mon-engine-swagger.yaml
+/meep-platform-control-swagger.yaml
+/meep-sandbox-control-swagger.yaml
+/config.json

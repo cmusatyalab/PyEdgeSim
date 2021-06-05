@@ -2,10 +2,36 @@
 
 ## Introduction
 
-https://github.com/InterDigitalInc/AdvantEDGE
-https://github.com/InterDigitalInc/AdvantEDGE/wiki
+PyEdgeSim is a *mostly* python-based simulation framework built around the [AdvantEDGE Mobile Edge Emulation Platform](https://github.com/InterDigitalInc/AdvantEDGE). This framework was used to run the simulations covered in the Carnegie Mellon University Computer Science Department Technical Report, [*Simulating Edge Computing Environments to Optimize Application Experience*](http://reports-archive.adm.cs.cmu.edu/anon/2020/CMU-CS-20-135.pdf) and the Open Edge Computing Initiative whitepaper *[How Close to the Edge?: Edge Computing and Carrier Interexchange](https://bit.ly/3ruDEYQ)*. These simulations evaluated the performance of an edge-native application, [OpenRTiST](https://ieeexplore.ieee.org/document/9229154), while emulating mobile edge networks in a variety of conditions using the AdvantEDGE platform.
 
-http://reports-archive.adm.cs.cmu.edu/anon/2020/CMU-CS-20-135.pdf
+PyEdgeSim is structured as an exercise to set up the simulation environment, run a *Hello World* simulation, view the simulation with a Grafana dashboard and produce a simple report from the captured data. Once you complete the exercise, we expect that you will customize the application, the AdvantEDGE scenario, the simulation script, the dashboard and the final report for your own purposes. You can view this exercise as a *quickstart* to accelerate the learning curve in using AdvantEDGE as an emulation tool.
+
+Detailed instructions are below but the basic process is:
+
+1. Procure a client and server to run the environment.
+
+2. Install and configure the prerequisites.
+
+3. Install and deploy the PyEdgeSim building blocks.
+   * Install kubernetes and helm and start a kubernetes cluster
+   * Install the AdvantEDGE build tools; Build and deploy AdvantEDGE.
+   * Get the OpenRTiST client and server.
+   * Set up the simulation scenario.
+   * Set up the data management engine and visualization tools (InfluxDB and Grafana).
+   * Set up the automation engine
+   
+4. Connect your OpenRTiST client to the server.
+
+5. Run a test automation.
+
+6. Generate a test report.
+
+------
+## PyEdgeSim Platform
+
+![PyEdgeSim](https://github.com/jblakley/PyEdgeSim/blob/main/doc/PyEdgeSimFramework.png)
+
+------
 
 ## Prerequisites
 
@@ -87,7 +113,7 @@ The script now continues to:
 
 At this point, before deploying the scenario, some manual effort is required outside of the script.
 
-6. Open a browser window to `127.0.0.1` to connect to the AdvantEDGE console.
+6. Open a browser window to `127.0.0.1`or the server's public IP to connect to the AdvantEDGE console.
 7. Select the *CONFIGURE* tab and  import `adv-ortist-sim.yaml` from the PyEdgeSim `data/scenarios` directory. Save the scenario with the name `adv-ortist-sim`.
 8. Select the *EXECUTE* tab and create a new sandbox named `adv-ortist-sim`. Wait for the sandbox to be created (*watch the red stoplight turn green*). Now,  deploy the `adv-ortist-sim` scenario. If this is successful, you will see two network elements, `openrtist-client1` and `openrtist-svc1` at the bottom of the *EXECUTE* page. You will also see these two pods when running a `kubectl get pods` command or by looking in `k9s`.
 

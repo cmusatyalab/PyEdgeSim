@@ -36,7 +36,6 @@ def deployAdvantEDGE(cnf):
 def getOpenRTiST(cnf):
     entry = input("Get OpenRTiST? [y/N] ") or "n"
     if entry in ['Y','y']:
-        mconsole("While OpenRTiST is being pulled and pushed, recreate sandbox {} in AdvantEDGE".format(cnf['SANDBOX']))    
         srcimg = "cmusatyalab/openrtist"
         dstimg = "meep-docker-registry:30001/openrtist:real"
         oscmd("docker pull {}".format(srcimg))
@@ -84,6 +83,7 @@ def installCharts(cnf):
                     srcfn = os.path.join(root,fn)
                     dstfn = os.path.join(fdestdir,fn)
                     shutil.copy2(srcfn,dstfn)
+        mconsole("In AdvantEDGE console, import and save scenario {} and create sandbox {}".format(cnf['SCENARIO'],cnf['SANDBOX']))
     return 0
 
 

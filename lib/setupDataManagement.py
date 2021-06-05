@@ -69,7 +69,7 @@ def setupGrafana(cnf):
         krunpodstr = "kubectl exec {} -- ".format(grafanapod)
         oscmd("{}{}".format(krunpodstr,"grafana-cli plugins install grafana-worldmap-panel"))
         oscmd("kubectl delete pod {}".format(grafanapod))
-        mconsole("Navigate to {}, login and import '{}' (login: admin, pw: admin)".format(grafanaurl, chartname))
+        mconsole("Navigate to {}, login (username: admin, pw: admin) \n\tand import '{}' ".format(grafanaurl, chartname))
         input("Press return to continue ")
     return 0
 

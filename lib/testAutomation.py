@@ -17,17 +17,22 @@ api = AdvantEDGEApi()
 
 
 def runAutomationTest(cnf, restart=False):
+    mconsole("If necessary, recreate sandbox {} and redeploy scenario {}".format(cnf['SANDBOX'],cnf['SCENARIO']))
+    mconsole("Connect OpenRTIST client to the server")
     entry = input("Run the test automation? [y/N] ") or "n"
     if entry not in ['Y','y']: return 0
     testscenname = cnf['SCENARIO']
     testprofile = cnf['AUTOMATION']
     stablizetime = 10
     api.setSandbox(cnf['SANDBOX'])
-    scenariorunning = api.startScenario(testscenname)
-    if not scenariorunning:
-        mconsole("Could not start scenario: %s" % testscenname,level="ERROR")
-        sys.exit(1)
-
+    try:
+        scenariorunning = api.startScenario(testscenname)
+        if not scenariorunning:
+            mconsole("Could not start scenario: %s" % testscenname,level="ERROR")
+            return -1
+    except:
+        mconsole("Could not start scenario: %s; Most likely, the sandbox %s does not exist" % (testscenname, cnf['SANDBOX']),level="ERROR")
+        return -1
     ''' Parse active scenario '''
     activescenario = api.getActiveScenario()
     mconsole("Active Scenario: %s" % activescenario.name)
