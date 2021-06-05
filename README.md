@@ -40,11 +40,11 @@ Install docker and configure $USER as a docker user. Then, reboot.
 
 Install java:
 
-> `sudo apt update`
+> sudo apt update
 >
-> `sudo apt install default-jdk -y`
+> sudo apt install default-jdk -y
 >
-> `sudo apt install openjdk-8-jre -y`
+> sudo apt install openjdk-8-jre -y
 
 
 
@@ -52,11 +52,11 @@ Open firewall ports 80 (HTTP), 443 (HTTPS), 22 (SSH), 30086 (InfluxDB) and 31001
 
 Clone the repository and install the required packages
 
-> `git clone https://github.com/jblakley/PyEdgeSim`
+> git clone https://github.com/jblakley/PyEdgeSim
 >
-> `cd PyEdgeSim`
+> cd PyEdgeSim
 >
-> `python install_requirements.py`
+> python install_requirements.py
 
 When prompted to <u>select the Linuxbrew installation directory</u>, enter ^D then return.
 
@@ -77,7 +77,7 @@ This script will walk you through several steps. Each step is as automated as po
 At this point, AdvantEDGE should be running. You can check this by running `k9s` or opening a browser window to `127.0.0.1`. If you start a new bash shell, your `.bashrc` should be configured for `kubectl`, `meepctl`, `go`, `npm` and `nvm`. To verify, run:
 
 ```
-> kubectl version; meepctl version; go version; npm version; node -v;  nvm --version
+kubectl version; meepctl version; go version; npm version; node -v;  nvm --version
 ```
 
 The script now continues to:
