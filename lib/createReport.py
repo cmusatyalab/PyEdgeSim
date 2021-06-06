@@ -109,7 +109,7 @@ def createPlots(measdf,trdf, netdf, evdf, cnf,  filename = None):
     ax = axs[2][0]
     ax = plotTraceRoute(trdf,cnf,ax=ax)
 #     ax.set_title("Trace Route Path",y=1.0,pad=-30,fontsize=14,color='red')
-    ax.set_title("Trace Route Path",fontsize=14)
+    if ax is not None: ax.set_title("Trace Route Path",fontsize=14)
     
     plt.tight_layout()
     if filename is not None:
@@ -188,6 +188,9 @@ def addLoc(row):
 def plotTraceRoute(trdf,cnf,ax=None):
     ctxprovider=ctx.sources.ST_TONER_LITE
     tdfx = trdf.copy().dropna()
+    if not 'latitude' in tdfx:
+        mconsole("No location information in traceroute data",level="ERROR")
+        return None
     tdfx['geometry'] = pt2geom(tdfx,latcol='latitude',lngcol='longitude')
     tdfx['geometryshift'] = tdfx['geometry'].shift(-1)
     tdfx['geometryshift'].iloc[-1] = tdfx['geometry'].iloc[0] # Make it around trip
