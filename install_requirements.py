@@ -16,3 +16,6 @@ setupclient="python lib/setupAutomation.py"
 
 cmdstr = "bash -c ' {} && {}' ".format(pipsetup,setupclient)
 oscmd(cmdstr)
+
+cmdstr = "lib/_installgdal.sh"
+oscmd(cmdstr)
