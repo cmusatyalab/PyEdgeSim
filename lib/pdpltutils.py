@@ -43,7 +43,7 @@ def save_plot(ax,fname):
 
         
 def ts_lineplot(fdf,ylst,title='',filename='tmp.png',saveon=False,figsize=(10,10),**kwargs):
-    print(title)
+    # print(title)
     ax = fdf.reset_index().plot(x='TIMESTAMP',y = ylst,title=title,figsize=figsize,**kwargs)
     ax.grid(True)
     if saveon:
@@ -56,7 +56,7 @@ def lineplot(tmpdf,xcol,ylst,title='',ax=None, filename='tmp.png', saveon=False,
     ''' PLot '''
     ymax = max(list(tmpdf[ylst].max()))
     ylim = ymax*yscale*1.1
-    print(ylim)
+    # print(ylim)
     ax = tmpdf.reset_index().plot(ax=ax,x=xcol,y=ylst,title=title,figsize=figsize,ylim=(0,ylim),
              logy=logy,logx=logx,legend=legend,**kwargs)
     ax.set_xlabel(xlabel)
