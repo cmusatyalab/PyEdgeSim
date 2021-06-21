@@ -75,6 +75,7 @@ def createReport(cnf,filename=None):
     trtedf2 = parseTraceRoute(cnf,trtedf)
     ''' Prepare the report '''
     createPlots(sessmeasdf,trtedf2,netdf,evdf, cnf,filename=filename)
+    saveDFs(sessmeasdf,trtedf2,netdf,evdf,sessid)
     mconsole("Report created: {}".format(filename))
     return 0
 
@@ -115,7 +116,13 @@ def createPlots(measdf,trdf, netdf, evdf, cnf,  filename = None):
     if filename is not None:
         fig.savefig(filename)
     return fig
-    
+
+def saveDFs(sessmeasdf,trtedf2,netdf,evdf,sessid):
+    sessmeasdf.to_csv("output/SessionData_{}.csv".format(sessid))
+    trtedf2.to_csv("output/TraceRouteData_{}.csv".format(sessid))
+    netdf.to_csv("output/NetworkData_{}.csv".format(sessid))
+    evdf.to_csv("output/EventData_{}.csv".format(sessid))
+
 def parseTraceRoute(cnf,trtedf):
     global ipdbdf
     ipdbdf = getIP2LITE(cnf)
