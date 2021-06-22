@@ -40,7 +40,6 @@ To execute this exercise, you will need:
 - A Linux Server -- either a virtual machine or a bare metal. This server will also need an IP address that the client can reach.
 - An Android Client with permission and capability to download and install apks.
 
-
 The exercise was tested and developed using the following system configurations. It is recommended to follow these configurations as closely as possible. It is highly recommended that you use Ubuntu 18.04 for the server and a modern Android device for the client.
 
 ### Server Configuration
@@ -58,6 +57,19 @@ The exercise was tested and developed using the following system configurations.
 - Samsung Galaxy S8 with Android 9
 - Essential PH-1 with Android 10
 
+#### GPU Implementation
+While a GPU is not required, PyEdgeSim's OpenRTiST application will run faster with one. Using a GPU requires three things:
+1. Equipping your server with a GPU and install the corresponding host driver.
+
+2. Configuring docker to use a GPU by installing and configuring nvidia-docker2
+
+3. Configuring kubernetes to use a GPU. You will need to this after installing kubernetes in step 1 of the exercise below.
+
+Only the OpenRTiST pod will use the GPU in this exercise.
+
+#### Low-latency Networking
+The application will also perform better if your environment has low-latency networking between the client and the server. This is difficult to measure in practice but connecting the client and server to the same LAN subnet will usually give the best performance. Wired connections will perform better than wireless.
+
 ## Exercise 1: Configure the Platform
 
 ### Server Setup
@@ -74,7 +86,7 @@ Install java:
 
 
 
-Open firewall ports 80 (HTTP), 443 (HTTPS), 22 (SSH), 30086 (InfluxDB) and 31001 (OpenRTiST)
+Open firewall ports 80 (HTTP), 443 (HTTPS), 22 (SSH), 30086 (InfluxDB) and 31001 (OpenRTiST).
 
 Clone the repository and install the required packages
 
@@ -86,9 +98,9 @@ Clone the repository and install the required packages
 
 When prompted to <u>select the Linuxbrew installation directory</u>, enter ^D then return.
 
-When prompted to set up automation, select "y".
+When prompted to set up automation, select "y". You will run this again during the main exercise.
 
-PyEdgeSim configuration details are in `config.json`. You won't need to play with most of these but set the project directory, `PROJECTHOME` to your preferred (usually `$HOME`) and the `PUBLICIP` to the public IP of your server.
+PyEdgeSim configuration details are in `config.json`. You won't need to play with most of these but set the project directory, `PROJECTHOME` to your preferred (usually `$HOME`).
 
 Now, its time to set up the simulation. Execute:
 
