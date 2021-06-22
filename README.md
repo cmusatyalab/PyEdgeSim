@@ -58,12 +58,12 @@ The exercise was tested and developed using the following system configurations.
 - Essential PH-1 with Android 10
 
 #### GPU Implementation
-While a GPU is not required, PyEdgeSim's OpenRTiST application will run faster with one. Using a GPU requires three things:
+While a GPU is not required, PyEdgeSim's OpenRTiST application will run faster with one. Using an NVIDIA GPU requires three things:
 1. Equipping your server with a GPU and install the corresponding host driver.
 
-2. Configuring docker to use a GPU by installing and configuring nvidia-docker2
+2. Configuring docker to use a GPU by installing and configuring nvidia-docker2 and updating /etc/docker/daemon.json
 
-3. Configuring kubernetes to use a GPU. You will need to this after installing kubernetes in step 1 of the exercise below.
+3. Configuring kubernetes to use a GPU. You will be prompted to do this after installing kubernetes in step 1 of the exercise below.
 
 Only the OpenRTiST pod will use the GPU in this exercise.
 
@@ -74,21 +74,11 @@ The application will also perform better if your environment has low-latency net
 
 ### Server Setup
 
-Install docker and configure $USER as a docker user. Then, reboot.
-
-Install java:
-
-> sudo apt update
->
-> sudo apt install default-jdk -y
->
-> sudo apt install openjdk-8-jre -y
-
-
+Install docker and configure yourself as a docker user. Then, reboot.
 
 Open firewall ports 80 (HTTP), 443 (HTTPS), 22 (SSH), 30086 (InfluxDB) and 31001 (OpenRTiST).
 
-Clone the repository and install the required packages
+Clone the repository and install the required packages:
 
 > git clone https://github.com/jblakley/PyEdgeSim
 >
@@ -125,7 +115,7 @@ The script now continues to:
 
 At this point, before deploying the scenario, some manual effort is required outside of the script.
 
-6. Open a browser window to `127.0.0.1`or the server's public IP to connect to the AdvantEDGE console.
+6. Open a browser window to `localhost`or the server's public IP to connect to the AdvantEDGE console.
 7. Select the *CONFIGURE* tab and  import `adv-ortist-sim.yaml` from the PyEdgeSim `data/scenarios` directory. Save the scenario with the name `adv-ortist-sim`.
 8. Select the *EXECUTE* tab and create a new sandbox named `adv-ortist-sim`. Wait for the sandbox to be created (*watch the red stoplight turn green*). Now,  deploy the `adv-ortist-sim` scenario. If this is successful, you will see two network elements, `openrtist-client1` and `openrtist-svc1` at the bottom of the *EXECUTE* page. You will also see these two pods when running a `kubectl get pods` command or by looking in `k9s`.
 
@@ -136,8 +126,9 @@ You can now continue the `simulation_setup.py` script.
     - To expose influxdb outside of the server cluster, this step stops the `adv-ortist-sim` scenario, deletes the sandbox and restarts AdvantEDGE. The process will take some time. You can validate that it worked by going to another machine with influxdb installed and running `influx -port 30086 -host <PUBLICIP-OF-SERVER>`. If it can't connect, make sure you opened port 30086 on your server.
     - From the browser, recreate your `adv-ortist-sim` sandbox and redeploy the `adv-ortist-sim` scenario.
     - From the script, setup grafana. 
-    - Then, open a browser tab to `http://127.0.0.1/grafana`, login at lower left with username = admin and pw = admin. Use the `+` to import the `Client Framerate and Round Trip Time.json` dashboard from the PyEdgeSim `data/grafana` directory. When the dashboard opens, select `adv_ortist_sim_adv_ortist_sim` from the `ScenarioDB` dropdown menu at the top of the dashboard.
-11. The script will prompt you to setup automation. This was already done during the installation requirements but no harm in doing it again to be safe.
+    - Then, open a browser tab to `http://localhost/grafana`, login at lower left with username = admin and pw = admin. Use the `+` to import the `Client Framerate and Round Trip Time.json` dashboard from the PyEdgeSim `data/grafana` directory. 
+    - The map in the dashboard is locked to the the Pittsburgh east end. You can change this by editing that panel and changing the GPS coordinates.
+11. The script will prompt you to setup automation. You already did this during the requirements installation but no harm in doing it again to be safe.
 12. Run the test automation. You can view the progress from the grafana dashboard. You'll see a network latency step graph in the lower left. Since you have not yet configured the client, you won't see anything meaningful in the upper half of the dashboard. 
 
 The final step in the script is the generation of a test report. We'll come back to this after the client is configured. You've completed the server configuration. For now, you can exit from the `simulation_setup.py` script.
@@ -152,9 +143,10 @@ The final step in the script is the generation of a test report. We'll come back
 
 ## Exercise 2: Running the Simulation
 
-With both the client and server running, connected and displaying style transfer, rerun the test automation by skipping through the prior steps in `simulation_setup.py`.  For some reason, it can take a while (10-15 minutes) for influxdb measurements from openrtist to appear in the openrtistdb that grafana draws from. If you don't see them in the upper part of the dashboard, try rerunning the simulation a few times until you see them. You can also look in influxdb itself by running the command shown above to connect.
+With both the client and server running, connected and displaying style transfer, rerun the test automation by skipping through the prior steps in `simulation_setup.py`. 
 
-Once you get a complete run with both the lower and upper dashboard showing data, create the test report to see that everything is working. The report is written to a file called `report.png`. It should look something like this.
+When you get a complete run with both the lower and upper dashboard showing data, create the test report to see that everything is working. The report is written to a file called `report.png`. It should look something like this. You will also find the data behind the report as csv files in the `output` folder.
 
 ![](files/report.png)
 
+You have now completed the exercise.
