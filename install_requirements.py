@@ -4,6 +4,9 @@ import os
 
 def oscmd(cmdstr): # Prints out to console and returns exit status
     return os.system(cmdstr)
+''' Java '''
+oscmd("sudo apt install default-jdk -y")
+oscmd("sudo apt install openjdk-8-jre -y")
 
 ''' K9s '''
 
