@@ -41,6 +41,7 @@ def setupKubernetes(cnf):
         oscmd("sudo apt-mark hold kubelet kubeadm kubectl")
         oscmd("sudo systemctl enable docker.service")
         # May need to turn off firewall
+	# May need to add to /etc/docker/daemon.json --> "exec-opts": ["native.cgroupdriver=systemd"],
         oscmd("sudo kubeadm init --ignore-preflight-errors=all")
         
         oscmd("mkdir -p $HOME/.kube")
