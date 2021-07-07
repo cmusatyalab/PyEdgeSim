@@ -61,7 +61,7 @@ def setupKubernetes(cnf):
         IP = cmd0("kubectl get nodes -o json|jq -r '.items[].status.addresses[] | select( .type | test(\"InternalIP\")) | .address'")
         
         if oscmd("grep meep-docker-registry /etc/hosts") != 0: 
-            oscmd("sudo sh -c 'echo \"{}    meep-docker-registry\" >> /etc/hosts'".format(IP))
+            oscmd("sudo sh -c 'echo \"{}    meep-docker-registry\" >> /etc/hosts'".format("127.0.0.1"))
          
         # Add K8s CA to list of trusted CAs
         fn="/usr/local/share/ca-certificates/kubernetes-ca.crt"
