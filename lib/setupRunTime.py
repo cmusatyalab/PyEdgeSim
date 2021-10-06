@@ -76,6 +76,8 @@ def setupKubernetes(cnf):
         entry = input("Enable NVIDIA GPU in Kubernetes? [y/N] ") or "n"
         if entry in ['Y','y']:
             oscmd("kubectl create -f https://raw.githubusercontent.com/NVIDIA/k8s-device-plugin/1.0.0-beta4/nvidia-device-plugin.yml")
+            oscmd('bash -c "grep default-runtime /etc/docker/daemon.json >/dev/null|| jq \'. += {\\"new-runtime\\":\\"nvidia\\"}\' < /etc/docker/daemon.json >newdaemon.json"')
+
     return 0
 
 
