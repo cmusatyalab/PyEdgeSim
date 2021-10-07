@@ -63,6 +63,25 @@ While a GPU is not required, PyEdgeSim's OpenRTiST application will run faster w
 
 2. Configuring docker to use a GPU by installing and configuring nvidia-docker2 and updating /etc/docker/daemon.json
 
+Your `/etc/docker/daemon.json` file should look something like this. Don't forget to restart docker with `sudo systemctl restart docker`
+
+	{
+	  "default-runtime": "nvidia",
+	  "runtimes": {
+	        "nvidia": {
+	            "path": "nvidia-container-runtime",
+	            "runtimeArgs": []
+	        }
+	  },
+	  "exec-opts": ["native.cgroupdriver=systemd"],
+	  "log-driver": "json-file",
+	  "log-opts": {
+	    "max-size": "100m"
+	  },
+	  "storage-driver": "overlay2"
+	}
+
+
 3. Configuring kubernetes to use a GPU. You will be prompted to do this after installing kubernetes in step 1 of the exercise below.
 
 Only the OpenRTiST pod will use the GPU in this exercise.
