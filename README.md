@@ -52,6 +52,8 @@ The exercise was tested and developed using the following system configurations.
 - Chrome Browser
 - AdvantEDGE 1.7.1
 
+ ** Update: now tested on Ubuntu 20.04 with ubuntu desktop over tigervnc *
+
 ### Client Configuration
 
 - Samsung Galaxy S8 with Android 9
