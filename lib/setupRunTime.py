@@ -71,13 +71,17 @@ def setupKubernetes(cnf):
             oscmd("sudo update-ca-certificates")
          
         # Restart docker daemon
-        oscmd("sudo systemctl restart docker")
+        setupK8sGPU()
         
+        oscmd("sudo systemctl restart docker")
+
+    return 0
+
+def setupK8sGPU():
         entry = input("Enable NVIDIA GPU in Kubernetes? [y/N] ") or "n"
         if entry in ['Y','y']:
             oscmd("kubectl create -f https://raw.githubusercontent.com/NVIDIA/k8s-device-plugin/1.0.0-beta4/nvidia-device-plugin.yml")
-    return 0
-
+            cmd_all('bash -c "grep default-runtime /etc/docker/daemon.json >/dev/null|| jq \'. += {\\"default-runtime\\":\\"nvidia\\"}\' < /etc/docker/daemon.json >newdaemon.json"')
 
 def setupHelm(cnf):
     entry = input("Set up helm? [y/N] ") or "n"
@@ -116,4 +120,4 @@ def installAdvantEDGE(cnf):
         retcode = 0
     return retcode
 
-
+setupK8sGPU()
