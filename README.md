@@ -44,8 +44,8 @@ The exercise was tested and developed using the following system configurations.
 
 ### Server Configuration
 
-- Ubuntu 18.04 or 20.04
-- Azure Stack Standard DS5 v2 (16 vcpus, 56 GB memory) instance with 64GB SSD
+- Ubuntu 18.04 or 20.04 
+- At least 128 GB of storage
 - Python 3.6
 - Docker version 1.19
 - XFCE desktop via TightVNC
