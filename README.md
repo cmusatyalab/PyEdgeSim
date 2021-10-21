@@ -44,15 +44,12 @@ The exercise was tested and developed using the following system configurations.
 
 ### Server Configuration
 
-- Ubuntu 18.04
-- Azure Stack Standard DS5 v2 (16 vcpus, 56 GB memory) instance with 64GB SSD
+- Ubuntu 18.04 and 20.04
 - Python 3.6
 - Docker
 - XFCE desktop via TightVNC
 - Chrome Browser
-- AdvantEDGE 1.7.1
-
- ** Update: now tested on Ubuntu 20.04 with ubuntu desktop over tigervnc *
+- AdvantEDGE 1.7.1 and 1.8.0
 
 ### Client Configuration
 
