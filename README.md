@@ -43,10 +43,10 @@ To execute this exercise, you will need:
 The exercise was tested and developed using the following system configurations. It is recommended to follow these configurations as closely as possible. It is highly recommended that you use Ubuntu 18.04 for the server and a modern Android device for the client.
 
 ### Server Configuration
-
-- Ubuntu 18.04 and 20.04
+- Ubuntu 18.04 or 20.04 
+- At least 128 GB of storage
 - Python 3.6
-- Docker
+- Docker version 1.19
 - XFCE desktop via TightVNC
 - Chrome Browser
 - AdvantEDGE 1.7.1 and 1.8.0
@@ -99,7 +99,11 @@ Open firewall ports 80 (HTTP), 443 (HTTPS), 22 (SSH), 30086 (InfluxDB) and 31001
 Clone the repository and install the required packages:
 
 > git clone https://github.com/jblakley/PyEdgeSim
->
+> 
+> \# Optionally checkout a specfic branch
+> 
+> git checkout 1.8.0
+> 
 > cd PyEdgeSim
 >
 > python install_requirements.py
