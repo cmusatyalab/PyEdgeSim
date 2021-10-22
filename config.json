@@ -1,7 +1,7 @@
 {
-	"PROJECTHOME":"/home/jblake1",
+	"PROJECTHOME":"/home/ubuntu",
 	"ADVANTEDGEGIT":"https://github.com/InterDigitalInc/AdvantEDGE",
-	"ADVANTEDGEVER":"1.7.1",
+	"ADVANTEDGEVER":"1.8.0",
 	"TMPDIR":"/tmp",
 	"IP":"10.0.0.4",
 	"APIIP":"127.0.0.1",
