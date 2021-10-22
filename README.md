@@ -43,7 +43,6 @@ To execute this exercise, you will need:
 The exercise was tested and developed using the following system configurations. It is recommended to follow these configurations as closely as possible. It is highly recommended that you use Ubuntu 18.04 for the server and a modern Android device for the client.
 
 ### Server Configuration
-
 - Ubuntu 18.04 or 20.04 
 - At least 128 GB of storage
 - Python 3.6

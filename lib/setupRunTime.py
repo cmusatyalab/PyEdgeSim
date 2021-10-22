@@ -120,4 +120,3 @@ def installAdvantEDGE(cnf):
         retcode = 0
     return retcode
 
-setupK8sGPU()

@@ -45,7 +45,7 @@ influxdb
 pandas
 matplotlib
 geopandas
-contextily
+contextily==1.1.0
 scipy
 pyshp
 sklearn
