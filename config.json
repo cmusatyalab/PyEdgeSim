@@ -2,6 +2,7 @@
 	"PROJECTHOME":"/home/ubuntu",
 	"ADVANTEDGEGIT":"https://github.com/InterDigitalInc/AdvantEDGE",
 	"ADVANTEDGEVER":"1.8.0",
+	"APIIP":"127.0.0.1",
 	"TMPDIR":"/tmp",
 	"DASHBOARD":"Client Framerate and Round Trip Time.json",
 	"SCENARIO":"adv-ortist-sim",
