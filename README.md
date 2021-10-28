@@ -100,12 +100,13 @@ Clone the repository and install the required packages:
 
 > git clone https://github.com/cmusatyalab/PyEdgeSim
 > 
-> \# Optionally checkout a specfic branch
+>  
+> cd PyEdgeSim
 > 
+> \# Optionally checkout a specfic branch
+>
 > git checkout 1.8.0
 > 
-> cd PyEdgeSim
->
 > python install_requirements.py
 
 When prompted to <u>select the Linuxbrew installation directory</u>, enter ^D then return.
