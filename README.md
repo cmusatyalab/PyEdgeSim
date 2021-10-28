@@ -159,7 +159,7 @@ The final step in the script is the generation of a test report. We'll come back
 ### Client Setup
 
 1. On your android client device, download and install the instrumented OpenRTiST client from [here](http://visualcloudsystems.org/cmudl/app-measurementDB-debug-AdvantEDGE.apk).
-2. When the OpenRTiST client opens, approve permission requests as prompted. These enable the client to collect measurements from the device. 
+2. When the OpenRTiST client opens, approve permission requests as prompted. These enable the client to collect measurements from the device. DISCLAIMER: this version of the application authorizes access to android information about location, network and device. It is not intended for general, long term use. For that, use the OpenRTiST app on Google Play.
 3. On the OpenRTiST client Server List, create a new server using an address of `<YOUR-SERVER-PUBLIC-IP>:31001`. Open that server and approve any other requested permissions. You should now be connected to the OpenRTiST server and can display the artistic style of your choice from the drop down. If you can't connect, check that port 31001 is open on your server.
 
 
