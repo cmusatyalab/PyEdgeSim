@@ -98,7 +98,7 @@ Open firewall ports 80 (HTTP), 443 (HTTPS), 22 (SSH), 30086 (InfluxDB) and 31001
 
 Clone the repository and install the required packages:
 
-> git clone https://github.com/jblakley/PyEdgeSim
+> git clone https://github.com/cmusatyalab/PyEdgeSim
 > 
 > \# Optionally checkout a specfic branch
 > 
