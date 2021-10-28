@@ -200,9 +200,11 @@ def plotTraceRoute(trdf,cnf,ax=None):
         return None
     tdfx['geometry'] = pt2geom(tdfx,latcol='latitude',lngcol='longitude')
     tdfx['geometryshift'] = tdfx['geometry'].shift(-1)
-    tdfx['geometryshift'].iloc[-1] = tdfx['geometry'].iloc[0] # Make it around trip
+    try:
+        tdfx['geometryshift'].iloc[-1] = tdfx['geometry'].iloc[0] # Make it around trip
+    except:
+        pass
     tgp = df2gp(tdfx)
-    
     tgp = tgp.dropna()
     tgp['LINEGEO'] = tgp.apply(pts2ls, axis = 1)
     # dumpdf(tgp.head(1))
