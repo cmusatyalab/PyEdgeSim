@@ -36,7 +36,7 @@ SecretStorage==2.3.1
 service-identity==16.0.0
 six==1.11.0
 ssh-import-id==5.7
-Twisted==20.3.0
+Twisted==22.2.0
 #unattended-upgrades==0.1
 urllib3==1.26.5
 tqdm
