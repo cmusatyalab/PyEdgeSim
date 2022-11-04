@@ -28,6 +28,7 @@ def setupDockerDaemon(cnf):
 def setupKubernetes(cnf):
     entry = input("Set up kubernetes? [y/N] ") or "n"
     if entry in ['Y','y']:
+	oscmd("sudo swapoff -a")
         oscmd("sudo apt-get update && sudo apt-get install -y apt-transport-https curl")
         oscmd('curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -')
         fn = "/etc/apt/sources.list.d/kubernetes.list"
