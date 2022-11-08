@@ -68,6 +68,7 @@ def setupGrafana(cnf):
         chartname = "{}/grafana/{}".format(os.getcwd(),cnf['DASHBOARD'])
         krunpodstr = "kubectl exec {} -- ".format(grafanapod)
         oscmd("{}{}".format(krunpodstr,"grafana-cli plugins install grafana-worldmap-panel"))
+        oscmd("{}{}".format(krunpodstr,"grafana-cli plugins install grafana-clock-panel"))
         oscmd("kubectl delete pod {}".format(grafanapod))
         mconsole("Navigate to {}, login (username: admin, pw: admin) \n\tand import '{}' ".format(grafanaurl, chartname))
         input("Press return to continue ")
