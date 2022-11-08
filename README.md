@@ -19,12 +19,16 @@ Detailed instructions are below but the basic process is:
    * Set up the simulation scenario.
    * Set up the data management engine and visualization tools (InfluxDB and Grafana).
    * Set up the automation engine
-   
+
 4. Connect your OpenRTiST client to the server.
 
 5. Run a test automation.
 
 6. Generate a test report.
+
+** Updated: 11/8/2022 See some new Tips and Tricks from a recent install of PyEdgeSim
+
+
 
 ------
 ## PyEdgeSim Platform
@@ -173,3 +177,43 @@ When you get a complete run with both the lower and upper dashboard showing data
 ![](files/report.png)
 
 You have now completed the exercise.
+
+## Tips and Tricks
+
+### NodeJS and NPM installation
+
+The setup of nodejs and npm in the simulation_setup.py doesn't seem to work well.  Recommend using another approach that results in npm@6.14.8 and node@v10.16.3 being installed. 
+
+### Meep-docker-registry
+
+A *chicken-and-egg* problem can arise with the deployment of the meep-docker-registry service in kubernetes. You may be unable to push images to that registry from the host. To work around this, you can deploy a standalone docker-based registry outside of kubernetes using:
+
+````
+docker run -d -p 30001:30001 --restart=always --name meep-docker-registry registry:2
+````
+
+and manually push the dockerized AdvantEDGE containers (e.g., `meep-docker-registry:30001/meep-mon-engine:latest`) into that registry.
+
+It is better if you can get the kubernetes service to work correctly in the long run but this can help in the interim. If you do continue to use this workaround, turn off the kubernetes service after its deployment:  `kubectl delete service meep-docker-registry` to prevent conflicts with the standalone service.
+
+### Prometheus and User IDs
+
+The `prometheus-meep-prometheus-server-0` kubernetes pod can fail to start correctly if the UID of the user is not 1000. You can fix this by changing `runAsUser: 1000` in `<ADVANTEDGEHOME>/charts/kube-prometheus-stack/values.yaml` and  `uid and gid` in `<ADVANTEDGEHOME>/.meepctl-repocfg.yaml` to the correct $UID. You have to run `meepctl delete dep && meepctl deploy dep` to have these changes take effect.
+
+### Storing additional data in InfluxDB
+
+Its sometimes useful to store data other than AdvantEDGE data in the AdvantEDGE influxdb service. To do this, you need to make it a NodePort Service and, optionally, expose it on port 30086 so it won't be confused with any influxd service running on the host.
+
+Edit `<ADVANTEDGEHOME>/charts/influxdb/values.yaml` as follows and then `meepctl delete dep && meepctl deploy dep`.
+
+```
+service:
+  ## Add annotations to service
+  # annotations: {}
+  type: NodePort
+  apiNodePort: 30086
+  rpcNodePort: 30088
+  # externalIPs: []
+  # externalTrafficPolicy: ""
+```
+
