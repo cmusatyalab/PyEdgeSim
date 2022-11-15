@@ -194,7 +194,7 @@ docker run -d -p 30001:30001 --restart=always --name meep-docker-registry regist
 
 and manually push the dockerized AdvantEDGE containers (e.g., `meep-docker-registry:30001/meep-mon-engine:latest`) into that registry.
 
-It is better if you can get the kubernetes service to work correctly in the long run but this can help in the interim. If you do continue to use this workaround, turn off the kubernetes service after its deployment:  `kubectl delete service meep-docker-registry` to prevent conflicts with the standalone service.
+It is better if you can get the kubernetes service to work correctly in the long run but this can help in the interim. If you do continue to use this workaround, turn off the kubernetes service before its deployment by setting the `replicaCount: 0`  in  `<ADVANTEDGEHOME>/charts/docker-registry/values.yaml` or after its deployment with `kubectl delete service meep-docker-registry` to prevent conflicts with the standalone service.
 
 ### Prometheus and User IDs
 
