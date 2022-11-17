@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import sys, os
-sys.path.append("./lib")
+sys.path.insert(0,"./lib")
 from optparse import OptionParser
 from pyutils import *
 

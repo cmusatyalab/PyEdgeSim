@@ -16,7 +16,7 @@ def setupDockerDaemon(cnf):
         mconsole("/etc/docker/daemon.json already current")
         return 0
     entry = input("Configure /etc/docker/daemon.json? [y/N] ") or "n"
-    if entry in ['Y','y']:
+    if entry in ['Y','y']:  
         oscmd("sudo swapoff -a")
         oscmd("sudo sed -i '/ swap / s/^/#/' /etc/fstab")
         oscmd('sudo cp {}/daemon.json /etc/docker'.format(cnf['QSFILES']))
@@ -28,8 +28,8 @@ def setupDockerDaemon(cnf):
 def setupKubernetes(cnf):
     entry = input("Set up kubernetes? [y/N] ") or "n"
     if entry in ['Y','y']:
-	oscmd("sudo swapoff -a")
-        oscmd("sudo apt-get update && sudo apt-get install -y apt-transport-https curl")
+        oscmd("sudo swapoff -a") # Turn this off in /etc/fstab as well
+        oscmd("sudo     apt-get update && sudo apt-get install -y apt-transport-https curl")
         oscmd('curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -')
         fn = "/etc/apt/sources.list.d/kubernetes.list"
         if not os.path.isfile(fn):
@@ -42,7 +42,7 @@ def setupKubernetes(cnf):
         oscmd("sudo apt-mark hold kubelet kubeadm kubectl")
         oscmd("sudo systemctl enable docker.service")
         # May need to turn off firewall
-	# May need to add to /etc/docker/daemon.json --> "exec-opts": ["native.cgroupdriver=systemd"],
+        # May need to add to /etc/docker/daemon.json --> "exec-opts": ["native.cgroupdriver=systemd"],
         oscmd("sudo kubeadm init --ignore-preflight-errors=all")
         
         oscmd("mkdir -p $HOME/.kube")
@@ -53,7 +53,8 @@ def setupKubernetes(cnf):
         oscmd("kubectl taint nodes --all node-role.kubernetes.io/master-")
         
         oscmd("sudo sysctl net.bridge.bridge-nf-call-iptables=1")
-        oscmd("kubectl apply -f \"https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')&env.WEAVE_MTU=1500\"")
+        # oscmd("kubectl apply -f \"https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')&env.WEAVE_MTU=1500\"")
+        oscmd("kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s-1.11.yaml")
         
         gstr = "source <(kubectl completion bash)"
         if oscmd('grep "{}" ~/.bashrc'.format(gstr)) != 0:
@@ -70,11 +71,12 @@ def setupKubernetes(cnf):
             oscmd("sudo cp /etc/kubernetes/pki/ca.crt {}".format(fn))
             oscmd("sudo chmod 644 {}".format(fn))
             oscmd("sudo update-ca-certificates")
-         
+        # # Add the network add-on    
+        # oscmd("kubectl apply -f https://docs.projectcalico.org/v3.14/manifests/calico.yaml")
         # Restart docker daemon
         setupK8sGPU()
         
-        oscmd("sudo systemctl restart docker")
+        oscmd("sudo systemctl restart docker")  
 
     return 0
 
