@@ -1,0 +1,421 @@
+{
+    "name": "N5G_CBRS_LBKOUT_V00_Load_V03",
+    "application": "edgevdi",
+    "latencyDistribution": "Normal",
+    "initial_conditions": {
+        "name": "N5G_CBRS_LBKOUT",
+        "application": "horizon",
+        "duration": 86,
+        "UE": {
+            "latency": 0,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "POA": {
+            "latency": 10,
+            "latencyVariation": 1,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "ZONE": {
+            "latency": 0,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "OPERATOR": {
+            "latency": 0,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "UE-APP": {
+            "latency": 0,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "EDGE-APP": {
+            "latency": 0,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "EDGE": {
+            "latency": 0,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "SCENARIO": {
+            "latency": 0,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        }
+    },
+    "exceptions": [],
+    "test_events": [
+        {
+            "mover": "iperf-ue1-50k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-100k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-200k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-400k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-800k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-1600k",
+            "waitafter": 5,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-50k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-100k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-200k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-400k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-800k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-1600k",
+            "waitafter": 10,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-50k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-100k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-200k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-400k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-800k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-1600k",
+            "waitafter": 16,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-50k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-100k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-200k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-400k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-800k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-1600k",
+            "waitafter": 6,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-50k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-100k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-200k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-400k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-800k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-1600k",
+            "waitafter": 9,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-50k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-100k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-200k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-400k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-800k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-1600k",
+            "waitafter": 6,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-50k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-100k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-200k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-400k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-800k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-1600k",
+            "waitafter": 16,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-50k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-100k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-200k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-400k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-800k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-1600k",
+            "waitafter": 1,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-50k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-100k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-200k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-400k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-800k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-1600k",
+            "waitafter": 6,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-50k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-100k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-200k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-400k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-800k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-1600k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        }
+    ]
+}

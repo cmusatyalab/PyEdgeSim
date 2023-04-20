@@ -1,0 +1,405 @@
+{
+    "name": "N4G_LTE_LBKOUT_V00_Combo_V03",
+    "application": "edgevdi",
+    "latencyDistribution": "Normal",
+    "initial_conditions": {
+        "name": "N4G_LTE_LBKOUT",
+        "application": "horizon",
+        "duration": 109,
+        "UE": {
+            "latency": 0,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "POA": {
+            "latency": 25,
+            "latencyVariation": 1,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "ZONE": {
+            "latency": 0,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "OPERATOR": {
+            "latency": 0,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "UE-APP": {
+            "latency": 0,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "EDGE-APP": {
+            "latency": 0,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "EDGE": {
+            "latency": 0,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "SCENARIO": {
+            "latency": 0,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        }
+    },
+    "exceptions": [],
+    "test_events": [
+        {
+            "mover": "iperf-ue1-50k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-100k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-200k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-400k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-800k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-1600k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "latency": 67,
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "horizon-cloudlet",
+            "waitafter": 9,
+            "latencyVariation": 20,
+            "packetLoss": 11
+        },
+        {
+            "mover": "iperf-ue1-50k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-100k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-200k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-400k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-800k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-1600k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "latency": 197,
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "horizon-cloudlet",
+            "waitafter": 23,
+            "latencyVariation": 32,
+            "packetLoss": 6
+        },
+        {
+            "mover": "iperf-ue1-50k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-100k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-200k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-400k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-800k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-1600k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "latency": 180,
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "horizon-cloudlet",
+            "waitafter": 4,
+            "latencyVariation": 36,
+            "packetLoss": 7
+        },
+        {
+            "mover": "iperf-ue1-50k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-100k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-200k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-400k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-800k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-1600k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "latency": 165,
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "horizon-cloudlet",
+            "waitafter": 15,
+            "latencyVariation": 17,
+            "packetLoss": 5
+        },
+        {
+            "mover": "iperf-ue1-50k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-100k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-200k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-400k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-800k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-1600k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "latency": 139,
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "horizon-cloudlet",
+            "waitafter": 52,
+            "latencyVariation": 26,
+            "packetLoss": 7
+        },
+        {
+            "mover": "iperf-ue1-50k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-100k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-200k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-400k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-800k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-1600k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "latency": 106,
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "horizon-cloudlet",
+            "waitafter": 10,
+            "latencyVariation": 12,
+            "packetLoss": 7
+        },
+        {
+            "mover": "iperf-ue1-50k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-100k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-200k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "mover": "iperf-ue1-400k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-800k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-1600k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "zone1-poa1"
+        },
+        {
+            "latency": 144,
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "horizon-cloudlet",
+            "waitafter": 3,
+            "latencyVariation": 21,
+            "packetLoss": 5
+        },
+        {
+            "mover": "iperf-ue1-50k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-100k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-200k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-400k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-800k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        },
+        {
+            "mover": "iperf-ue1-1600k",
+            "waitafter": 0,
+            "type": "MOBILITY",
+            "dest": "DISCONNECTED"
+        }
+    ]
+}
