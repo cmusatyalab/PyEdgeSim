@@ -2,6 +2,7 @@
 import sys
 print(sys.path)
 sys.path.append(".")
+sys.path.append("../lib")
 import os
 import time
 import json
@@ -19,6 +20,9 @@ LOGNAME=__name__
 NETCHARNODE='horizon-cloudlet'
 MOBILITYNODE = 'zone1-poa1'
 
+VARIANTS= 5
+LATRANGE = range(50,400)
+
 def main():
     global logger
     LOGFILE="interference_scenarios.log"
@@ -29,9 +33,9 @@ def main():
     zeroprof = genZero(aa,saveOn=True)
     
     normallst = genNormal(aa,saveOn=True,variants = 5)
-    badsignallst = genBadSignal(aa,getFresh(aa),saveOn=True, latrange = range(50,400),variants = 5)
-    loadlst = genLoad(aa,getFresh(aa),saveOn=True,variants = 5)
-    combolst = genCombo(aa,getFresh(aa),saveOn=True,latrange = range(50,250),variants = 5)
+    badsignallst = genBadSignal(aa,getFresh(aa),saveOn=True, latrange = LATRANGE,variants = VARIANTS)
+    loadlst = genLoad(aa,getFresh(aa),saveOn=True,variants = VARIANTS)
+    combolst = genCombo(aa,getFresh(aa),saveOn=True,latrange = LATRANGE,variants = VARIANTS)
     pass
 
 def getFresh(aa): return genNormal(aa,saveOn=False,variants = 1)

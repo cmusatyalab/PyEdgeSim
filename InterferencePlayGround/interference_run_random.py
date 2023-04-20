@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import sys
 sys.path.append(".")
+sys.path.append("../lib")
 import os
 from datetime import datetime
 import time
