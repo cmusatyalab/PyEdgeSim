@@ -5,7 +5,7 @@
     "initial_conditions": {
         "name": "N5G_CBRS_REMOTEIXP",
         "application": "horizon",
-        "duration": 69,
+        "duration": 52,
         "UE": {
             "latency": 0,
             "latencyVariation": 0,
@@ -60,7 +60,7 @@
         {
             "type": "NETWORK-CHARACTERISTICS-UPDATE",
             "name": "zone1-poa1",
-            "waitafter": 69,
+            "waitafter": 52,
             "latency": 60,
             "latencyVariation": 1,
             "throughput": 10000,

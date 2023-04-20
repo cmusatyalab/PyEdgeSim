@@ -5,7 +5,7 @@
     "initial_conditions": {
         "name": "N4G_LTE_REMOTEIXP",
         "application": "horizon",
-        "duration": 117,
+        "duration": 114,
         "UE": {
             "latency": 0,
             "latencyVariation": 0,
@@ -58,60 +58,68 @@
     "exceptions": [],
     "test_events": [
         {
-            "latency": 112,
+            "latency": 198,
             "type": "NETWORK-CHARACTERISTICS-UPDATE",
             "name": "horizon-cloudlet",
-            "waitafter": 21,
-            "latencyVariation": 17,
-            "packetLoss": 15
+            "waitafter": 19,
+            "latencyVariation": 31,
+            "packetLoss": 13
         },
         {
-            "latency": 283,
+            "latency": 340,
             "type": "NETWORK-CHARACTERISTICS-UPDATE",
             "name": "horizon-cloudlet",
-            "waitafter": 9,
-            "latencyVariation": 17,
-            "packetLoss": 8
+            "waitafter": 1,
+            "latencyVariation": 10,
+            "packetLoss": 7
         },
         {
             "latency": 156,
             "type": "NETWORK-CHARACTERISTICS-UPDATE",
             "name": "horizon-cloudlet",
-            "waitafter": 6,
-            "latencyVariation": 32,
-            "packetLoss": 7
+            "waitafter": 40,
+            "latencyVariation": 42,
+            "packetLoss": 8
         },
         {
-            "latency": 73,
+            "latency": 184,
             "type": "NETWORK-CHARACTERISTICS-UPDATE",
             "name": "horizon-cloudlet",
-            "waitafter": 0,
-            "latencyVariation": 22,
-            "packetLoss": 14
+            "waitafter": 16,
+            "latencyVariation": 37,
+            "packetLoss": 6
         },
         {
-            "latency": 84,
+            "latency": 158,
             "type": "NETWORK-CHARACTERISTICS-UPDATE",
             "name": "horizon-cloudlet",
-            "waitafter": 3,
-            "latencyVariation": 48,
-            "packetLoss": 16
-        },
-        {
-            "latency": 152,
-            "type": "NETWORK-CHARACTERISTICS-UPDATE",
-            "name": "horizon-cloudlet",
-            "waitafter": 15,
-            "latencyVariation": 10,
+            "waitafter": 4,
+            "latencyVariation": 33,
             "packetLoss": 15
         },
         {
-            "latency": 376,
+            "latency": 103,
             "type": "NETWORK-CHARACTERISTICS-UPDATE",
             "name": "horizon-cloudlet",
             "waitafter": 5,
-            "latencyVariation": 41,
-            "packetLoss": 14
+            "latencyVariation": 20,
+            "packetLoss": 18
+        },
+        {
+            "latency": 270,
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "horizon-cloudlet",
+            "waitafter": 3,
+            "latencyVariation": 20,
+            "packetLoss": 6
+        },
+        {
+            "latency": 363,
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "horizon-cloudlet",
+            "waitafter": 14,
+            "latencyVariation": 12,
+            "packetLoss": 10
         }
     ]
 }

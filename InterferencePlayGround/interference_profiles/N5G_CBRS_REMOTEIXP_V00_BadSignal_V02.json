@@ -5,7 +5,7 @@
     "initial_conditions": {
         "name": "N5G_CBRS_REMOTEIXP",
         "application": "horizon",
-        "duration": 83,
+        "duration": 69,
         "UE": {
             "latency": 0,
             "latencyVariation": 0,
@@ -58,76 +58,76 @@
     "exceptions": [],
     "test_events": [
         {
-            "latency": 73,
+            "latency": 81,
             "type": "NETWORK-CHARACTERISTICS-UPDATE",
             "name": "horizon-cloudlet",
-            "waitafter": 2,
-            "latencyVariation": 24,
-            "packetLoss": 8
+            "waitafter": 18,
+            "latencyVariation": 18,
+            "packetLoss": 7
         },
         {
-            "latency": 234,
-            "type": "NETWORK-CHARACTERISTICS-UPDATE",
-            "name": "horizon-cloudlet",
-            "waitafter": 1,
-            "latencyVariation": 44,
-            "packetLoss": 17
-        },
-        {
-            "latency": 131,
+            "latency": 221,
             "type": "NETWORK-CHARACTERISTICS-UPDATE",
             "name": "horizon-cloudlet",
             "waitafter": 9,
-            "latencyVariation": 21,
-            "packetLoss": 16
+            "latencyVariation": 39,
+            "packetLoss": 7
         },
         {
-            "latency": 276,
-            "type": "NETWORK-CHARACTERISTICS-UPDATE",
-            "name": "horizon-cloudlet",
-            "waitafter": 12,
-            "latencyVariation": 22,
-            "packetLoss": 14
-        },
-        {
-            "latency": 201,
+            "latency": 257,
             "type": "NETWORK-CHARACTERISTICS-UPDATE",
             "name": "horizon-cloudlet",
             "waitafter": 10,
+            "latencyVariation": 31,
+            "packetLoss": 10
+        },
+        {
+            "latency": 272,
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "horizon-cloudlet",
+            "waitafter": 8,
+            "latencyVariation": 10,
+            "packetLoss": 15
+        },
+        {
+            "latency": 102,
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "horizon-cloudlet",
+            "waitafter": 3,
+            "latencyVariation": 22,
+            "packetLoss": 9
+        },
+        {
+            "latency": 313,
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "horizon-cloudlet",
+            "waitafter": 1,
+            "latencyVariation": 8,
+            "packetLoss": 9
+        },
+        {
+            "latency": 181,
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "horizon-cloudlet",
+            "waitafter": 8,
+            "latencyVariation": 31,
+            "packetLoss": 12
+        },
+        {
+            "latency": 356,
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "horizon-cloudlet",
+            "waitafter": 18,
             "latencyVariation": 23,
             "packetLoss": 5
         },
         {
-            "latency": 101,
+            "latency": 114,
             "type": "NETWORK-CHARACTERISTICS-UPDATE",
             "name": "horizon-cloudlet",
-            "waitafter": 1,
-            "latencyVariation": 39,
-            "packetLoss": 11
-        },
-        {
-            "latency": 229,
-            "type": "NETWORK-CHARACTERISTICS-UPDATE",
-            "name": "horizon-cloudlet",
-            "waitafter": 14,
-            "latencyVariation": 15,
-            "packetLoss": 14
-        },
-        {
-            "latency": 269,
-            "type": "NETWORK-CHARACTERISTICS-UPDATE",
-            "name": "horizon-cloudlet",
-            "waitafter": 2,
-            "latencyVariation": 42,
-            "packetLoss": 10
-        },
-        {
-            "latency": 141,
-            "type": "NETWORK-CHARACTERISTICS-UPDATE",
-            "name": "horizon-cloudlet",
-            "waitafter": 15,
-            "latencyVariation": 38,
-            "packetLoss": 14
+            "waitafter": 4,
+            "latencyVariation": 14,
+            "packetLoss": 9
         }
     ]
 }

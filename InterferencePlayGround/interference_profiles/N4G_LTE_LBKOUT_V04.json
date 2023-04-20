@@ -5,7 +5,7 @@
     "initial_conditions": {
         "name": "N4G_LTE_LBKOUT",
         "application": "horizon",
-        "duration": 102,
+        "duration": 71,
         "UE": {
             "latency": 0,
             "latencyVariation": 0,
@@ -60,7 +60,7 @@
         {
             "type": "NETWORK-CHARACTERISTICS-UPDATE",
             "name": "zone1-poa1",
-            "waitafter": 102,
+            "waitafter": 71,
             "latency": 25,
             "latencyVariation": 1,
             "throughput": 10000,

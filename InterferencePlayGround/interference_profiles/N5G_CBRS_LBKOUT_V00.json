@@ -5,7 +5,7 @@
     "initial_conditions": {
         "name": "N5G_CBRS_LBKOUT",
         "application": "horizon",
-        "duration": 46,
+        "duration": 99,
         "UE": {
             "latency": 0,
             "latencyVariation": 0,
@@ -60,7 +60,7 @@
         {
             "type": "NETWORK-CHARACTERISTICS-UPDATE",
             "name": "zone1-poa1",
-            "waitafter": 46,
+            "waitafter": 99,
             "latency": 10,
             "latencyVariation": 1,
             "throughput": 10000,

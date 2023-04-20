@@ -5,7 +5,7 @@
     "initial_conditions": {
         "name": "N4G_LTE_LEL",
         "application": "horizon",
-        "duration": 98,
+        "duration": 37,
         "UE": {
             "latency": 0,
             "latencyVariation": 0,
@@ -60,7 +60,7 @@
         {
             "type": "NETWORK-CHARACTERISTICS-UPDATE",
             "name": "zone1-poa1",
-            "waitafter": 98,
+            "waitafter": 37,
             "latency": 15,
             "latencyVariation": 1,
             "throughput": 10000,
