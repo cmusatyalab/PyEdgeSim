@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 import sys
+print(sys.path)
+sys.path.append(".")
 import os
 import time
 import json
