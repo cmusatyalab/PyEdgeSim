@@ -3,7 +3,8 @@
 import os
 import sys
 print(sys.path)
-sys.path.append("..")
+sys.path.append("../lib")
+sys.path.append(".")
 # conda install pyqt
 # Windows Install DLLs: https://www.qt.io/download-qt-installer
 

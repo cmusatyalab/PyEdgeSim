@@ -106,6 +106,16 @@ To run a random series of badsignal profiles in series:
 python interference_run_random.py -B
 ```
 
+## The interference console
+
+### Getting started
+1. Install the flask application on the AdvantEDGE host
+2. Start the GUI on the client
+
+### Using the console
+
+
+## APPENDIX 1: Example Profile
 A complete example "combo" profile for a 4G LTE network with local breakout experience varying latency, jitter, packet loss and load.
 
 
