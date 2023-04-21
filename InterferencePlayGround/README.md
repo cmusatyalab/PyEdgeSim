@@ -131,7 +131,7 @@ python console_GUI.py
 
 ## APPENDIX 1: Example Profile
 A complete example "combo" profile for a 4G LTE network with local breakout experience varying latency, jitter, packet loss and load.
-
+[Combo_Example](interference_profiles/Combo_Example.json)
 
 
 ```
