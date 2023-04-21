@@ -108,12 +108,26 @@ python interference_run_random.py -B
 
 ## The interference console
 
-### Getting started
 1. Install the flask application on the AdvantEDGE host
-2. Start the GUI on the client
 
-### Using the console
+```
+mkdir ~/flask
+cp -pvr interference_api/* ~/flask
+cd ~/flask
+pip install -r requirements.txt
+```
+2. Run the flask server
 
+```
+./flask.sh
+```
+
+3. Start the GUI on the client
+
+```
+cd <path-to-interference-generator>/ConsoleQt5
+python console_GUI.py
+```
 
 ## APPENDIX 1: Example Profile
 A complete example "combo" profile for a 4G LTE network with local breakout experience varying latency, jitter, packet loss and load.
