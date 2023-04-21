@@ -4,7 +4,7 @@ import os
 from types import SimpleNamespace
 from pyutils import *
 
-HOME=os.environ['HOME'] if 'HOME' in os.environ else "/home/jblake1"  
+HOME=os.environ['HOME'] if 'HOME' in os.environ else "/home/ubuntu"  
 ROOT_DIR=f"{HOME}/CMUProjects/LEL/EdgeVDI"
 INT_GEN=f"{ROOT_DIR}/interference_run_random.py"
 INT_PROF=f"{ROOT_DIR}/interference_profiles"

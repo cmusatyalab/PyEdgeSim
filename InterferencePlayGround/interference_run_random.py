@@ -28,7 +28,7 @@ cnf = {
     "profile":"horizontestlinux1",
     "fileroot":"Automation",
     "distribution":"Normal",
-    "testerid":'jblake1',
+    "testerid":'ubuntu',
     "cloudletip":'cloudlet004.elijah.cs.cmu.edu',
     "influxon":True,
     "influxport":'30086',
