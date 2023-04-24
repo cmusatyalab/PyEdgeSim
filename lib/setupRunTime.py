@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # https://github.com/InterDigitalInc/AdvantEDGE/wiki/runtime-environment
- 
 import sys
 import os
 import pprint
@@ -79,6 +78,35 @@ def setupKubernetes(cnf):
         oscmd("sudo systemctl restart docker")  
 
     return 0
+
+def setupK3s(cnf):
+    calico = True
+    entry = input("Set up kubernetes (k3s)? [y/N] ") or "n"
+    if entry in ['Y', 'y']:
+        kubedn = f"{os.environ['HOME']}/.kube"
+        kubefn = kubedn + "/config"
+        if not calico:
+            oscmd("curl -sfL https://get.k3s.io | sh -s - --docker")
+                # NEW FOR K3S with Calico
+        else:
+            oscmd('curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" INSTALL_K3S_EXEC="--flannel-backend=none --cluster-cidr=192.168.0.0/16 --disable-network-policy --disable=traefik" sh -')
+        if not os.path.exists(kubedn): os.mkdir(kubedn)
+        # oscmd(f"test -d {kubedn} || mkdir {kubedn}")
+        oscmd(f"sudo cp /etc/rancher/k3s/k3s.yaml {kubefn}")
+        oscmd(f"sudo chown jblake1 {kubefn};sudo chgrp jblake1 {kubefn};chmod 0600 {kubefn}")
+        os.environ['KUBECONFIG'] = kubefn
+        oscmd("kubectl get nodes")
+        if calico:
+            oscmd("kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/tigera-operator.yaml")
+            oscmd("kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/custom-resources.yaml")
+
+        oscmd("watch kubectl get pods --all-namespaces")
+        
+        IP = cmd0("kubectl get nodes -o json|jq -r '.items[].status.addresses[] | select( .type | test(\"InternalIP\")) | .address'")
+        print(f'Master IP={IP}')
+
+    return 0
+
 
 def setupK8sGPU():
         entry = input("Enable NVIDIA GPU in Kubernetes? [y/N] ") or "n"

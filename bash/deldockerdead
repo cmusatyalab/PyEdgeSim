@@ -1,0 +1,6 @@
+CNT=$(docker ps -a |grep Exited|awk '{print $1}')
+echo $CNT
+test -n "${CNT}" && docker rm ${CNT}
+IMG=$(docker images | grep '<none>'|awk '{print $3}')
+echo $IMG
+test -n "$IMG" && for img in ${IMG}; do docker image rm $img; done
