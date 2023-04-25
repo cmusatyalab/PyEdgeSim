@@ -18,19 +18,32 @@ api = AdvantEDGEApi()
 
 def main():
     configureLogging()
+    setupRegistry(cnf)
+    deployAdvantEDGE(cnf)
     getOpenRTiST(cnf)
     startOpenRTiST(cnf)
     pass
+
+def setupRegistry(cnf):
+    entry = input("Setup docker registry? [y/N] ") or "n"
+    if entry in ['Y','y']:
+        PORT = cnf['REGISTRYPORT']
+        REGISTRY = cnf['REGISTRY']
+        oscmd(f"docker run -d -p {PORT}:5000 --restart=always --name {REGISTRY} registry:2")
+        oscmd(f"grep {REGISTRY} /etc/hosts || sudo sed -i 's/127.0.0.1 localhost/127.0.0.1 localhost {REGISTRY}/' /etc/hosts")
+    return 0
 
 def deployAdvantEDGE(cnf):
     # meepctl = os.path.join(*[cnf['ADVANTEDGEDIR'],"bin","meepctl","meepctl"])
     entry = input("Deploy AdvantEDGE? [y/N] ") or "n"
     if entry in ['Y','y']:
         setMEEPPATH(cnf['ADVANTEDGEDIR'])
+        upgradeDockerBase(cnf)
         meepctl = "meepctl"
-        if oscmd("{} deploy dep".format(meepctl)) != 0: return -1
-        if oscmd("{} dockerize all".format(meepctl)) != 0: return -1
-        if oscmd("{} deploy core".format(meepctl)) != 0: return -1
+        if oscmd(f"{meepctl} deploy dep") != 0: return -1
+        # oscmd(f"kubectl delete service {cnf['REGISTRY']}") # get rid of k8s registry to use docker version
+        if oscmd(f"{meepctl} dockerize all") != 0: return -1
+        if oscmd(f"{meepctl} deploy core") != 0: return -1
     return 0
 
 def getOpenRTiST(cnf):
@@ -86,5 +99,14 @@ def installCharts(cnf):
         mconsole("In AdvantEDGE console, import and save scenario {} and create sandbox {}".format(cnf['SCENARIO'],cnf['SANDBOX']))
     return 0
 
+def upgradeDockerBase(cnf):
+    DFBASE=os.path.join(*[cnf['PROJECTHOME'],"AdvantEDGE","go-apps"])
+    UPGRADELST = ['meep-tc-sidecar','meep-virt-engine','meep-auth-svc']
+    OLDVER="9.6-slim"
+    NEWVER="10.13-slim"
+    for img in UPGRADELST:
+        df = os.path.join(*[DFBASE,img,"Dockerfile"])
+        oscmd(f"sed -i 's/{OLDVER}/{NEWVER}/' {df}")
+    
 
 if __name__ == '__main__': main()

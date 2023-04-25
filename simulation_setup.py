@@ -60,9 +60,10 @@ def job_execute(kwargs):
         if installMeepCTL(cnf) != 0: return -8
         if buildMeepAll(cnf) != 0: return -9
     ''' Deploy AdvantEDGE '''
-    if deployAdvantEDGE(cnf) != 0: return -10
+    if setupRegistry(cnf) != 0: return -10
+    if deployAdvantEDGE(cnf) != 0: return -11
     ''' Pull OpenRTiST '''
-    if getOpenRTiST(cnf) != 0: return -13
+    if getOpenRTiST(cnf) != 0: return -12
     ''' Set up the scenario '''
     if installCharts(cnf) != 0: return -13
     ''' Deploy the scenario in the sandbox '''         
@@ -70,13 +71,13 @@ def job_execute(kwargs):
     ''' Data Management '''
     entry = input("Setup data management? [y/N] ") or "n"
     if entry in ['Y','y']:        
-        if setupInfluxDB(cnf) != 0: return -11
-        if setupGrafana(cnf) != 0: return -12
+        if setupInfluxDB(cnf) != 0: return -15
+        if setupGrafana(cnf) != 0: return -16
     ''' Automation '''
-    if setupAutomation(cnf) != 0: return -15
-    if runAutomationTest(cnf) != 0: return -16
+    if setupAutomation(cnf) != 0: return -17
+    if runAutomationTest(cnf) != 0: return -18
     ''' Create automation report '''
-    if createReport(cnf,filename="report.png") != 0: return -17
+    if createReport(cnf,filename="report.png") != 0: return -18
     else: mconsole("SUCCESS!")
     return 0
 

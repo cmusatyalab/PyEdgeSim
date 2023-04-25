@@ -11,5 +11,7 @@
 	"AUTOMATION":"latencystep",
 	"GOVERSION":"18.1",
 	"NVMVERSION":"12.19.0",
-	"NPMVERSION":"6.14.8"
+	"NPMVERSION":"6.14.8",
+	"REGISTRY":"meep-docker-registry",
+	"REGISTRYPORT":30001
 }
