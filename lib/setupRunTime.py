@@ -25,8 +25,11 @@ def setupDockerDaemon(cnf):
     return 0
     # ## Install Kubernetes
 def setupKubernetes(cnf):
-    entry = input("Set up kubernetes? [y/N] ") or "n"
+    if 'KUBERNETESTYPE' in cnf and cnf['KUBERNETESTYPE'] == "k3s":
+        return setupK3s(cnf)
+    entry = input("Set up kubernetes (k8s)? [y/N] ") or "n"
     if entry in ['Y','y']:
+
         oscmd("sudo swapoff -a") # Turn this off in /etc/fstab as well
         oscmd("sudo     apt-get update && sudo apt-get install -y apt-transport-https curl")
         oscmd('curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -')
@@ -100,7 +103,7 @@ def setupK3s(cnf):
             oscmd("kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/tigera-operator.yaml")
             oscmd("kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/custom-resources.yaml")
 
-        oscmd("watch kubectl get pods --all-namespaces")
+        # oscmd("watch kubectl get pods --all-namespaces")
         
         IP = cmd0("kubectl get nodes -o json|jq -r '.items[].status.addresses[] | select( .type | test(\"InternalIP\")) | .address'")
         print(f'Master IP={IP}')

@@ -48,4 +48,5 @@ contextily==1.1.0
 scipy
 pyshp
 sklearn
+scikit-learn
 statsmodels

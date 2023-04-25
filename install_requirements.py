@@ -17,7 +17,6 @@ cmdstr = f"bash -c ' {pipsetup} && {setupclient}' "
 oscmd(cmdstr)
 
 ''' K9s '''
-# BREWPATH = "$HOME/.linuxbrew/bin"
 K9SURL = "wget https://github.com/derailed/k9s/releases/download/v0.27.3/"
 K9SFN="k9s_Linux_amd64.tar.gz"
 url = f"{K9SURL}/{K9SFN}"

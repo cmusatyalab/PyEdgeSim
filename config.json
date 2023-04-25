@@ -9,5 +9,7 @@
 	"SCENARIO":"adv-ortist-sim",
 	"SANDBOX":"adv-ortist-sim",
 	"AUTOMATION":"latencystep",
-	"GOVERSION":"15.3"
+	"GOVERSION":"18.1",
+	"NVMVERSION":"12.19.0",
+	"NPMVERSION":"6.14.8"
 }
