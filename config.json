@@ -1,5 +1,5 @@
 {
-	"KUBERNETESTYPE":"k3s",
+	"KUBERNETESTYPE":"k8s",
 	"PROJECTHOME":"/home/jblake1",
 	"ADVANTEDGEGIT":"https://github.com/InterDigitalInc/AdvantEDGE",
 	"ADVANTEDGEVER":"1.9.0",
@@ -12,6 +12,8 @@
 	"GOVERSION":"18.1",
 	"NVMVERSION":"12.19.0",
 	"NPMVERSION":"6.14.8",
+	"KUBEVERSION":"1.26.0",
+	"CNIVER":"1.1.1",
 	"REGISTRY":"meep-docker-registry",
 	"REGISTRYPORT":30001
 }

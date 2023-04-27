@@ -47,6 +47,8 @@ def job_execute(kwargs):
     ''' Set up runtime environment (CPU Only) '''
     entry = input("Setup runtime environment? [y/N] ") or "n"
     if entry in ['Y','y']:
+        if setupDockerDaemon(cnf) != 0: return -1
+        if setupContainerd(cnf) != 0: return -1
         if setupKubernetes(cnf) != 0: return -1
         if setupHelm(cnf) != 0: return -2
         if installAdvantEDGE(cnf) != 0: return -3
