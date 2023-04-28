@@ -1,9 +1,11 @@
 {
 	"KUBERNETESTYPE":"k8s",
+	"HASGPU": "False",
 	"PROJECTHOME":"/home/jblake1",
 	"ADVANTEDGEGIT":"https://github.com/InterDigitalInc/AdvantEDGE",
 	"ADVANTEDGEVER":"1.9.0",
 	"APIIP":"127.0.0.1",
+	"AFQDN":"pyedgesimdev.eastus.cloudapp.azure.com",
 	"TMPDIR":"/tmp",
 	"DASHBOARD":"Client Framerate and Round Trip Time.json",
 	"SCENARIO":"adv-ortist-sim",
