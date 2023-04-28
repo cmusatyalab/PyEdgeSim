@@ -36,7 +36,7 @@ def setupAPIs(cnf):
         srcfn = f"{FILEROOT}/meep-{api}-swagger-{ver}.yaml"
         if not os.path.isfile(srcfn): getYAML(srcfn,ver,app)
         dstfn = f"meep-{api}-swagger.yaml"
-        cmdstr = f"sed \'s#<IP>#{cnf['APIIP']}#;s#<SANDBOX>#{cnf['SANDBOX']}#\' {srcfn} > {dstfn}"
+        cmdstr = f"sed \'s#<IP>#{cnf['AFQDN']}#;s#<SANDBOX>#{cnf['SANDBOX']}#\' {srcfn} > {dstfn}"
         oscmd(cmdstr)
         javastr = f"java -jar {FILEROOT}/swagger-codegen-cli.jar generate -i {dstfn} -l python -o ./{api}-client/python -DpackageName={pkg}"
         pipstr = f"pip install ./{api}-client/python"
