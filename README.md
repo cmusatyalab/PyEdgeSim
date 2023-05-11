@@ -117,7 +117,7 @@ When prompted to <u>select the Linuxbrew installation directory</u>, enter ^D th
 
 When prompted to set up automation, select "y". You will run this again during the main exercise.
 
-PyEdgeSim configuration details are in `config.json`. You won't need to play with most of these but set the project directory, `PROJECTHOME` to your preferred (usually `$HOME`).
+PyEdgeSim configuration details are in `config.json`. You won't need to play with most of these but set the project directory, `PROJECTHOME` to your preferred (usually `$HOME`). Also, if version numbers change on some of the installs, you can adjust them here.
 
 Now, its time to set up the simulation. Execute:
 
@@ -216,4 +216,11 @@ service:
   # externalIPs: []
   # externalTrafficPolicy: ""
 ```
+
+## DEV BRANCH TODO
+1. Fix registry initiatization once and for all
+2. OpenRTIST without GPU
+3. Push openrtist image to the local registry
+4. Clean up requirements install with new versions, non-brew k9s install
+5. Interference Generator install, test, doc
 
