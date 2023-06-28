@@ -50,3 +50,6 @@ pyshp
 sklearn
 scikit-learn
 statsmodels
+flask
+PyQt5==5.12.3
+ 

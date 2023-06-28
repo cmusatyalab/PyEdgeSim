@@ -3,9 +3,6 @@ import sys
 print(sys.path)
 sys.path.append(".")
 sys.path.append("../lib")
-import os
-import time
-import json
 import numpy as np
 
 from pyutils import *

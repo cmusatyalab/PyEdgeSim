@@ -1,7 +1,7 @@
 #coding: utf-8
 import sys
 import os
-
+sys.path.append(".")
 from flask import Flask, render_template,jsonify,request
 from flask import session as fsess
 from api_handler import api_handle

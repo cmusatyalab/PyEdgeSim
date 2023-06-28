@@ -8,7 +8,7 @@ oscmd("sudo apt update")
 ''' Java '''
 oscmd("sudo apt install default-jdk -y")
 oscmd("sudo apt install openjdk-8-jre -y")
-oscmd("sudo apt install -y jq influxdb-client webpack npm")
+oscmd("sudo apt install -y jq influxdb-client webpack npm python3-pyqt5")
 
 pipsetup="pip install requests;pip install -r pip_requirements.txt"
 setupclient="python lib/setupAutomation.py"
