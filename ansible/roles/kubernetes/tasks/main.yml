@@ -1,0 +1,17 @@
+---
+- import_tasks: set-operating-system.yml
+- name: Download rke binary for {{ ansible_distribution }}
+  become: yes
+  get_url:
+    url: https://github.com/rancher/rke/releases/download/{{ rke_version }}/rke_{{ operating_system }}-{{ arch }}
+    dest: /usr/local/bin/rke
+    mode: '0755'
+- name: Download kubectl binary for {{ ansible_distribution }}
+  become: yes
+  get_url:
+    url: https://dl.k8s.io/release/{{ kubectl_version }}/bin/{{ operating_system }}/{{ arch }}/kubectl
+    dest: /usr/local/bin/kubectl
+    mode: '0755'
+
+- import_tasks: setup-ssh-key.yml
+- import_tasks: install-rke.yml

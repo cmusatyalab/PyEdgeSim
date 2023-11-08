@@ -26,17 +26,16 @@ def setupAPIs(cnf):
     APILST=["ctrl-engine",'mon-engine','platform-control','sandbox-control']
     PKGLST=["client","monitorclient","platformclient","sandboxclient"]
     for pkg,api in zip(PKGLST,APILST):
-        srcfn = "files/meep-{}-swagger-{}.yaml".format(api,cnf['ADVANTEDGEVER'])
-        dstfn = "meep-{}-swagger.yaml".format(api)
-        cmdstr = "sed \'s#<IP>#{}#;s#<SANDBOX>#{}#\' {} > {}" \
-            .format(cnf['APIIP'],cnf['SANDBOX'],srcfn,dstfn)
+        srcfn = f"files/meep-{api}-swagger-{cnf['ADVANTEDGEVER']}.yaml"
+        dstfn = f"meep-{api}-swagger.yaml"
+        cmdstr = f"sed \'s#<IP>#{cnf['APIIP']}#;s#<SANDBOX>#{cnf['SANDBOX']}#\' {srcfn} > {dstfn}"
         oscmd(cmdstr)
         # shutil.copy2(srcfn,dstfn)
-        javastr = "java -jar files/swagger-codegen-cli.jar generate -i {} -l python -o ./{}-client/python -DpackageName={}".format(dstfn,api,pkg)
-        pipstr = "pip install ./{}-client/python".format(api)
-        deletestr = "rm -rf ./{}-client".format(api)
-        cmdstr = "{} && {} && {}".format(javastr,pipstr,deletestr)
-        cmdstr = "bash -c '{}'".format(cmdstr)
+        javastr = f"java -jar files/swagger-codegen-cli.jar generate -i {dstfn} -l python -o ./{api}-client/python -DpackageName={pkg}"
+        pipstr = f"pip install ./{api}-client/python"
+        deletestr = f"rm -rf ./{api}-client"
+        cmdstr = f"{javastr} && {pipstr} && {deletestr}"
+        cmdstr = f"bash -c '{cmdstr}'"
         oscmd(cmdstr)
     return 0
 

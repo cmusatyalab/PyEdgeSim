@@ -1,12 +1,12 @@
 {
 	"PROJECTHOME":"/home/jblake1",
 	"ADVANTEDGEGIT":"https://github.com/InterDigitalInc/AdvantEDGE",
-	"ADVANTEDGEVER":"1.8.0",
+	"ADVANTEDGEVER":"1.9.2",
 	"APIIP":"127.0.0.1",
 	"TMPDIR":"/tmp",
 	"DASHBOARD":"Client Framerate and Round Trip Time.json",
-	"SCENARIO":"adv-ortist-sim",
-	"SANDBOX":"adv-ortist-sim",
+	"SCENARIO":"horizon-filter-1",
+	"SANDBOX":"horizon-filter-1",
 	"AUTOMATION":"latencystep",
 	"GOVERSION":"15.3"
 }

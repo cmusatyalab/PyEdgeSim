@@ -1,0 +1,11 @@
+---
+- name: Download, unzip and install helmfile
+  become: yes
+  unarchive:
+    src: https://github.com/helmfile/helmfile/releases/download/v0.156.0/helmfile_0.156.0_linux_{{ arch }}.tar.gz
+    dest: /usr/local/bin
+    copy: no
+
+#  TODO
+#- name: Run helmfile init
+#  shell: echo "y"|helmfile init

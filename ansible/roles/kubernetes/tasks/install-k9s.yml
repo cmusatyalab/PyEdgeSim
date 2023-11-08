@@ -1,0 +1,8 @@
+---
+- name: Download, unzip and install k9s
+  become: yes
+  unarchive:
+    src: https://github.com/derailed/k9s/releases/download/v0.27.3/k9s_Linux_{{ arch }}.tar.gz
+    dest: /usr/local/bin
+    copy: no
+
