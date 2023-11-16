@@ -32,21 +32,22 @@ class AdvantEDGEApi(object):
         self.scenario = SCENARIO
         self.apiip = kwargs['APIIP'] if 'APIIP' in kwargs else '127.0.0.1'
         # PKGLST=[f"{pkg}-{SANDBOX}-{SCENARIO}" for pkg in PKGLST]
-        # try:
-        sbclient = import_module(PKGLST[3])
-        sbclient = self.dontVerifySSL(sbclient)
-        pltclient = import_module(PKGLST[2])
-        pltclient = self.dontVerifySSL(pltclient)
-        monclient = import_module(PKGLST[1])
-        monclient = self.dontVerifySSL(monclient)
-        client = import_module(PKGLST[0])
-        client = self.dontVerifySSL(client)
-        # ApiException = client.rest.ApiException
-        # EventMobility = client.models.event_mobility.EventMobility
-        # except:
-        #     mconsole(f"Could not import the client APIs for sandbox {SANDBOX} and scenario {SCENARIO}",level="ERROR")
-        #     mconsole("Please run with -A option one time to generate API libraries",level="ERROR")
-        #     sys.exit(1)
+        try:
+            sbclient = import_module(PKGLST[3])
+            sbclient = self.dontVerifySSL(sbclient)
+            self.setSandbox(SANDBOX)
+            pltclient = import_module(PKGLST[2])
+            pltclient = self.dontVerifySSL(pltclient)
+            monclient = import_module(PKGLST[1])
+            monclient = self.dontVerifySSL(monclient)
+            client = import_module(PKGLST[0])
+            client = self.dontVerifySSL(client)
+            ApiException = client.rest.ApiException
+            EventMobility = client.models.event_mobility.EventMobility
+        except:
+            mconsole(f"Could not import the client APIs for sandbox {SANDBOX} and scenario {SCENARIO}",level="ERROR")
+            mconsole("Please run with -A option one time to generate API libraries",level="ERROR")
+            sys.exit(1)
         self.apidict = {
             'eventreplay':sbclient.EventReplayApi(),
             'scenarioconfiguration':pltclient.ScenarioConfigurationApi(),
@@ -72,6 +73,9 @@ class AdvantEDGEApi(object):
         
     def setSandbox(self,sandbox): 
         self.sandbox = sandbox if sandbox is not None else testsandbox
+        configuration = sbclient.Configuration()
+        configuration.host = re.sub("sandboxname", sandbox ,configuration.host)
+        sbclient.Configuration.set_default(configuration)
 
     def getApiKeys(self):
         return list(self.apidict.keys())
@@ -152,14 +156,14 @@ class AdvantEDGEApi(object):
     def getActiveScenario(self,verbose = False, **kwargs):
         ''' Get the currently running scenario '''
         api_instance = self.getSubApi('scenarioexecution')
-        try:
-            api_response = api_instance.get_active_scenario()
-        except sbclient.rest.ApiException as e:
-            if verbose:
-                mconsole ("No Active Scenario: {}\n".format(e),level="ERROR")
-            else:
-                mconsole("No Active Scenario")
-            api_response=None
+        # try:
+        api_response = api_instance.get_active_scenario()
+        # except sbclient.rest.ApiException as e:
+        #     if verbose:
+        #         mconsole ("No Active Scenario: {}\n".format(e),level="ERROR")
+        #     else:
+        #         mconsole("No Active Scenario")
+        #     api_response=None
         return api_response
 
     def terminateActiveScenario(self):

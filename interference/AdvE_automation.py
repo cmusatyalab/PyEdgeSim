@@ -27,6 +27,8 @@ class AdvantEDGEAutomation(object):
             createDB(self.influxclient,dbname)
             self.influxdfclient = DataFrameClient(host=host, port=port, database=dbname)
             dbs = getDBs(self.influxclient)
+        else:
+            kwargs['influxon'] = False
         self.vars = kwargs
         pass
     
@@ -35,7 +37,6 @@ class AdvantEDGEAutomation(object):
         testscenname = self.vars['SCENARIO']
         sandbox = self.vars['SANDBOX']
         distribution = self.vars['distribution']
-        self.api.setSandbox(sandbox)
         if not self.api.startScenario(testscenname):
             mconsole("Could not start scenario: %s; Most likely, the sandbox %s does not exist" % (testscenname, sandbox),level="ERROR")
             return False
