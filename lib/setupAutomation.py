@@ -11,7 +11,7 @@ from config import *
 from simlogging import mconsole
 
 cnf = initConfig()
-
+disable_certs="-Dio.swagger.parser.util.RemoteUrl.trustAll=true"
 
 def main():
     setupAutomation(cnf)
@@ -31,12 +31,16 @@ def setupAPIs(cnf):
         cmdstr = f"sed \'s#<IP>#{cnf['APIIP']}#;s#<SANDBOX>#{cnf['SANDBOX']}#\' {srcfn} > {dstfn}"
         oscmd(cmdstr)
         # shutil.copy2(srcfn,dstfn)
-        javastr = f"java -jar files/swagger-codegen-cli.jar generate -i {dstfn} -l python -o ./{api}-client/python -DpackageName={pkg}"
+        javastr = f"java -jar files/swagger-codegen-cli.jar generate -i {dstfn} {disable_certs} -l python -o ./{api}-client/python -DpackageName={pkg}"
         pipstr = f"pip install ./{api}-client/python"
         deletestr = f"rm -rf ./{api}-client"
         cmdstr = f"{javastr} && {pipstr} && {deletestr}"
-        cmdstr = f"bash -c '{cmdstr}'"
-        oscmd(cmdstr)
+        oscmd(javastr)
+        oscmd(pipstr)
+        # cmdstr = javastr
+        # cmdstr = f"bash -c '{cmdstr}'"
+        # oscmd(cmdstr)
+
     return 0
 
 if __name__ == '__main__': main()
