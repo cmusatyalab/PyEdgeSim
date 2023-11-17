@@ -13,7 +13,7 @@ from pyutils import  *
 from types import SimpleNamespace  
 
 baseURL = None
-cnf = {'HOST': 'cloudlet041.elijah.cs.cmu.edu', 'PORT': 5000}
+# cnf = {'HOST': '127.0.0.1', 'PORT': 5002}
 
 def main(): # For testing -- job_execute called by GUI
     # testurl = "https://www.google.com"
@@ -25,7 +25,7 @@ def main(): # For testing -- job_execute called by GUI
     N5G = False
     RANDOM = False
     kwargs = locals()
-    kwargs['cnf'] = cnf
+    # kwargs['cnf'] = cnf
     job_execute(kwargs)
     pass
 

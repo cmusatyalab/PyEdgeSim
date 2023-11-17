@@ -5,31 +5,33 @@ from types import SimpleNamespace
 from pyutils import *
 
 HOME=os.environ['HOME'] if 'HOME' in os.environ else "/home/jblake1"  
-ROOT_DIR=f"{HOME}/CMUProjects/LEL/EdgeVDI"
+ROOT_DIR=f"{HOME}/git/PyEdgeSim/interference"
 INT_GEN=f"{ROOT_DIR}/interference_run_random.py"
-INT_PROF=f"{ROOT_DIR}/interference_profiles"
-USER="ubuntu"
+INT_PROF=f"{ROOT_DIR}/../interference_profiles"
+LIBDIR=f"{ROOT_DIR}/../lib"
+USER="jblake1"
 
 def main():
     print(f'INT_GEN exists: {os.path.exists(INT_GEN)}')
     print(f'INT_PROF exists: {os.path.exists(INT_PROF)}')
     interference = False
     lbo = False
-    zero = False
+    zero = True
     nlte = False
     n5g = False
     rand = False
     apigen = True
-    sandbox = 'horizon-filter-2'
-    scenario = 'horizon-filter-2'
+    sandbox = 'horizon-filter-1'
+    scenario = 'horizon-filter-1'
     kwargs = locals()
     job_execute(**kwargs)
     pass
 
-def job_execute(**kwargs):  
+def job_execute(**kwargs):
     result = ""
     print(kwargs)
     k = SimpleNamespace(**kwargs)
+    os.environ['PYTHONPATH'] = LIBDIR
     cmdstr = f"bash -c \'cd {ROOT_DIR} ; python {INT_GEN} "
     cmdstr += addEnvironment(k)
     

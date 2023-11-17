@@ -1,4 +1,5 @@
 {
-	"HOST":"cloudlet004.elijah.cs.cmu.edu",
-	"PORT":5002
+	"HOST":"cloudlet013.elijah.cs.cmu.edu",
+	"PORT":5002,
+	"INTGENPATH":"/home/jblake1/PyEdgeSim/interference"
 }
