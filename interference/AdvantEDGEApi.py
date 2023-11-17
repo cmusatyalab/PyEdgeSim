@@ -156,14 +156,14 @@ class AdvantEDGEApi(object):
     def getActiveScenario(self,verbose = False, **kwargs):
         ''' Get the currently running scenario '''
         api_instance = self.getSubApi('scenarioexecution')
-        # try:
-        api_response = api_instance.get_active_scenario()
-        # except sbclient.rest.ApiException as e:
-        #     if verbose:
-        #         mconsole ("No Active Scenario: {}\n".format(e),level="ERROR")
-        #     else:
-        #         mconsole("No Active Scenario")
-        #     api_response=None
+        try:
+            api_response = api_instance.get_active_scenario()
+        except sbclient.rest.ApiException as e:
+            if verbose:
+                mconsole ("No Active Scenario: {}\n".format(e),level="ERROR")
+            else:
+                mconsole("No Active Scenario")
+            api_response=None
         return api_response
 
     def terminateActiveScenario(self):
@@ -197,7 +197,7 @@ class AdvantEDGEApi(object):
         scendict = {'name':scenario.name,'deployment':scenario.deployment,
                     'domainlst':[],'zonelst':[],'locationlst':[], 'physloclst':[],'processlst':[]}
         scendict['deploymentdata'] = self.scenariodata({
-            'name':'Internet', 
+            'name':scenario.name, 
             'net_char':scenario.deployment.net_char,
             'type':'SCENARIO'
         })
@@ -320,7 +320,7 @@ class AdvantEDGEApi(object):
         def condprint(str1,str2):
             if verbose:
                 print(str1,str2)
-        if name == "Internet":
+        if name == self.scenario:
             return sd['deploymentdata']
         for domain in sd['deployment'].domains:
             if domain.name == name:
@@ -413,7 +413,7 @@ class AdvantEDGEApi(object):
         return jitter
         
 
-    def setLatencyDistribution(self,distribution,elementname = "Internet",verbose=False):
+    def setLatencyDistribution(self,distribution,elementname = "SCENARIO",verbose=False):
         allowed_dist = ["Normal", "Pareto", "Paretonormal","Uniform"]
         if distribution not in allowed_dist:
             mconsole("Distribution {} not allowed; Choose from: {}".format(distribution,allowed_dist),level="ERROR")
@@ -502,6 +502,7 @@ class AdvantEDGEApi(object):
             api_response = api_instance.send_event(evtype, ev)
         except sbclient.rest.ApiException as e:
             mconsole("Exception when calling %s: %s\n" % (evtype,e),level="ERROR")
+            pass
         except:
             e = getExceptData()
             mconsole("Exception when calling %s: %s\n" % (evtype,e),level="ERROR")

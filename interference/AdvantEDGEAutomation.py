@@ -5,15 +5,17 @@ from datetime import datetime
 import time
 import json
 from optparse import OptionParser
-
+import requests
+requests.urllib3.disable_warnings()
 import client
 
 from simlogging import mconsole
 from pyutils import *
 from influxutils import *
 
-from AdvE_api_lib import AdvantEDGEApi
+from AdvantEDGEApi import AdvantEDGEApi
 from testScenarios import testprofiledict
+
 
 class AdvantEDGEAutomation(object):
     def __init__(self, **kwargs):
@@ -40,7 +42,7 @@ class AdvantEDGEAutomation(object):
         if not self.api.startScenario(testscenname):
             mconsole("Could not start scenario: %s; Most likely, the sandbox %s does not exist" % (testscenname, sandbox),level="ERROR")
             return False
-        self.api.setLatencyDistribution(distribution,verbose=True)
+        self.api.setLatencyDistribution(distribution,elementname = testscenname, verbose=True)
         return True
     
     def runAutomationTest(self, runzero = True):
@@ -98,7 +100,7 @@ class AdvantEDGEAutomation(object):
         initcond = testprof['initial_conditions']
         ''' Latency Distribution '''
         latdist = testprof['latencyDistribution'] if 'latencyDistribution' in testprof else 'Normal'
-        api.setLatencyDistribution(latdist,verbose=True)
+        api.setLatencyDistribution(latdist,elementname = self.vars['SCENARIO'] ,verbose=True)
         ''' Get nodes '''
         uelst = [physloc for physloc in sd['physloclst'] if physloc[1] == 'UE']
         edgelst = [physloc for physloc in sd['physloclst'] if physloc[1] == 'EDGE']
@@ -109,7 +111,7 @@ class AdvantEDGEAutomation(object):
         edgeapplst = [app for app in sd['processlst'] if app[1] == 'EDGE-APP']
         dplydata = sd['deploymentdata']
         ''' Configure  '''
-        for node in [('Internet','SCENARIO')] + uelst + edgelst + poalst + zonelst + operatorlst + ueapplst + edgeapplst:
+        for node in  [(self.vars['SCENARIO'],'SCENARIO')] + uelst + edgelst + poalst + zonelst + operatorlst + ueapplst + edgeapplst:
             nodecond = initcond[node[1]]
             api.setLatency(node[0],nodecond['latency'])
             api.setLatencyVariation(node[0],nodecond['latencyVariation'])
@@ -117,6 +119,7 @@ class AdvantEDGEAutomation(object):
             api.setPacketLoss(node[0],nodecond['packetLoss'])
         for excpt in testprof['exceptions']:
             api.setMultipleValues(excpt,verbose=verbose)
+        pass
     
     def InfluxMeasure(self,on = 1):
         ''' Create a database entry at the start and end of the profile execution '''

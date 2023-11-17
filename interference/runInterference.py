@@ -13,8 +13,8 @@ from simlogging import mconsole
 from no_ssl_verification import *
 
 from pyutils import *
-from AdvE_api_lib import AdvantEDGEApi
-from AdvE_automation import AdvantEDGEAutomation
+from AdvantEDGEApi import AdvantEDGEApi
+from AdvantEDGEAutomation import AdvantEDGEAutomation
 
 # from setupAPIs import setupAPIs
 

@@ -12,29 +12,29 @@ import simlogging
 from simlogging import mconsole
 
 from pyutils import *
-from AdvE_api_lib import AdvantEDGEApi
-from AdvE_automation import AdvantEDGEAutomation
+from AdvantEDGEApi import AdvantEDGEApi
+from AdvantEDGEAutomation import AdvantEDGEAutomation
 
-from setupAPIs import setupAPIs
+# from setupAPIs import setupAPIs
 
 cnf = {
     "apiip":"127.0.0.1",
-    "apiversion":"1.8.0",
-    "advantedgever":"1.8.0",
-    "scenario":"horizon-filter-1",
-    "sandbox":"horizon-filter-1",
+    "apiversion":"1.9.2",
+    "advantedgever":"1.9.2",
+    "SCENARIO":"horizon-filter-1",
+    "SANDBOX":"horizon-filter-1",
     "profile":"horizontestlinux1",
     "fileroot":"Automation",
     "distribution":"Normal",
     "testerid":'jblake1',
-    "cloudletip":'cloudlet004.elijah.cs.cmu.edu',
-    "influxon":True,
+    "cloudletip":'127.0.0.1',
+    "influxon":False,
     "influxport":'30086',
     "influxdbname":"edgevdi",
     "influxmeasurement":"advantedge",
 }
 
-INTDIR = "./interference_profiles"
+INTDIR = "../interference_profiles"
 zerofn = os.path.join(INTDIR,"zero.json")
 
 stablizetime = 10
@@ -76,10 +76,10 @@ def main():
     ''' Change default parameters '''
     parser.add_option("-T", "--testerid", dest="testerid", default = cnf['testerid'],
         help="Give testerid".format(cnf['testerid']), metavar="STRING")    
-    parser.add_option("-s", "--sandbox", dest="sandbox", default = cnf['sandbox'],
-        help="Give the sandbox name (DEFAULT = {})".format(cnf['sandbox']), metavar="STRING")
-    parser.add_option("-S", "--scenario", dest="scenario", default = cnf['scenario'],
-        help="Give the scenario name (DEFAULT = {})".format(cnf['scenario']), metavar="STRING")
+    parser.add_option("-s", "--sandbox", dest="SANDBOX", default = cnf['SANDBOX'],
+        help="Give the sandbox name (DEFAULT = {})".format(cnf['SANDBOX']), metavar="STRING")
+    parser.add_option("-S", "--scenario", dest="SCENARIO", default = cnf['SCENARIO'],
+        help="Give the scenario name (DEFAULT = {})".format(cnf['SCENARIO']), metavar="STRING")
     parser.add_option("-i", "--apiip", dest="apiip", default = cnf['apiip'],
         help="Give the IP for the api server (DEFAULT = {})".format(cnf['apiip']), metavar="STRING")
     parser.add_option("-V", "--advantedgever", dest="advantedgever", default = cnf['advantedgever'],
@@ -98,7 +98,7 @@ def main():
     kwargs.update(vars(options))
 
     if kwargs['apiregen']: 
-        setupAPIs(**kwargs)
+        # setupAPIs(**kwargs)
         mconsole("APIs are now configured. This program will exit so that the new API modules are reimported")
         mconsole("Please restart the application without the -A option")
         sys.exit(0)
