@@ -497,6 +497,7 @@ class AdvantEDGEApi(object):
         self._sendAdvEvent(ev,'NETWORK-CHARACTERISTICS-UPDATE')
     
     def _sendAdvEvent(self,ev,evtype):
+        api_response = None
         api_instance = self.getSubApi('eventsend')
         try:
             api_response = api_instance.send_event(evtype, ev)
@@ -506,6 +507,7 @@ class AdvantEDGEApi(object):
         except:
             e = getExceptData()
             mconsole("Exception when calling %s: %s\n" % (evtype,e),level="ERROR")
+        return api_response
 
     def getElementNetworkInfo(self,element):
         if element is None:
