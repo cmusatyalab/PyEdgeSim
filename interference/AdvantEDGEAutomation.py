@@ -14,7 +14,7 @@ from pyutils import *
 from influxutils import *
 
 from AdvantEDGEApi import AdvantEDGEApi
-from testScenarios import testprofiledict
+# from testScenarios import testprofiledict
 
 
 class AdvantEDGEAutomation(object):
@@ -49,8 +49,8 @@ class AdvantEDGEAutomation(object):
         testscenname = self.vars['SCENARIO']
         if self.vars['testprofilefn'] is not None:
             runprofile = readJSON(self.vars['testprofilefn']) 
-        else:
-            runprofile = testprofiledict[self.vars['testprofile']]
+        # else:
+        #     runprofile = testprofiledict[self.vars['testprofile']]
         sandbox = self.vars['SANDBOX']
         distribution = self.vars['distribution']
         api = self.api
@@ -72,7 +72,8 @@ class AdvantEDGEAutomation(object):
     
     def runZero(self):
         mconsole("Set test profile to %s" % 'zero')
-        self.setupTestProfile(testprofiledict['zero'],verbose=True)
+        runfile = readJSON(os.path.join(self.vars['intdir'],"zero.json"))
+        self.setupTestProfile(runfile,verbose=True)
         self.stablize()
 
     def runEvents(self,runprofile, api, verbose=False):

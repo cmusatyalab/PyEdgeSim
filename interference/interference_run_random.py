@@ -32,9 +32,10 @@ cnf = {
     "influxport":'30086',
     "influxdbname":"edgevdi",
     "influxmeasurement":"advantedge",
+    "intdir":"../interference_profiles"
 }
 
-INTDIR = "../interference_profiles"
+INTDIR = cnf['intdir']
 zerofn = os.path.join(INTDIR,"zero.json")
 
 stablizetime = 10
