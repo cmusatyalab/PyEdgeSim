@@ -13,7 +13,7 @@
             "packetLoss": 0
         },
         "POA": {
-            "latency": 70,
+            "latency": 100,
             "latencyVariation": 1,
             "throughput": 10000,
             "packetLoss": 0
