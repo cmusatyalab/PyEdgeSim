@@ -79,6 +79,7 @@ class Window(QtWidgets.QMainWindow):
             "NLTE":{"MESSAGE":"Run as 4G LTE network","type":"button"},
             "N5G":{"MESSAGE":"Run as 5G Network","type":"button"},
             "RANDOM":{"MESSAGE":"Run with mix","type":"button"},
+            "PROFILE":{"MESSAGE":"Run with profile","type":"button"},
             "APIGEN":{"MESSAGE":"Regenerate APIs for this sandbox/scenario combo","type":"button"},
             "interference":{"MESSAGE":"Run with interference","type":"checkbox"},
             "lbo":{"MESSAGE":"Run with edge computing","type":"checkbox"}
@@ -111,10 +112,15 @@ class Window(QtWidgets.QMainWindow):
 
         l2 = QLabel("Scenario")
         default_scenario = cnf['SCENARIO'] if 'SCENARIO' in cnf else "horizon-filter-1"
-        self.scenario = QLineEdit(default_scenario)     
+        self.scenario = QLineEdit(default_scenario)
+        
+        l3 = QLabel("Profile")
+        default_profile = cnf['PROFILE'] if 'PROFILE' in cnf else "NA"
+        self.profile = QLineEdit(default_profile)  
         
         vboxform.addRow(l1,self.sandBox)
         vboxform.addRow(l2,self.scenario)
+        vboxform.addRow(l3,self.profile)
         
         vboxmain.addLayout(vboxform)
 
@@ -161,6 +167,7 @@ class option_button(QtWidgets.QPushButton):
                 "lbo": win.cb_option_buttons['lbo'].state,
                 "sandbox":str(win.sandBox.text()),
                 "scenario":str(win.scenario.text()),
+                "profile":str(win.profile.text()),
             }
         except Exception as e:
             console(f"Error: {e}")
