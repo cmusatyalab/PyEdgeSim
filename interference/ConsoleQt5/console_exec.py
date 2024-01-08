@@ -45,6 +45,8 @@ def job_execute(kwargs):
             resp = runLTE(k)
         elif k.RANDOM:
             resp = runRandom(k)
+        elif k.PROFILE:
+            resp = runProfile(k)
         elif k.APIGEN:
             resp = runAPIGen(k)
         else:
@@ -78,6 +80,15 @@ def runRandom(k):
     resp = requests.get(req)
     return resp
 
+def runProfile(k):
+    if(k.profile == "NA"):
+        console("No profile specified")
+        return None
+    req = baseURL + "profile"
+    req = wrapURL(req,k)
+    resp = requests.get(req)
+    return resp
+
 def runAPIGen(k):
     req = baseURL + "apigen"
     req = wrapURL(req,k)
@@ -96,7 +107,7 @@ def getBaseURL(k):
 def wrapURL(req,k):
     if k.interference: req += "&interference"
     if k.lbo: req += "&lbo"
-    req += f"&sandbox={k.sandbox}&scenario={k.scenario}"
+    req += f"&sandbox={k.sandbox}&scenario={k.scenario}&profilefn={k.profile}"
     return req
         
 if __name__ == '__main__': main()
