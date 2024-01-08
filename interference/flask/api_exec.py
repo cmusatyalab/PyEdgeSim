@@ -1,4 +1,5 @@
 import sys
+from pickle import TRUE
 devnull = [print(line) for line in sys.path]
 import os
 from types import SimpleNamespace
@@ -20,9 +21,11 @@ def main():
     nlte = False
     n5g = False
     rand = False
-    apigen = True
+    profile = False
+    apigen = False
     sandbox = 'horizon-filter-1'
     scenario = 'horizon-filter-1'
+    profilefn = "Qatar_Remote_V00.json"
     kwargs = locals()
     job_execute(**kwargs)
     pass
@@ -57,6 +60,10 @@ def job_execute(**kwargs):
         elif k.rand:
             result += f"Running random; interference and local-breakout are ignored"
             cmdstr += "\'"
+            cmd_subp(cmdstr)
+        elif k.profile:
+            result += f"Running profile {k.profilefn}"
+            cmdstr += f" -f {os.path.join(INT_PROF,k.profilefn)}\'"
             cmd_subp(cmdstr)
         elif k.apigen:
             result += f"(Re)generating AdvantEDGE APIs for sandbox={k.sandbox} scenario={k.scenario}"
