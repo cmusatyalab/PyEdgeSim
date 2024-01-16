@@ -171,7 +171,15 @@ class option_button(QtWidgets.QPushButton):
             }
         except Exception as e:
             console(f"Error: {e}")
-        console(f"Option selected: {self.message} with\n\tinterference={retdict['interference']}, edge computing={retdict['lbo']}")
+        
+        ''' Prepare the console message '''
+        label = self.blabel
+        msg = f"Option selected: {self.message}"
+        msg = msg + f" {retdict['profile']}" if label == 'PROFILE' else msg
+        msg = msg + f" with interference={retdict['interference']}, edge computing={retdict['lbo']}" \
+                if label == 'NLTE' or label == 'N5G' else msg
+        # console(f"Option selected: {self.message} with\n\tinterference={retdict['interference']}, edge computing={retdict['lbo']}")
+        console(msg)
         return retdict
 
 class option_checkbox(QtWidgets.QCheckBox):
