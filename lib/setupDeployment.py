@@ -15,6 +15,7 @@ from setupBuildEnv import setMEEPPATH
 
 cnf = initConfig()
 api = AdvantEDGEApi()
+meepctl = os.path.join(setMEEPPATH(cnf['ADVANTEDGEDIR']),"meepctl")
 
 def main():
     configureLogging()
@@ -37,11 +38,11 @@ def deployAdvantEDGE(cnf):
     # meepctl = os.path.join(*[cnf['ADVANTEDGEDIR'],"bin","meepctl","meepctl"])
     entry = input("Deploy AdvantEDGE? [y/N] ") or "n"
     if entry in ['Y','y']:
+
         setMEEPPATH(cnf['ADVANTEDGEDIR'])
         upgradeDockerBase(cnf)
         meepctl = "meepctl"
         if oscmd(f"{meepctl} deploy dep") != 0: return -1
-        # oscmd(f"kubectl delete service {cnf['REGISTRY']}") # get rid of k8s registry to use docker version
         if oscmd(f"{meepctl} dockerize all") != 0: return -1
         if oscmd(f"{meepctl} deploy core") != 0: return -1
     return 0
@@ -67,21 +68,19 @@ def startOpenRTiST(cnf):
     return 0
 
 def stopDeployment(cnf,settletime=120):
-    mconsole("Shutting down deployment and waiting {} seconds".format(settletime))
-    cmdstr = "kubectl get namespace -o json|jq -r '.items[] | select( .metadata.name | test(\"{}\")) | .metadata.name'" \
-        .format(cnf['SANDBOX'])
+    mconsole(f"Shutting down deployment and waiting {settletime} seconds")
+    cmdstr = f"kubectl get namespace -o json|jq -r '.items[] | select( .metadata.name | test(\"{cnf['SANDBOX']}\")) | .metadata.name'"
     ns = cmd0(cmdstr)
     if len(ns) > 0:
         oscmd("kubectl delete namespace {}".format(cnf['SANDBOX']))
-    cmdstr = "bash -c 'meepctl delete core;meepctl delete dep;sleep {}'".format(settletime)
+    cmdstr = f"bash -c '{meepctl} delete core;{meepctl} delete dep;sleep {settletime}'"
     oscmd(cmdstr)
 
 def startDeployment(cnf,settletime=0):
     mconsole("Starting deployment and waiting {} seconds".format(settletime))
-    cmdstr = "bash -c 'meepctl deploy dep;meepctl deploy core;sleep {}'".format(settletime)
+    cmdstr = f"bash -c '{meepctl} deploy dep;{meepctl} deploy core;sleep {settletime}'"
     oscmd(cmdstr)
-    mconsole("You will need to recreate sandbox {} and deploy scenario {} in it" \
-            .format(cnf['SANDBOX'],cnf['SCENARIO']))
+    mconsole(f"You will need to recreate sandbox {cnf['SANDBOX']} and deploy scenario {cnf['SCENARIO']} in it")
 
 def installCharts(cnf):
     datadir = "./data"
