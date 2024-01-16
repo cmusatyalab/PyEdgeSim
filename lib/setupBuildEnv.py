@@ -27,43 +27,38 @@ def installGO(cnf):
     entry = input("Install GO? [y/N] ") or "n"
     if entry in ['Y','y']:
         tmpdir = cnf['TMPDIR'] if 'TMPDIR' in cnf else "/tmp"
-        gofn = os.path.join(tmpdir,"go1.{}.linux-amd64.tar.gz".format(GOVER))
-        oscmd("wget -P {} https://dl.google.com/go/go1.{}.linux-amd64.tar.gz".format(tmpdir,GOVER))
-        if oscmd("sudo tar -C /usr/local -xzf {}".format(gofn)) == 0:
-            os.remove(gofn)
+        gofn = os.path.join(tmpdir,f"go1.{GOVER}.linux-amd64.tar.gz")
+        oscmd(f"wget -P {tmpdir} https://dl.google.com/go/go1.{GOVER}.linux-amd64.tar.gz")
+        if oscmd(f"sudo tar -C /usr/local -xzf {gofn}") == 0: os.remove(gofn)
         setGOPATH()
     return 0
 
 def setGOPATH():
-    gobin = "{}/go/bin:/usr/local/go/bin".format(os.environ['HOME'])
+    gobin = f"{os.environ['HOME']}/go/bin:/usr/local/go/bin"
     setPATH(gobin)
 
 def installNodeJS(cnf):
     entry = input("Install NodeJS? [y/N] ") or "n"
     if entry in ['Y','y']:
-        oscmd("sudo apt-get update ; sudo apt-get install -y nodejs-dev node-gyp libssl1.0-dev")
-        oscmd("sudo apt-get update ; sudo apt-get install -y build-essential libssl-dev npm")
+        # oscmd("sudo apt-get update ; sudo apt-get install -y nodejs-dev node-gyp libssl1.0-dev")
+        oscmd("sudo apt-get update ; sudo apt-get install -y build-essential libssl-dev")
         tmpdir = cnf['TMPDIR'] if 'TMPDIR' in cnf else "/tmp"
-        if 'NVM_DIR' in os.environ:
-            os.environ.pop('NVM_DIR')
+        if 'NVM_DIR' in os.environ: os.environ.pop('NVM_DIR')
         jsfn = os.path.join(tmpdir,"install.sh")
-        oscmd("curl -skL https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh -o {}".format(jsfn))
-        if oscmd("bash {}".format(jsfn)) == 0:
-            os.remove(jsfn)
+        oscmd(f"curl -skL https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh -o {jsfn}")
+        if oscmd(f"bash {jsfn}") == 0: os.remove(jsfn)
         os.environ['NVM_DIR'] = os.path.join(os.environ['HOME'],".nvm")
-        oscmd("bash -c '{};nvm install 10.16.3'".format(nvmenvstr))
-        setNVMPATH()  
-        oscmd("npm install -g npm")
+        oscmd(f"bash -c {nvmenvstr};nvm install {cnf['NVMVERSION']}")
+        setNVMPATH()
+        oscmd(f"npm install -g npm@{cnf['NPMVERSION']}")
         retlst = cmd("node -v;npm -v")
         mconsole("NodeJS Version: {} NPM Version: {}".format(retlst[0],retlst[1]) )
     return 0
 
 def setNVMPATH():
-    # /home/user/.nvm/versions/node/v10.16.3/bin/npm
-    npmbin = "{}/.nvm/versions/node".format(os.environ['HOME'])
+    npmbin = f"{os.environ['HOME']}/.nvm/versions/node"
     npmbin = os.path.join(*[npmbin,os.listdir(npmbin)[0],"bin"])
     setPATH(npmbin)
-    # os.environ['PATH'] = "{}:{}".format(os.environ['PATH'],npmbin)
          
 def installESLint(cnf):
     entry = input("Install ESLint? [y/N] ") or "n"
@@ -77,10 +72,9 @@ def installGolangCILint(cnf):
     entry = input("Install GolangCI-Lint? [y/N] ") or "n"
     if entry in ['Y','y']:
         setGOPATH()
-        inststr = "cd ~;GO111MODULE=on go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.18.0"
-        verstr = "go/bin/golangci-lint --version"
-        cmdstr = "{};{}".format(inststr,verstr)
-        oscmd('bash -c "{}"'.format(cmdstr))
+        oscmd("curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.46.0")
+        verstr = f"{os.environ['HOME']}/go/bin/golangci-lint --version"
+        oscmd(f'bash -c "{verstr}"')
     return 0
 
 def installMeepCTL(cnf):
@@ -88,8 +82,8 @@ def installMeepCTL(cnf):
     if entry in ['Y','y']:
         setGOPATH()
         addn = cnf['ADVANTEDGEDIR']
-        cmdstr = "cd {}/go-apps/meepctl;./install.sh".format(addn)
-        oscmd('bash -c "{}"'.format(cmdstr))
+        cmdstr = f"cd {addn}/go-apps/meepctl;./install.sh"
+        oscmd(f'bash -c "{cmdstr}"')
         nodeip = cmd0("kubectl get nodes -o json|jq -r '.items[].status.addresses[] | select( .type | test(\"InternalIP\")) | .address'")
         setMEEPPATH(addn)        
         oscmd("meepctl config ip {};meepctl config gitdir {};meepctl config".format(nodeip,addn))

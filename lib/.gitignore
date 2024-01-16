@@ -1,2 +1,7 @@
 /npm-debug.log
 /newdaemon.json
+/out.log
+/meep-platform-ctrl-swagger.yaml
+/meep-ctrl-engine-swagger.yaml
+/meep-mon-engine-swagger.yaml
+/meep-sandbox-ctrl-swagger.yaml

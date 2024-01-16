@@ -1,12 +1,21 @@
 {
+	"KUBERNETESTYPE":"k8s",
+	"HASGPU": "False",
 	"PROJECTHOME":"/home/jblake1",
 	"ADVANTEDGEGIT":"https://github.com/InterDigitalInc/AdvantEDGE",
 	"ADVANTEDGEVER":"1.9.2",
 	"APIIP":"127.0.0.1",
+	"AFQDN":"pyedgesimdev.eastus.cloudapp.azure.com",
 	"TMPDIR":"/tmp",
 	"DASHBOARD":"Client Framerate and Round Trip Time.json",
 	"SCENARIO":"horizon-filter-1",
 	"SANDBOX":"horizon-filter-1",
 	"AUTOMATION":"latencystep",
-	"GOVERSION":"15.3"
+	"GOVERSION":"18.1",
+	"NVMVERSION":"12.19.0",
+	"NPMVERSION":"6.14.8",
+	"KUBEVERSION":"1.26.0",
+	"CNIVER":"1.1.1",
+	"REGISTRY":"meep-docker-registry",
+	"REGISTRYPORT":30001
 }

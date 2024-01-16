@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # https://github.com/InterDigitalInc/AdvantEDGE/wiki/runtime-environment
- 
 import sys
 import os
 import pprint
@@ -24,37 +23,67 @@ def setupDockerDaemon(cnf):
         return -1
     ''' REBOOT '''
     return 0
+def setupContainerd(cnf):
+    entry = input("Set up containerd? [y/N] ") or "n"
+    if entry in ['Y','y']:
+        cmdstr = "sudo mkdir -p /etc/containerd;\
+        containerd config default | sudo tee /etc/containerd/config.toml;\
+        sudo sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml"
+        oscmd(cmdstr)
+        cmdstr = "sudo systemctl restart containerd"
+        oscmd(cmdstr)
+        cmdstr = "sudo cp files/modules_k8s.conf /etc/modules-load.d/k8s.conf;\
+        sudo modprobe overlay;sudo modprobe br_netfilter"
+        oscmd(cmdstr)
+        cmdstr = "sudo cp files/sysctl_k8s.conf /etc/sysctl.d/k8s.conf;\
+        sudo sysctl --system"
+        oscmd(cmdstr)
+        cmdstr = "sudo mkdir -p /etc/containerd;\
+        containerd config default | sudo tee /etc/containerd/config.toml;\
+        sudo sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml;\
+        sudo systemctl restart containerd"
+        oscmd(cmdstr)
+        oscmd(f"sudo setfacl --modify user:{os.environ['USER']}:rw /run/containerd/containerd.sock")
+    return 0
     # ## Install Kubernetes
 def setupKubernetes(cnf):
-    entry = input("Set up kubernetes? [y/N] ") or "n"
+    calico = False
+    if 'KUBERNETESTYPE' in cnf and cnf['KUBERNETESTYPE'] == "k3s": 
+        return setupK3s(cnf)
+    entry = input("Set up kubernetes (k8s)? [y/N] ") or "n"
     if entry in ['Y','y']:
+
         oscmd("sudo swapoff -a") # Turn this off in /etc/fstab as well
         oscmd("sudo     apt-get update && sudo apt-get install -y apt-transport-https curl")
         oscmd('curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -')
         fn = "/etc/apt/sources.list.d/kubernetes.list"
-        if not os.path.isfile(fn):
-            oscmd('sudo cp {}/kubernetes.list {}'.format(cnf['QSFILES'],fn))
+        if not os.path.isfile(fn): oscmd(f"sudo cp {cnf['QSFILES']}/kubernetes.list {fn}")
         
         # Install latest supported k8s version
         if oscmd("sudo apt-get update") != 0: return -1
-        oscmd("sudo apt-get install -y kubelet=1.19.1-00 kubeadm=1.19.1-00 kubectl=1.19.1-00 kubernetes-cni=0.8.7-00")
+        KVER = cnf['KUBEVERSION']
+        oscmd(f"sudo apt-get install -y kubelet={KVER}-00 kubeadm={KVER}-00 kubectl={KVER}-00 kubernetes-cni={cnf['CNIVER']}-00")
         # Lock current version
         oscmd("sudo apt-mark hold kubelet kubeadm kubectl")
-        oscmd("sudo systemctl enable docker.service")
+        # oscmd("sudo systemctl enable docker.service")
         # May need to turn off firewall
         # May need to add to /etc/docker/daemon.json --> "exec-opts": ["native.cgroupdriver=systemd"],
-        oscmd("sudo kubeadm init --ignore-preflight-errors=all")
+        oscmd("sudo kubeadm init  --cri-socket unix:///run/containerd/containerd.sock --ignore-preflight-errors=all")
         
         oscmd("mkdir -p $HOME/.kube")
         
         oscmd("sudo cp /etc/kubernetes/admin.conf $HOME/.kube/config")
         oscmd("sudo chown $(id -u):$(id -g) $HOME/.kube/config")
          
-        oscmd("kubectl taint nodes --all node-role.kubernetes.io/master-")
+        oscmd("kubectl taint nodes --all node-role.kubernetes.io/control-plane-")
         
         oscmd("sudo sysctl net.bridge.bridge-nf-call-iptables=1")
         # oscmd("kubectl apply -f \"https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')&env.WEAVE_MTU=1500\"")
-        oscmd("kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s-1.11.yaml")
+        if calico:
+            oscmd("kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.1/manifests/tigera-operator.yaml")
+            oscmd("kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.1/manifests/custom-resources.yaml")
+        else: # weave
+            oscmd("kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s-1.11.yaml")
         
         gstr = "source <(kubectl completion bash)"
         if oscmd('grep "{}" ~/.bashrc'.format(gstr)) != 0:
@@ -67,18 +96,45 @@ def setupKubernetes(cnf):
          
         # Add K8s CA to list of trusted CAs
         fn="/usr/local/share/ca-certificates/kubernetes-ca.crt"
-        if not os.path.isfile(fn):
-            oscmd("sudo cp /etc/kubernetes/pki/ca.crt {}".format(fn))
-            oscmd("sudo chmod 644 {}".format(fn))
-            oscmd("sudo update-ca-certificates")
-        # # Add the network add-on    
-        # oscmd("kubectl apply -f https://docs.projectcalico.org/v3.14/manifests/calico.yaml")
-        # Restart docker daemon
+        # if not os.path.isfile(fn):
+        oscmd("sudo cp /etc/kubernetes/pki/ca.crt {}".format(fn))
+        oscmd("sudo chmod 644 {}".format(fn))
+        oscmd("sudo update-ca-certificates")
+
         setupK8sGPU()
         
-        oscmd("sudo systemctl restart docker")  
+        oscmd("sudo systemctl restart docker;sudo systemctl restart containerd;sudo systemctl restart kubelet")  
 
     return 0
+
+def setupK3s(cnf):
+    calico = True
+    entry = input("Set up kubernetes (k3s)? [y/N] ") or "n"
+    if entry in ['Y', 'y']:
+        kubedn = f"{os.environ['HOME']}/.kube"
+        kubefn = kubedn + "/config"
+        if not calico:
+            oscmd("curl -sfL https://get.k3s.io | sh -s - --docker")
+                # NEW FOR K3S with Calico
+        else:
+            oscmd('curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" INSTALL_K3S_EXEC="--flannel-backend=none --cluster-cidr=192.168.0.0/16 --disable-network-policy --disable=traefik" sh -')
+        if not os.path.exists(kubedn): os.mkdir(kubedn)
+        # oscmd(f"test -d {kubedn} || mkdir {kubedn}")
+        oscmd(f"sudo cp /etc/rancher/k3s/k3s.yaml {kubefn}")
+        oscmd(f"sudo chown jblake1 {kubefn};sudo chgrp jblake1 {kubefn};chmod 0600 {kubefn}")
+        os.environ['KUBECONFIG'] = kubefn
+        oscmd("kubectl get nodes")
+        if calico:
+            oscmd("kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.1/manifests/tigera-operator.yaml")
+            oscmd("kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.1/manifests/custom-resources.yaml")
+
+        # oscmd("watch kubectl get pods --all-namespaces")
+        
+        IP = cmd0("kubectl get nodes -o json|jq -r '.items[].status.addresses[] | select( .type | test(\"InternalIP\")) | .address'")
+        print(f'Master IP={IP}')
+
+    return 0
+
 
 def setupK8sGPU():
         entry = input("Enable NVIDIA GPU in Kubernetes? [y/N] ") or "n"

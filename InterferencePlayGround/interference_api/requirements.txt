@@ -1,0 +1,4 @@
+flask
+Flask
+requests
+setuptools==65

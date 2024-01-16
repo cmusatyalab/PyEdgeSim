@@ -10,12 +10,19 @@ from influxdb import DataFrameClient
 
 from pyutils import *
 from simlogging import mconsole
+from config import *
 from setupDeployment import stopDeployment,startDeployment
 
 PORT=8086
 FPORT=30086
 DBNAME= "openrtistdb"
 
+cnf = initConfig()
+
+def main():
+    setupInfluxDB(cnf)
+    setupGrafana(cnf)
+    
 def setupInfluxDB(cnf):
     entry = input("Setup InfluxDB? [y/N] ") or "n"
     if entry in ['Y','y']:
@@ -82,3 +89,4 @@ def getDBs(client):
         mconsole("Could not parse influxdb database list: {}".format(response),level="ERROR")
     return None
 
+if __name__ == '__main__': main()

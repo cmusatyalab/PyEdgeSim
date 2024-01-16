@@ -114,13 +114,13 @@ def writeJSON(fn,injson):
         json.dump(injson,f,indent=4)
 
 ''' ZIP '''
-def dunzip(zipfilefull,dstdir="."): # Unzip file to destination directory -- works as pandas.series.apply
-    with zipfile.ZipFile(zipfilefull,"r") as zipd:
-        zipcontents = zipd.namelist()
-        for zipitem in zipcontents:
-            zipdstfile = os.path.join(dstdir,zipitem)
-            if not os.path.exists(zipdstfile):
-                print("Extracting %s from %s to %s" % (zipitem,zipfilefull,dstdir))
-                zipd.extract(zipitem, dstdir)
-    return zipitem # Assumes only one item
+# def dunzip(zipfilefull,dstdir="."): # Unzip file to destination directory -- works as pandas.series.apply
+#     with zipfile.ZipFile(zipfilefull,"r") as zipd:
+#         zipcontents = zipd.namelist()
+#         for zipitem in zipcontents:
+#             zipdstfile = os.path.join(dstdir,zipitem)
+#             if not os.path.exists(zipdstfile):
+#                 print("Extracting %s from %s to %s" % (zipitem,zipfilefull,dstdir))
+#                 zipd.extract(zipitem, dstdir)
+#     return zipitem # Assumes only one item
 

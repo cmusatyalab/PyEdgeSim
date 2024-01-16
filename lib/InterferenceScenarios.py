@@ -8,6 +8,8 @@ defwait = 10
 modelwait = 5
 
 
+''' Use these to construct a profile '''
+
 EXCEPTIONTEMPLATE = {'name':'<ELEMENT>','latency':'<LATENCY>','latencyVariation':'<LATENCYVARIATION>',
                      'throughput':'<THROUGHPUT>','packetLoss':'<PACKETLOSS'}
 

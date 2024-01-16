@@ -3,6 +3,7 @@
 import sys
 import os
 sys.path.append(os.getcwd())
+import requests
 import pprint
 import json
 import shutil
@@ -14,6 +15,8 @@ cnf = initConfig()
 disable_certs="-Dio.swagger.parser.util.RemoteUrl.trustAll=true"
 
 def main():
+    global FILEROOT
+    if os.getcwd().endswith("lib"): FILEROOT="../files"
     setupAutomation(cnf)
     
 def setupAutomation(cnf):
@@ -42,6 +45,14 @@ def setupAPIs(cnf):
         # oscmd(cmdstr)
 
     return 0
+
+def getYAML(fn,version,app):
+    # https://raw.githubusercontent.com/InterDigitalInc/AdvantEDGE/release-1.9.0/go-apps/platform-control-ctrl/api/swagger.yaml
+    url = BASEURL.replace("VERSION",version)
+    url= f"{url}meep-{app}/api/swagger.yaml"
+    r = requests.get(url, allow_redirects=True)
+    if r.status_code == 200: open(f"{fn}",'wb').write(r.content)
+    print(fn,version)
 
 if __name__ == '__main__': main()
 

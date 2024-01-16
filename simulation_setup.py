@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import sys, os
+print(sys.path)
 sys.path.insert(0,"./lib")
 sys.path.insert(0,"./interference")
 from optparse import OptionParser
@@ -52,6 +53,8 @@ def job_execute(kwargs):
         ''' Set up runtime environment (CPU Only) '''
         entry = input("Setup runtime environment? [y/N] ") or "n"
         if entry in ['Y','y']:
+            if setupDockerDaemon(cnf) != 0: return -1
+            if setupContainerd(cnf) != 0: return -1
             if setupKubernetes(cnf) != 0: return -1
             if setupHelm(cnf) != 0: return -2
             if installAdvantEDGE(cnf) != 0: return -3
@@ -85,11 +88,9 @@ def job_execute(kwargs):
 
     ''' End of Fast Track '''
 
-    if testInterference(cnf) != 0: return -18
-    
-    
+    if testInterference(cnf) != 0: return -1
     ''' Create automation report '''
-    if createReport(cnf,filename="report.png") != 0: return -17
+    if createReport(cnf,filename="report.png") != 0: return -18
     else: mconsole("SUCCESS!")
     return 0
 

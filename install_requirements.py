@@ -17,6 +17,8 @@ cmdstr = f"bash -c ' {pipsetup} && {setupgdal} && {setupclient}' "
 oscmd(cmdstr)
 
 ''' K9s '''
-setupk9s = "python lib/k9s_setup.py"
-oscmd(setupk9s)
+K9SURL = "wget https://github.com/derailed/k9s/releases/download/v0.27.3/"
+K9SFN="k9s_Linux_amd64.tar.gz"
+url = f"{K9SURL}/{K9SFN}"
+oscmd(f'/bin/bash -c "wget {url}" && /bin/bash -c "tar xvzf {K9SFN} k9s" && sudo mv k9s /usr/local/bin/')
 
