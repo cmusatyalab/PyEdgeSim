@@ -1,0 +1,101 @@
+{
+    "name": "leltestprofile",
+    "application": "edgevdi",
+    "latencyDistribution": "Pareto",
+    "initial_conditions": {
+        "UE": {
+            "latency": 0,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "POA": {
+            "latency": 3,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "ZONE": {
+            "latency": 5,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "OPERATOR": {
+            "latency": 5,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "UE-APP": {
+            "latency": 0,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "EDGE-APP": {
+            "latency": 0,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "SCENARIO": {
+            "latency": 35,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        }
+    },
+    "exceptions": [],
+    "test_events": [
+    	{"type":"MOBILITY","mover":"iperf-ue1-1600k","dest":"zone1-poa1","waitafter":0},
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 20,
+            "latency": 20,
+            "latencyVariation": 4,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {"type":"MOBILITY","mover":"iperf-ue1-1600k","dest":"DISCONNECTED","waitafter":0},
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 20,
+            "latency": 26,
+            "latencyVariation": 5,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {"type":"MOBILITY","mover":"iperf-ue1-1600k","dest":"zone1-poa1","waitafter":0},
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 20,
+            "latency": 34,
+            "latencyVariation": 6,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {"type":"MOBILITY","mover":"iperf-ue1-1600k","dest":"DISCONNECTED","waitafter":0},
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 20,
+            "latency": 44,
+            "latencyVariation": 8,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 0,
+            "latencyVariation": 0,
+            "throughput": 1000,
+            "packetLoss": 0
+        }
+    ]
+}

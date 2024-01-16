@@ -1,8 +1,0 @@
-[Unit]
-Description = flask python command to do useful stuff
-
-[Service]
-ExecStart = sudo -H -u jblake1 bash -c '/home/jblake1/flask/flask.sh'
-
-[Install]
-WantedBy = multi-user.target

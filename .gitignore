@@ -9,4 +9,5 @@
 /report-s8.png
 doc/FixNotes.md
 .pydevproject
-*.pyc
+*/*__pycache_*
+
