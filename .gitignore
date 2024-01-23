@@ -11,3 +11,6 @@ doc/FixNotes.md
 .pydevproject
 */*__pycache_*
 
+interference/ConsoleQt5/__pycache__/config.cpython-37.pyc
+interference/ConsoleQt5/__pycache__/console_exec.cpython-37.pyc
+interference/ConsoleQt5/__pycache__/qtdbg.cpython-37.pyc
