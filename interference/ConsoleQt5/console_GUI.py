@@ -76,10 +76,10 @@ class Window(QtWidgets.QMainWindow):
         ''' Check Boxes '''
         self.option_list = {
             "zero":{"MESSAGE":"Run with no added latency (e.g., wired, wifi)","type":"button"},
+            "PROFILE":{"MESSAGE":"Run with profile","type":"button"},
             "NLTE":{"MESSAGE":"Run as 4G LTE network","type":"button"},
             "N5G":{"MESSAGE":"Run as 5G Network","type":"button"},
             "RANDOM":{"MESSAGE":"Run with mix","type":"button"},
-            "PROFILE":{"MESSAGE":"Run with profile","type":"button"},
             "APIGEN":{"MESSAGE":"Regenerate APIs for this sandbox/scenario combo","type":"button"},
             "interference":{"MESSAGE":"Run with interference","type":"checkbox"},
             "lbo":{"MESSAGE":"Run with edge computing","type":"checkbox"}
@@ -115,9 +115,11 @@ class Window(QtWidgets.QMainWindow):
         self.scenario = QLineEdit(default_scenario)
         
         l3 = QLabel("Profile")
-        default_profile = cnf['PROFILE'] if 'PROFILE' in cnf else "NA"
-        self.profile = QLineEdit(default_profile)  
         
+        self.profile = QComboBox()
+        ddlst = cnf['PROFILELIST']
+        [self.profile.addItem(prof) for prof in ddlst]
+                
         vboxform.addRow(l1,self.sandBox)
         vboxform.addRow(l2,self.scenario)
         vboxform.addRow(l3,self.profile)
@@ -167,7 +169,8 @@ class option_button(QtWidgets.QPushButton):
                 "lbo": win.cb_option_buttons['lbo'].state,
                 "sandbox":str(win.sandBox.text()),
                 "scenario":str(win.scenario.text()),
-                "profile":str(win.profile.text()),
+                # "profile":str(win.profile.text()), # Line Entry
+                "profile":str(win.profile.currentText()) + ".json" # Combo Box
             }
         except Exception as e:
             console(f"Error: {e}")

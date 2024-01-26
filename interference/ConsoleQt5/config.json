@@ -2,5 +2,6 @@
 	"HOST":"cloudlet013.elijah.cs.cmu.edu",
 	"PORT":5002,
 	"INTGENPATH":"/home/jblake1/PyEdgeSim/interference",
-	"PROFILE":"BadSignal_Example.json"
+	"PROFILE":"BadSignal_Example.json",
+	"PROFILELIST":["zero","Pittsburgh_WiFi_V00","Qatar_WiFi_V00","Qatar_Remote_V00","BadSignal_Example","Combo_Example"]
 }
