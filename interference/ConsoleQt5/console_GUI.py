@@ -67,6 +67,7 @@ class Window(QtWidgets.QMainWindow):
         ''' options '''
         vboxoptions = QVBoxLayout()
         hboxoptions = QHBoxLayout()
+        pboxoptions = QHBoxLayout()
         vboxcheck = QVBoxLayout()
         
         cbox1=QLabel()
@@ -75,16 +76,17 @@ class Window(QtWidgets.QMainWindow):
         
         ''' Check Boxes '''
         self.option_list = {
-            "zero":{"MESSAGE":"Run with no added latency (e.g., wired, wifi)","type":"button"},
-            "PROFILE":{"MESSAGE":"Run with profile","type":"button"},
-            "NLTE":{"MESSAGE":"Run as 4G LTE network","type":"button"},
-            "N5G":{"MESSAGE":"Run as 5G Network","type":"button"},
+            "zero":{"MESSAGE":"No added latency (e.g., wired, wifi)","type":"button","color":"red"},
+            "NLTE":{"MESSAGE":"4G LTE network","type":"button","color":"green"},
+            "N5G":{"MESSAGE":"5G Network","type":"button","color":"green"},
             "RANDOM":{"MESSAGE":"Run with mix","type":"button"},
             "APIGEN":{"MESSAGE":"Regenerate APIs for this sandbox/scenario combo","type":"button"},
+            "PROFILE":{"MESSAGE":"Run with profile","type":"button","color":"blue"},
             "interference":{"MESSAGE":"Run with interference","type":"checkbox"},
             "lbo":{"MESSAGE":"Run with edge computing","type":"checkbox"}
         }
-        
+        cnf = self.basecnf
+                
         ''' Option Buttons '''
         self.cb_option_buttons = {}
         for key in self.option_list.keys():
@@ -96,16 +98,11 @@ class Window(QtWidgets.QMainWindow):
                 self.cb_option_buttons[key] = option_checkbox(key,self.option_list[key],self.basecnf,self)
                 hboxoptions.addWidget(self.cb_option_buttons[key])
         ''' Add Boxes and Buttons to UI '''
-        
 
-        vboxoptions.addLayout(hboxoptions)
 
-        ''' add options to main layout '''
-        vboxmain.addLayout(vboxoptions)
-        
         ''' Form '''
-        cnf = self.basecnf
         vboxform = QFormLayout()
+        
         l1 = QLabel("Sandbox")
         default_sandBox = cnf['SANDBOX'] if 'SANDBOX' in cnf else "horizon-filter-1"
         self.sandBox = QLineEdit(default_sandBox)
@@ -115,29 +112,34 @@ class Window(QtWidgets.QMainWindow):
         self.scenario = QLineEdit(default_scenario)
         
         l3 = QLabel("Profile")
-        
+        l3.setStyleSheet(f"color: blue")
         self.profile = QComboBox()
+        self.profile.setStyleSheet(f"color: blue")
+        self.profile.setStyleSheet(f"background-color: powderblue")
         ddlst = cnf['PROFILELIST']
         [self.profile.addItem(prof) for prof in ddlst]
-                
+
+        vboxform.addRow(l3,self.profile)                
         vboxform.addRow(l1,self.sandBox)
         vboxform.addRow(l2,self.scenario)
-        vboxform.addRow(l3,self.profile)
-        
-        vboxmain.addLayout(vboxform)
 
         ''' logging console '''
         vboxconsole = QVBoxLayout()
         self.dbgwidg = QDbgConsole()
         vboxconsole.addWidget(self.dbgwidg)
         
-        vboxmain.addLayout(vboxconsole)
-        
         ''' Quit Button '''
-        quit_buttn = quit_button("QUIT")
+        quit_buttn = quit_button("QUIT")        
+        
+        ''' add options to main layout '''
+        vboxoptions.addLayout(vboxform)  
+        vboxoptions.addLayout(hboxoptions)
+        vboxmain.addLayout(vboxoptions)    
+
+        vboxmain.addLayout(vboxconsole)
         vboxmain.addWidget(quit_buttn)
-        ''' put the progress bar on the botttom '''
         vboxmain.addWidget(self.progress)
+        
         ''' Set the Layout '''
         widgmain.setLayout(vboxmain)
         self.setCentralWidget(widgmain)
@@ -146,7 +148,15 @@ class Window(QtWidgets.QMainWindow):
 class option_button(QtWidgets.QPushButton):
     def __init__(self, blabel, optiondict, cnf, parent = None):
         super(option_button, self).__init__()
-        self.message = optiondict['MESSAGE']
+        self.message = optiondict['MESSAGE'] if 'MESSAGE' in optiondict else "NA"
+        ''' style '''
+        self.backgroundcolor = optiondict['backgroundcolor'] if 'backgroundcolor' in optiondict else None
+        if self.backgroundcolor is not None: self.setStyleSheet(f"background-color: {self.backgroundcolor}");
+        
+        self.color = optiondict['color'] if 'color' in optiondict else None
+        if self.color is not None: self.setStyleSheet(f"color: {self.color}");
+        
+        ''' Content '''
         self.setText("{}".format(self.message))
         self.clicked.connect(self.option_button_clicked)
         self.optiondict = optiondict
