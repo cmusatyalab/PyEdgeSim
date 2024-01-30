@@ -548,7 +548,7 @@ class AdvantEDGEApi(object):
         podtuplst = [] 
         for pod in podlst:
             cmdout = cmd("kubectl get pods --namespace %s --field-selector metadata.name=%s" % (self.sandbox,pod))
-            podstat = cmd("echo %s|awk '{print $3}'" % cmdout[1])[0] if len(cmdout) > 1 else None
+            podstat = cmd("echo '%s'|awk '{print $3}'" % cmdout[1])[0] if len(cmdout) > 1 else None
             podtuplst.append((pod,podstat))
         return podtuplst
 
