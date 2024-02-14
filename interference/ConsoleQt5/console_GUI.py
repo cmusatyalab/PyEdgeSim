@@ -83,7 +83,7 @@ class Window(QtWidgets.QMainWindow):
             "APIGEN":{"MESSAGE":"Regenerate APIs for this sandbox/scenario combo","type":"button"},
             "PROFILE":{"MESSAGE":"Run with profile","type":"button","color":"blue"},
             "interference":{"MESSAGE":"Run with interference","type":"checkbox"},
-            "lbo":{"MESSAGE":"Run with edge computing","type":"checkbox"}
+            "lbo":{"MESSAGE":"Run with local breakout","type":"checkbox"}
         }
         cnf = self.basecnf
                 
