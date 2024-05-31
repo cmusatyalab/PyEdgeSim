@@ -1,0 +1,322 @@
+{
+    "name": "leltestprofile",
+    "application": "edgevdi",
+    "latencyDistribution": "Pareto",
+    "initial_conditions": {
+        "UE": {
+            "latency": 0,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "POA": {
+            "latency": 3,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "ZONE": {
+            "latency": 5,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "OPERATOR": {
+            "latency": 5,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "UE-APP": {
+            "latency": 0,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "EDGE-APP": {
+            "latency": 0,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "SCENARIO": {
+            "latency": 35,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        }
+    },
+    "exceptions": [],
+    "test_events": [
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 20,
+            "latencyVariation": 4,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 26,
+            "latencyVariation": 5,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 34,
+            "latencyVariation": 6,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 44,
+            "latencyVariation": 8,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 57,
+            "latencyVariation": 10,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 74,
+            "latencyVariation": 13,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 96,
+            "latencyVariation": 17,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 125,
+            "latencyVariation": 22,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 162,
+            "latencyVariation": 29,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 211,
+            "latencyVariation": 38,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 274,
+            "latencyVariation": 49,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 356,
+            "latencyVariation": 64,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 463,
+            "latencyVariation": 83,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 602,
+            "latencyVariation": 108,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 783,
+            "latencyVariation": 140,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 1018,
+            "latencyVariation": 182,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 783,
+            "latencyVariation": 237,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 602,
+            "latencyVariation": 308,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 463,
+            "latencyVariation": 400,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 356,
+            "latencyVariation": 520,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 274,
+            "latencyVariation": 676,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 211,
+            "latencyVariation": 879,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 162,
+            "latencyVariation": 1143,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 125,
+            "latencyVariation": 1486,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 96,
+            "latencyVariation": 1932,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 74,
+            "latencyVariation": 2512,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 57,
+            "latencyVariation": 3266,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 44,
+            "latencyVariation": 4246,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 34,
+            "latencyVariation": 5520,
+            "throughput": 1000,
+            "packetLoss": 2
+        },
+        {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 5,
+            "latency": 26,
+            "latencyVariation": 7176,
+            "throughput": 1000,
+            "packetLoss": 2
+        }
+    ]
+}

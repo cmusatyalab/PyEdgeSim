@@ -10,13 +10,19 @@ from influxdb import DataFrameClient
 
 from pyutils import *
 from simlogging import mconsole
+from config import *
 from setupDeployment import stopDeployment,startDeployment
 
 PORT=8086
 FPORT=30086
 DBNAME= "openrtistdb"
 
+cnf = initConfig()
 
+def main():
+    setupInfluxDB(cnf)
+    setupGrafana(cnf)
+    
 def setupInfluxDB(cnf):
     entry = input("Setup InfluxDB? [y/N] ") or "n"
     if entry in ['Y','y']:
@@ -63,7 +69,7 @@ def setupGrafana(cnf):
     entry = input("Setup Grafana? [y/N] ") or "n"
     if entry in ['Y','y']:    
         mconsole("Install grafana extensions")
-        grafanapod = cmd0('kubectl get pod -l app=grafana -o jsonpath="{.items[0].metadata.name}"')
+        grafanapod = cmd0('kubectl get pod -l app.kubernetes.io/name=grafana -o jsonpath="{.items[0].metadata.name}"')
         grafanaurl="http://{}/grafana".format(cnf['APIIP'])
         chartname = "{}/grafana/{}".format(os.getcwd(),cnf['DASHBOARD'])
         krunpodstr = "kubectl exec {} -- ".format(grafanapod)
@@ -83,3 +89,4 @@ def getDBs(client):
         mconsole("Could not parse influxdb database list: {}".format(response),level="ERROR")
     return None
 
+if __name__ == '__main__': main()

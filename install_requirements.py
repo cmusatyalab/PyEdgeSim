@@ -4,24 +4,21 @@ import os
 
 def oscmd(cmdstr): # Prints out to console and returns exit status
     return os.system(cmdstr)
-oscmd("sudo apt update")
-''' Java '''
-oscmd("sudo apt install default-jdk -y")
-oscmd("sudo apt install openjdk-8-jre -y")
-oscmd("sudo apt install -y jq influxdb-client webpack npm")
+
+''' Apt installs '''
+INSTALL="default-jdk openjdk-8-jre jq influxdb-client webpack npm"
+cmdstr = f"bash -c ' sudo apt update && sudo apt install -y {INSTALL}'"
+oscmd(cmdstr)
 
 pipsetup="pip install requests;pip install -r pip_requirements.txt"
 setupclient="python lib/setupAutomation.py"
-
-cmdstr = "bash -c ' {} && {}' ".format(pipsetup,setupclient)
-oscmd(cmdstr)
-
-cmdstr = "lib/_installgdal.sh"
+setupgdal = "lib/_installgdal.sh"
+cmdstr = f"bash -c ' {pipsetup} && {setupgdal} && {setupclient}' "
 oscmd(cmdstr)
 
 ''' K9s '''
-BREWPATH = "$HOME/.linuxbrew/bin"
-oscmd('/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"')
-oscmd("{}/brew install k9s".format(BREWPATH))
-oscmd("echo alias k9s=\'{}/k9s\' >> ~/.bashrc".format(BREWPATH))
+K9SURL = "wget https://github.com/derailed/k9s/releases/download/v0.27.3/"
+K9SFN="k9s_Linux_amd64.tar.gz"
+url = f"{K9SURL}/{K9SFN}"
+oscmd(f'/bin/bash -c "wget {url}" && /bin/bash -c "tar xvzf {K9SFN} k9s" && sudo mv k9s /usr/local/bin/')
 

@@ -1,0 +1,42 @@
+---
+- name: Add Docker GPG apt Key
+  become: yes
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker Repository
+  become: yes
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu focal stable
+    state: present
+
+- name: Update apt and install docker.io and containerd
+  become: yes
+  apt:
+    name: 
+    - docker.io=20.10.21-0ubuntu1~22.04.3
+    - containerd
+    update_cache: true
+    allow_downgrade: true
+
+- name: Install Docker Module for Python
+  #pip:
+  #  name: docker
+  shell: |
+    curl https://releases.rancher.com/install-docker/{{ docker_version }}.sh | sh
+
+- name: Add user to docker group
+  become: yes
+  user:
+    name: "{{ ansible_user }}"
+    groups: docker
+    append: yes
+
+- name: Pull alpine docker image
+  become: yes
+  docker_image:
+    name: alpine
+    source: pull
+    
+# TODO Docker compose

@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 import sys, os
+print(sys.path)
 sys.path.insert(0,"./lib")
+sys.path.insert(0,"./interference")
 from optparse import OptionParser
 from pyutils import *
 
@@ -11,6 +13,7 @@ from setupBuildEnv import *
 from setupAutomation import *
 from setupDataManagement import *
 from setupDeployment import *
+from setupInterference import *
 from testAutomation import *
 from createReport import *
 
@@ -39,43 +42,55 @@ def cmdOptions(tmpcnf):
     parser.add_option("-d", "--debug",
                   action="store_true", dest="debug", default=False,
                   help="Debugging mode")
+    parser.add_option("-F", "--fasttrack",
+                  action="store_true", dest="FASTTRACK", default=False,
+                  help="Fast track to a particular step (for testing purposes)")
     return  parser.parse_args()
 
 def job_execute(kwargs):
     cnf.update(kwargs)
-    ''' Set up runtime environment (CPU Only) '''
-    entry = input("Setup runtime environment? [y/N] ") or "n"
-    if entry in ['Y','y']:
-        if setupKubernetes(cnf) != 0: return -1
-        if setupHelm(cnf) != 0: return -2
-        if installAdvantEDGE(cnf) != 0: return -3
-    ''' Set up build environment (CPU Only) '''
-    entry = input("Setup build environment? [y/N] ") or "n"
-    if entry in ['Y','y']:
-        if installGO(cnf) != 0: return -4
-        if installNodeJS(cnf) != 0: return -5
-        if installESLint(cnf) != 0: return -6
-        if installGolangCILint(cnf) != 0: return -7
-        if installMeepCTL(cnf) != 0: return -8
-        if buildMeepAll(cnf) != 0: return -9
-    ''' Deploy AdvantEDGE '''
-    if deployAdvantEDGE(cnf) != 0: return -10
-    ''' Pull OpenRTiST '''
-    if getOpenRTiST(cnf) != 0: return -13
-    ''' Set up the scenario '''
-    if installCharts(cnf) != 0: return -13
-    ''' Deploy the scenario in the sandbox '''         
-    if startOpenRTiST(cnf) != 0: return -14
-    ''' Data Management '''
-    entry = input("Setup data management? [y/N] ") or "n"
-    if entry in ['Y','y']:        
-        if setupInfluxDB(cnf) != 0: return -11
-        if setupGrafana(cnf) != 0: return -12
-    ''' Automation '''
-    if setupAutomation(cnf) != 0: return -15
-    if runAutomationTest(cnf) != 0: return -16
+    if not cnf['FASTTRACK']:
+        ''' Set up runtime environment (CPU Only) '''
+        entry = input("Setup runtime environment? [y/N] ") or "n"
+        if entry in ['Y','y']:
+            if setupDockerDaemon(cnf) != 0: return -1
+            if setupContainerd(cnf) != 0: return -1
+            if setupKubernetes(cnf) != 0: return -1
+            if setupHelm(cnf) != 0: return -2
+            if installAdvantEDGE(cnf) != 0: return -3
+        ''' Set up build environment (CPU Only) '''
+        entry = input("Setup build environment? [y/N] ") or "n"
+        if entry in ['Y','y']:
+            if installGO(cnf) != 0: return -4
+            if installNodeJS(cnf) != 0: return -5
+            if installESLint(cnf) != 0: return -6
+            if installGolangCILint(cnf) != 0: return -7
+            if installMeepCTL(cnf) != 0: return -8
+            if buildMeepAll(cnf) != 0: return -9
+        ''' Deploy AdvantEDGE '''
+        if deployAdvantEDGE(cnf) != 0: return -10
+        ''' Pull OpenRTiST '''
+        if getOpenRTiST(cnf) != 0: return -13
+        ''' Set up the scenario '''
+        if installCharts(cnf) != 0: return -13
+        ''' Deploy the scenario in the sandbox '''         
+        if startOpenRTiST(cnf) != 0: return -14
+        ''' Data Management '''
+        entry = input("Setup data management? [y/N] ") or "n"
+        if entry in ['Y','y']:        
+            if setupInfluxDB(cnf) != 0: return -11
+            if setupGrafana(cnf) != 0: return -12
+        ''' Automation '''
+        if setupAutomation(cnf) != 0: return -15
+        if runAutomationTest(cnf) != 0: return -16
+        ''' Interference Generator '''
+        if generateInterferenceProfiles(cnf) != 0: return -17
+
+    ''' End of Fast Track '''
+
+    if testInterference(cnf) != 0: return -1
     ''' Create automation report '''
-    if createReport(cnf,filename="report.png") != 0: return -17
+    if createReport(cnf,filename="report.png") != 0: return -18
     else: mconsole("SUCCESS!")
     return 0
 

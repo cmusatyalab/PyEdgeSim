@@ -1,0 +1,70 @@
+{
+    "name": "Pittsburgh_4G_No_LBO",
+    "application": "edgevdi",
+    "latencyDistribution": "Normal",
+    "initial_conditions": {
+        "name": "Pittsburgh_4G_No_LBO",
+        "application": "horizon",
+        "duration": 44,
+        "UE": {
+            "latency": 0,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "POA": {
+            "latency": 55,
+            "latencyVariation": 30,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "ZONE": {
+            "latency": 0,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "OPERATOR": {
+            "latency": 0,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "UE-APP": {
+            "latency": 0,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "EDGE-APP": {
+            "latency": 0,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "EDGE": {
+            "latency": 0,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        },
+        "SCENARIO": {
+            "latency": 0,
+            "latencyVariation": 0,
+            "throughput": 10000,
+            "packetLoss": 0
+        }
+    },
+    "exceptions": [],
+    "test_events": [
+                {
+            "type": "NETWORK-CHARACTERISTICS-UPDATE",
+            "name": "zone1-poa1",
+            "waitafter": 60,
+            "latency": 55,
+            "latencyVariation": 30,
+            "throughput": 10000,
+            "packetLoss": 0
+        }
+    ]
+}

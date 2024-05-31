@@ -15,22 +15,36 @@ from setupBuildEnv import setMEEPPATH
 
 cnf = initConfig()
 api = AdvantEDGEApi()
+meepctl = os.path.join(setMEEPPATH(cnf['ADVANTEDGEDIR']),"meepctl")
 
 def main():
     configureLogging()
+    setupRegistry(cnf)
+    deployAdvantEDGE(cnf)
     getOpenRTiST(cnf)
     startOpenRTiST(cnf)
     pass
+
+def setupRegistry(cnf):
+    entry = input("Setup docker registry? [y/N] ") or "n"
+    if entry in ['Y','y']:
+        PORT = cnf['REGISTRYPORT']
+        REGISTRY = cnf['REGISTRY']
+        oscmd(f"docker run -d -p {PORT}:5000 --restart=always --name {REGISTRY} registry:2")
+        oscmd(f"grep {REGISTRY} /etc/hosts || sudo sed -i 's/127.0.0.1 localhost/127.0.0.1 localhost {REGISTRY}/' /etc/hosts")
+    return 0
 
 def deployAdvantEDGE(cnf):
     # meepctl = os.path.join(*[cnf['ADVANTEDGEDIR'],"bin","meepctl","meepctl"])
     entry = input("Deploy AdvantEDGE? [y/N] ") or "n"
     if entry in ['Y','y']:
+
         setMEEPPATH(cnf['ADVANTEDGEDIR'])
+        upgradeDockerBase(cnf)
         meepctl = "meepctl"
-        if oscmd("{} deploy dep".format(meepctl)) != 0: return -1
-        if oscmd("{} dockerize all".format(meepctl)) != 0: return -1
-        if oscmd("{} deploy core".format(meepctl)) != 0: return -1
+        if oscmd(f"{meepctl} deploy dep") != 0: return -1
+        if oscmd(f"{meepctl} dockerize all") != 0: return -1
+        if oscmd(f"{meepctl} deploy core") != 0: return -1
     return 0
 
 def getOpenRTiST(cnf):
@@ -54,21 +68,19 @@ def startOpenRTiST(cnf):
     return 0
 
 def stopDeployment(cnf,settletime=120):
-    mconsole("Shutting down deployment and waiting {} seconds".format(settletime))
-    cmdstr = "kubectl get namespace -o json|jq -r '.items[] | select( .metadata.name | test(\"{}\")) | .metadata.name'" \
-        .format(cnf['SANDBOX'])
+    mconsole(f"Shutting down deployment and waiting {settletime} seconds")
+    cmdstr = f"kubectl get namespace -o json|jq -r '.items[] | select( .metadata.name | test(\"{cnf['SANDBOX']}\")) | .metadata.name'"
     ns = cmd0(cmdstr)
     if len(ns) > 0:
         oscmd("kubectl delete namespace {}".format(cnf['SANDBOX']))
-    cmdstr = "bash -c 'meepctl delete core;meepctl delete dep;sleep {}'".format(settletime)
+    cmdstr = f"bash -c '{meepctl} delete core;{meepctl} delete dep;sleep {settletime}'"
     oscmd(cmdstr)
 
 def startDeployment(cnf,settletime=0):
     mconsole("Starting deployment and waiting {} seconds".format(settletime))
-    cmdstr = "bash -c 'meepctl deploy dep;meepctl deploy core;sleep {}'".format(settletime)
+    cmdstr = f"bash -c '{meepctl} deploy dep;{meepctl} deploy core;sleep {settletime}'"
     oscmd(cmdstr)
-    mconsole("You will need to recreate sandbox {} and deploy scenario {} in it" \
-            .format(cnf['SANDBOX'],cnf['SCENARIO']))
+    mconsole(f"You will need to recreate sandbox {cnf['SANDBOX']} and deploy scenario {cnf['SCENARIO']} in it")
 
 def installCharts(cnf):
     datadir = "./data"
@@ -86,5 +98,14 @@ def installCharts(cnf):
         mconsole("In AdvantEDGE console, import and save scenario {} and create sandbox {}".format(cnf['SCENARIO'],cnf['SANDBOX']))
     return 0
 
+def upgradeDockerBase(cnf):
+    DFBASE=os.path.join(*[cnf['PROJECTHOME'],"AdvantEDGE","go-apps"])
+    UPGRADELST = ['meep-tc-sidecar','meep-virt-engine','meep-auth-svc']
+    OLDVER="9.6-slim"
+    NEWVER="10.13-slim"
+    for img in UPGRADELST:
+        df = os.path.join(*[DFBASE,img,"Dockerfile"])
+        oscmd(f"sed -i 's/{OLDVER}/{NEWVER}/' {df}")
+    
 
 if __name__ == '__main__': main()
